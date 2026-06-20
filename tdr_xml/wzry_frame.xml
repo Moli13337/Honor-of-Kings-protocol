@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<metalib name="CSProtocol_frame" tagsetversion="1" version="1">
+
+  <struct name="FRAMEDT_VECTOR3" version="1">
+    <entry name="X" type="int32"/>
+    <entry name="Y" type="int32"/>
+    <entry name="Z" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEDT_VECTOR2" version="1">
+    <entry name="X" type="int32"/>
+    <entry name="Z" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYERMOVE" version="1">
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYERMOVEDIRECTION" version="1">
+    <entry name="nDegree" type="int16"/>
+    <entry name="bMoveSeq" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_STOPMOVE" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_STOPROTATE" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_USESKILL" version="1">
+    <entry name="chSlotPos" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_ATTACKPOSITION" version="1">
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_ATTACKACTOR" version="1">
+    <entry name="iObjectID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_USECURVETRACKSKILL" version="1">
+    <entry name="nNoUse" type="int16"/>
+    <entry name="chSlotType" type="int8"/>
+    <entry name="iSkillID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SWITCH_AI" version="1">
+    <entry name="chIsAutoAI" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SWITCH_ROBOT_STOP" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SWITCH_CAPTAIN" version="1">
+    <entry name="iObjectID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SWITCH_CAPTAIN_COMMANDER_MODE" version="1">
+    <entry name="iOriObjectID" type="int32"/>
+    <entry name="iNowObjectID" type="int32"/>
+    <entry name="iTagetObjectID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SWITCH_SUPER_KILLER" version="1">
+    <entry name="chIsSuperKiller" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SWITCH_GOD_MODE" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SWITCH_ALL_GOD_MODE" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_LEARN_TALENT" version="1">
+    <entry name="dwHeroObjID" type="uint32"/>
+    <entry name="chTalentLevel" type="int8"/>
+    <entry name="dwTalentID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_TESTCOMMANDDELAY" version="1">
+    <entry name="dwDelayMs" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAY_PAINT" version="1">
+    <entry name="dwPaintId" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYERRUNAWAY" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYERDISCONNECT" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYERRECONNECT" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYATTACKTARGETMODE" version="1">
+    <entry name="chAttackTargetMode" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SVRNTFCHGKFRAMELATER" version="1">
+    <entry name="bKFrameLaterNum" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_ASSISTSTATECHG" version="1">
+    <entry name="bChgType" type="uint8"/>
+    <entry name="dwAiPlayerObjID" type="uint32"/>
+    <entry name="dwMasterObjID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_CHGAUTOAI" version="1">
+    <entry name="bAutoAIType" type="uint8"/>
+    <entry name="dwPlayerObjID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_ONESTEP_BUY_EQUIP" version="1">
+    <entry name="EquipID" type="uint16" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_ADD_GOLD_COIN_IN_BATTLE" version="1">
+    <entry name="iAddValue" type="int32"/>
+    <entry name="dwUseGMPlayerID" type="uint32"/>
+    <entry name="dwAddGoldPlayerID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SET_SKILL_LEVEL" version="1">
+    <entry name="bSkillSlot" type="uint8"/>
+    <entry name="bSkillLevel" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYCOMMONATTACKTMODE" version="1">
+    <entry name="bCommonAttackMode" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYLASTHITANDATTACKORGANMODE" version="1">
+    <entry name="bLastHitAndAttackOrganMode" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_INBATTLEINPUTCHATENABLEMODE" version="1">
+    <entry name="bInBattleInputChatEnableMode" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_INBATTLEINPUTCHATONEPLAYERENABLEMODE" version="1">
+    <entry name="dwCtrlPlayerID" type="uint32"/>
+    <entry name="bIsEnable" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_Signal_Btn_Position" version="1">
+    <entry name="bSignalID" type="uint8"/>
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+    <entry name="dwM_timeStamp" type="uint32"/>
+    <entry name="bIsOpenHci" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_Signal_MiniMap_Position" version="1">
+    <entry name="bSignalID" type="uint8"/>
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+    <entry name="bElementType" type="uint8"/>
+    <entry name="dwSendObjID" type="uint32"/>
+    <entry name="dwM_timeStamp" type="uint32"/>
+    <entry name="bIsOpenHci" type="uint8"/>
+    <entry name="iConfigId" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_OMG_SIGNAL_MINIMAP_POSITION" version="1">
+    <entry name="bSignalID" type="uint8"/>
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+    <entry name="bElementType" type="uint8"/>
+    <entry name="dwSendObjID" type="uint32"/>
+    <entry name="dwM_timeStamp" type="uint32"/>
+    <entry name="bIsOpenHci" type="uint8"/>
+    <entry name="iConfigId" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_Signal_MiniMap_Target" version="1">
+    <entry name="bSignalID" type="uint8"/>
+    <entry name="bType" type="uint8"/>
+    <entry name="dwTargetObjID" type="uint32"/>
+    <entry name="dwSendObjID" type="uint32"/>
+    <entry name="dwM_timeStamp" type="uint32"/>
+    <entry name="bIsOpenHci" type="uint8"/>
+    <entry name="iConfigId" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_IN_OUT_EQUIPSHOP" version="1">
+    <entry name="bInOut" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PAUSE_RESUME_GAME" version="1">
+    <entry name="bPauseCommand" type="uint8"/>
+    <entry name="bPauseByCamp" type="uint8"/>
+    <entry name="szCampPauseTimes" type="char" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_CHOOSE_EQUIPSKILL" version="1">
+    <entry name="wEquipID" type="uint16"/>
+    <entry name="bEquipActiveSkillIndex" type="uint8"/>
+    <entry name="bGridIndex" type="uint8"/>
+    <entry name="bContainerType" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_CHEAT" version="1">
+    <entry name="bCheatType" type="uint8"/>
+    <entry name="dwCtrlPlayerID" type="uint32"/>
+    <entry name="iParam1" type="int32"/>
+    <entry name="iParam2" type="int32"/>
+    <entry name="iParam3" type="int32"/>
+    <entry name="iParam4" type="int32"/>
+    <entry name="iParam5" type="int32"/>
+    <entry name="iParam6" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEDT_RECOMMEND_EQUIP_PLAN_INFO" version="1">
+    <entry name="EquipId" type="uint16" count="0"/>
+    <entry name="bIsCustomDefine" type="uint8"/>
+    <entry name="szName" type="char" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_HERO" version="1">
+    <entry name="dwCtrlPlayerID" type="uint32"/>
+    <entry name="dwHeroID" type="uint32"/>
+    <entry name="dwSkinID" type="uint32"/>
+    <entry name="dwSkinVoiceID" type="uint32"/>
+    <entry name="dwSummonerSkillId" type="uint32"/>
+    <entry name="SymbolID" type="uint32" count="0"/>
+    <entry name="dwEquipPlanCnt" type="uint32"/>
+    <entry name="astEquipPlanInfo" type="FRAMEDT_RECOMMEND_EQUIP_PLAN_INFO" count="0"/>
+    <entry name="stCurrentEquipPlanInfo" type="FRAMEDT_RECOMMEND_EQUIP_PLAN_INFO"/>
+    <entry name="bForceCreateNew" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_SWITCH_HERO_INGAME" version="1">
+    <entry name="dwHeroCfgId" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_MIRROR_ACTOR_INGAME" version="1">
+    <entry name="dwSkinId" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_COPY_ACTOR_INGAME" version="1">
+    <entry name="stActorBornPosOffset" type="FRAMEDT_VECTOR2"/>
+    <entry name="iCallActorIndex" type="int32"/>
+    <entry name="iConfigId" type="int32"/>
+    <entry name="iSkinId" type="int32"/>
+    <entry name="bIsFriend" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_REMOVE_CALL_ACTOR_INGAME" version="1">
+    <entry name="iCallActorIndex" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_USE_JOINT_SKILL" version="1">
+    <entry name="dwObjID" type="uint32"/>
+    <entry name="dwUniqueId" type="uint32"/>
+    <entry name="iSubTargetID" type="int32"/>
+    <entry name="dwSourceActorId" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_GROUP" version="1">
+    <entry name="bGroup" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_ID" version="1">
+    <entry name="bGroup" type="uint8"/>
+    <entry name="EquipID" type="uint16" count="0"/>
+    <entry name="dwRecommendType" type="uint32"/>
+    <entry name="dwRecommendID" type="uint32"/>
+    <entry name="szSuitEquipName" type="char" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_SET_TEMPUSE_EQUIP" version="1">
+    <entry name="wEquipID" type="uint16"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_MAKE_ITEM" version="1">
+    <entry name="dwMakeLevel" type="uint32"/>
+    <entry name="dwMakeIndex" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_ADD_SPECIAL_ABILITY" version="1">
+    <entry name="dwSpecialAbilityIndex" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_SET_PAINT" version="1">
+    <entry name="dwPaintID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_PURSUIT_ONMOVE_SWITCH" version="1">
+    <entry name="bPursuitOnMove" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_CONTINUE_COMMON_ATTACK_MODE" version="1">
+    <entry name="bCommonAttackModeType" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_COMMON_ATTACK_SEARCH_MODE" version="1">
+    <entry name="bCommonAttackSearchModeType" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_USE_CHARGE_SKILL" version="1">
+    <entry name="bSkillslot" type="uint8"/>
+    <entry name="bState" type="uint8"/>
+    <entry name="nDegree" type="int16"/>
+    <entry name="stPos" type="FRAMEDT_VECTOR2"/>
+    <entry name="dwSeq" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SET_SKILL_INDICATIOR_DIRECTION" version="1">
+    <entry name="nDegree" type="int16"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SET_SKILL_INDICATIOR_POSITION" version="1">
+    <entry name="stPos" type="FRAMEDT_VECTOR2"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PICK_DROPITEM" version="1">
+    <entry name="dwPlayerID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_ACTOR_SUICIDE" version="1">
+    <entry name="iObjectID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_USEREVIVECOIN" version="1">
+    <entry name="bUseless" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_CANCEL_SKILL" version="1">
+    <entry name="dwObjID" type="uint32"/>
+    <entry name="iParam" type="int32"/>
+    <entry name="bSkillSlotType" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAY_BATTLE_ACTION" version="1">
+    <entry name="dwBattleActionId" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAY_EMOJI" version="1">
+    <entry name="dwEmojiId" type="uint32"/>
+    <entry name="bTextIndex" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAY_SACRED_ANIMAL" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAY_SACRED_ANIMAL_ACTION" version="1">
+    <entry name="dwActionId" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_BLUEPRINT_BROADCAST" version="1">
+    <entry name="iIntParam1" type="int32"/>
+    <entry name="iIntParam2" type="int32"/>
+    <entry name="stVintParam" type="FRAMEDT_VECTOR3"/>
+    <entry name="iUniqueKey" type="int32"/>
+    <entry name="iCmdEnum" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_BLUEPRINT_NORMALBROAD" version="1">
+    <entry name="iIntParam1" type="int32"/>
+    <entry name="iIntParam2" type="int32"/>
+    <entry name="stVintParam" type="FRAMEDT_VECTOR3"/>
+    <entry name="iUniqueKey" type="int32"/>
+    <entry name="iCmdEnum" type="int32"/>
+    <entry name="szStrParam" type="char" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_NEWBIE_GUIDE" version="1">
+    <entry name="iGuideType" type="int32"/>
+    <entry name="iIntParam1" type="int32"/>
+    <entry name="iIntParam2" type="int32"/>
+    <entry name="iIntParam3" type="int32"/>
+    <entry name="iIntParam4" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_DRAG_HERO" version="1">
+    <entry name="dwObjID" type="uint32"/>
+    <entry name="bReplace" type="uint8"/>
+    <entry name="X" type="int32"/>
+    <entry name="Z" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_HERO" version="1">
+    <entry name="dwObjID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_PICK_CARD_INFO" version="1">
+    <entry name="iBuyCardIndex" type="int32"/>
+    <entry name="bLock" type="uint8"/>
+    <entry name="bGen" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_REQUEST_CARDDETAIL" version="1">
+    <entry name="chReserve" type="int8"/>
+    <entry name="bIgnoreFirstRoundGen" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_ENABLE_EXTRA_SLOT" version="1">
+    <entry name="bEnable" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_PICK_UP_DROP" version="1">
+    <entry name="iDropID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_CHOOSE_EQUIP" version="1">
+    <entry name="iDropID" type="int32"/>
+    <entry name="iEquipID" type="int32"/>
+    <entry name="bAutoAddEquip" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_ADD_PLAYER_COIN" version="1">
+    <entry name="iAddNum" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NB_LOAD_PRESET" version="1">
+    <entry name="dwPlayerID" type="uint32"/>
+    <entry name="dwPresetID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NB_SET_PLAYER_LEVEL" version="1">
+    <entry name="dwPlayerID" type="uint32"/>
+    <entry name="bLevel" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO" version="1">
+    <entry name="iEquipID" type="int32"/>
+    <entry name="X" type="int32"/>
+    <entry name="Z" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO2" version="1">
+    <entry name="iEquipID" type="int32"/>
+    <entry name="iHeroObjID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_UNLOAD_EQUIP_IN_HERO" version="1">
+    <entry name="iActorID" type="int32"/>
+    <entry name="iEquipID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_USE_SKILL" version="1">
+    <entry name="iSkillIndex" type="int32"/>
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+    <entry name="bIsAuto" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_UNLOAD_SKILL" version="1">
+    <entry name="iSkillIndex" type="int32"/>
+    <entry name="iBackPackDropID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_BUY_EXP" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_CLEAR_DEPOSIT_CARD" version="1">
+    <entry name="chCampcareer" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_BAN_THE_CAMP" version="1">
+    <entry name="wCampID" type="uint16"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_BAN_THE_HERO" version="1">
+    <entry name="dwHeroID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_ALLY_GIFT" version="1">
+    <entry name="bGiftOpType" type="uint8"/>
+    <entry name="iParam" type="int32"/>
+    <entry name="iParam2" type="int32"/>
+    <entry name="iParam3" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_CHECK_GIFT_EQUIP" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_FINISH_PREPARE" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_ALLY_RESCUE" version="1">
+    <entry name="bRescue" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_UPGRADE_EQUIP" version="1">
+    <entry name="iEquipID" type="int32"/>
+    <entry name="iHeroObjID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_SET_FORMATION" version="1">
+    <entry name="bFormationIndex" type="uint8"/>
+    <entry name="bSubID" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_SET_RECOMMEND_ARRANGE" version="1">
+    <entry name="bType" type="uint8"/>
+    <entry name="dwArrangeCfgId" type="uint32"/>
+    <entry name="dwParam" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_LEARNPVETALENT" version="1">
+    <entry name="dwHeroObjID" type="uint32"/>
+    <entry name="dwPVETalentID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_REQUEST_PVETALENT_LIST" version="1">
+    <entry name="dwHeroObjID" type="uint32"/>
+    <entry name="dwIsReRandom" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SET_AUTO_BATTLE" version="1">
+    <entry name="dwPlayerID" type="uint32"/>
+    <entry name="bIsAutoBattle" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SET_PLAYER_STATE" version="1">
+    <entry name="stDestPosition" type="FRAMEDT_VECTOR3"/>
+    <entry name="bSoulLevel" type="uint8"/>
+    <entry name="iSoulExp" type="int32"/>
+    <entry name="bSkill1_level" type="uint8"/>
+    <entry name="iSkill1_CD" type="int32"/>
+    <entry name="bSkill1BeanCount" type="uint8"/>
+    <entry name="bSkill2_level" type="uint8"/>
+    <entry name="iSkill2_CD" type="int32"/>
+    <entry name="bSkill2BeanCount" type="uint8"/>
+    <entry name="bSkill3_level" type="uint8"/>
+    <entry name="iSkill3_CD" type="int32"/>
+    <entry name="bSkill3BeanCount" type="uint8"/>
+    <entry name="bSkillEx3_level" type="uint8"/>
+    <entry name="iSkillEx3_CD" type="int32"/>
+    <entry name="bSkillEx3BeanCount" type="uint8"/>
+    <entry name="EquipID" type="uint16" count="0"/>
+    <entry name="iHp" type="int32"/>
+    <entry name="iEp" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_ADD_ACTOR" version="1">
+    <entry name="bType" type="uint8"/>
+    <entry name="bActorCamp" type="uint8"/>
+    <entry name="iConfigId" type="int32"/>
+    <entry name="stDestPosition" type="FRAMEDT_VECTOR3"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_SLOT" version="1">
+    <entry name="bIndex" type="uint8"/>
+    <entry name="bSlotIndex" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_SALE_EXTRASLOT_HERO" version="1">
+    <entry name="bIndex" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NUMEN_MOVE_TO_TARGET" version="1">
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_DRAG_NUMEN" version="1">
+    <entry name="dwObjID" type="uint32"/>
+    <entry name="stWorldPos" type="FRAMEDT_VECTOR3"/>
+    <entry name="bIsBornPoint" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NUMEN_ACCUMULATE" version="1">
+    <entry name="dwObjID" type="uint32"/>
+    <entry name="bIsRelease" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NUMEN_CLICK" version="1">
+    <entry name="bIsContinuous" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NUMEN_AUTO" version="1">
+    <entry name="bEnable" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_WATCH_FIGHT_STA" version="1">
+    <entry name="dwWatchID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_REBUILD_TALENT" version="1">
+    <entry name="bTalentLevelPoint" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_REPLACE_TALENT" version="1">
+    <entry name="bSelectIndex" type="uint8"/>
+    <entry name="dwTalentReplaceID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_PET_DIALOG" version="1">
+    <entry name="bDialogType" type="uint8"/>
+    <entry name="bTitleID" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_DRAW_ITEM" version="1">
+    <entry name="bItemIndex" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_BATTLE" version="1">
+    <entry name="bIndex" type="uint8"/>
+    <entry name="X" type="int32"/>
+    <entry name="Z" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_CHOOSE_TANLENT" version="1">
+    <entry name="dwId" type="uint32"/>
+    <entry name="bIsRebuild" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_BOUNTY_OPERATION" version="1">
+    <entry name="bOpt" type="uint8"/>
+    <entry name="bParam" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_UGC_CUSTOMIZE" version="1">
+    <entry name="bType" type="uint8"/>
+    <entry name="wLen" type="uint16"/>
+    <entry name="szBuf" type="char" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NEW_CHOOSE_EQUIP" version="1">
+    <entry name="bItemIndex" type="uint8"/>
+    <entry name="bAutoAddEquip" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PROJECT8_NEW_REFRESH_EQUIP" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_NOTIFY_CLIENT_RECOVER_END" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_DROP_ITEM_INFO_CHANGE" version="1">
+    <entry name="dwItemId" type="uint32"/>
+    <entry name="bItemNum" type="uint8"/>
+    <entry name="bCanPickCnt" type="uint8"/>
+    <entry name="bItemLeftCnt" type="uint8"/>
+    <entry name="bItemTodayLeftCnt" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_CHOOSE_ENTER_EXTEND_FRAME" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_REQ_QUIT_EXTEND_FRAME" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_AI_OVERALL_SENSE_INSTRUCTION" version="1">
+    <entry name="dwHostID" type="uint32"/>
+    <entry name="bSignalID" type="uint8"/>
+    <entry name="iParam1" type="int32"/>
+    <entry name="iParam2" type="int32"/>
+    <entry name="iParam3" type="int32"/>
+    <entry name="iKillCount" type="int32"/>
+    <entry name="iKillProb" type="int32"/>
+    <entry name="iDeadProb" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_OPERATE_SKILL_BUTTON" version="1">
+    <entry name="iUiEventId" type="int32"/>
+    <entry name="bSlot" type="uint8"/>
+    <entry name="stPos" type="FRAMEDT_VECTOR2"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_RIGHT_JOYSTICK_MOVE" version="1">
+    <entry name="nDegree" type="int16"/>
+    <entry name="bSeq" type="uint8"/>
+    <entry name="bUseType" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_VIDEO_PLAY_COMPLETED" version="1">
+    <entry name="iVideoId" type="int32"/>
+    <entry name="bSkip" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PERCISIONATK_TARGET" version="1">
+    <entry name="iTargetId" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_SET_PERCISION_ATTACK_MODE" version="1">
+    <entry name="bMode" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_ACTOR_OPERATE" version="1">
+    <entry name="iOpValue" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_LEFT_JOYSTICK_DRAG_STATE_CHANGE" version="1">
+    <entry name="bBeginDrag" type="uint8"/>
+    <entry name="dwActorObjID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_DIMENSION_HERO_CHANGE_SKILL" version="1">
+    <entry name="bJobOrder" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_DIMENSION_WEAR" version="1">
+    <entry name="dwPlayerID" type="uint32"/>
+    <entry name="dwHeroID" type="uint32"/>
+    <entry name="bGender" type="uint8"/>
+    <entry name="bJobType" type="uint8"/>
+    <entry name="Parts" type="uint32" count="0"/>
+    <entry name="Weapons" type="uint32" count="0"/>
+    <entry name="bIsApplyToActor" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_SIDE_SKILL_BTN" version="1">
+    <entry name="iUniqueID" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_CHANGE_RECOMMEND_EQUIP_LIST" version="1">
+    <entry name="bLen" type="uint8"/>
+    <entry name="dwBoughtState" type="uint32"/>
+    <entry name="EquipID" type="uint16" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_INSCRIBE_ACTION" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_EASY_IN_START_FIGHT" version="1">
+    <entry name="chReserve" type="int8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_ULTIMATE_AWAKEN_FORCE_SET_BDTALENTS" version="1">
+    <entry name="chReserve" type="int8"/>
+    <entry name="TalentIDs" type="int32" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_OMG_PARACHUTE_MOVE" version="1">
+    <entry name="iDirectionDegree" type="int32"/>
+    <entry name="iLastPosX" type="int32"/>
+    <entry name="iLastPosY" type="int32"/>
+    <entry name="iIsHalt" type="int32"/>
+    <entry name="iJumpingSpeed" type="int32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_OMG_PARACHUTE_FOLLOW" version="1">
+    <entry name="dwTargetObjID" type="uint32"/>
+    <entry name="dwFollowObjID" type="uint32"/>
+    <entry name="bState" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_OMG_INVITE_PARACHUTE_FOLLOW" version="1">
+    <entry name="dwInviteObjectID" type="uint32"/>
+    <entry name="dwBeInviteObjID" type="uint32"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_OMG_AGREE_OR_REJECT_PARACHUTE_FOLLOW" version="1">
+    <entry name="dwInviteObjectID" type="uint32"/>
+    <entry name="dwBeInviteObjID" type="uint32"/>
+    <entry name="bResult" type="uint8"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_BLUEPRINT_CUSTOMDEF" version="1">
+    <entry name="iCmdEnum" type="int32"/>
+    <entry name="wBufferLen" type="uint16"/>
+    <entry name="szBuf" type="char" count="0"/>
+  </struct>
+
+  <struct name="FRAMEPKG_CMD_AXISSCALE" version="1">
+    <entry name="nScale" type="int16"/>
+  </struct>
+
+  <union name="FRAME_CMD_INFO" version="1">
+    <entry name="stCmdPlayerMove" type="FRAMEPKG_CMD_PLAYERMOVE"/>
+    <entry name="stCmdPlayerStopMove" type="FRAMEPKG_CMD_STOPMOVE"/>
+    <entry name="stCmdPlayerAttackPosition" type="FRAMEPKG_CMD_ATTACKPOSITION"/>
+    <entry name="stCmdPlayerAttackPlayer" type="FRAMEPKG_CMD_ATTACKACTOR"/>
+    <entry name="stCmdPlayerUseCurveTrackSkill" type="FRAMEPKG_CMD_USECURVETRACKSKILL"/>
+    <entry name="stCmdPlayerSwithAutoAI" type="FRAMEPKG_CMD_SWITCH_AI"/>
+    <entry name="stCmdPlayerSwitchCaptain" type="FRAMEPKG_CMD_SWITCH_CAPTAIN"/>
+    <entry name="stCmdPlayerSwitchSuperKiller" type="FRAMEPKG_CMD_SWITCH_SUPER_KILLER"/>
+    <entry name="stCmdPlayerSwitchGodMode" type="FRAMEPKG_CMD_SWITCH_GOD_MODE"/>
+    <entry name="stCmdPlayerLearnTalent" type="FRAMEPKG_CMD_LEARN_TALENT"/>
+    <entry name="stCmdTestCommandDelay" type="FRAMEPKG_CMD_TESTCOMMANDDELAY"/>
+    <entry name="stCmdPlayerAttackTargetMode" type="FRAMEPKG_CMD_PLAYATTACKTARGETMODE"/>
+    <entry name="stCmdSvrNtfChgFrameLater" type="FRAMEPKG_CMD_SVRNTFCHGKFRAMELATER"/>
+    <entry name="stCmdPlayerAddGoldCoinInBattle" type="FRAMEPKG_CMD_PLAYER_ADD_GOLD_COIN_IN_BATTLE"/>
+    <entry name="stCmdSetSkillLevel" type="FRAMEPKG_CMD_SET_SKILL_LEVEL"/>
+    <entry name="stCmdPlayCommonAttackMode" type="FRAMEPKG_CMD_PLAYCOMMONATTACKTMODE"/>
+    <entry name="stCmdPlayerLockAttackTarget" type="FFRAMEPKG_CMD_LOCKATTACKTARGET"/>
+    <entry name="stCmdSignalBtnPosition" type="FRAMEPKG_CMD_Signal_Btn_Position"/>
+    <entry name="stCmdSignalMiniMapPosition" type="FRAMEPKG_CMD_Signal_MiniMap_Position"/>
+    <entry name="stCmdSignalMiniMapTarget" type="FRAMEPKG_CMD_Signal_MiniMap_Target"/>
+    <entry name="stCmdPlayerInOutEquipShop" type="FRAMEPKG_CMD_PLAYER_IN_OUT_EQUIPSHOP"/>
+    <entry name="stCmdPlayerChangeUsedRecommendEquipGroup" type="FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_GROUP"/>
+    <entry name="stCmdPlayLastHitAndAttackOrganMode" type="FRAMEPKG_CMD_PLAYLASTHITANDATTACKORGANMODE"/>
+    <entry name="stCmdPlayerChooseEquipSkill" type="FRAMEPKG_CMD_PLAYER_CHOOSE_EQUIPSKILL"/>
+    <entry name="stCmdPlayerCheat" type="FRAMEPKG_CMD_PLAYER_CHEAT"/>
+    <entry name="stCmdPlayerHeroSwitch" type="FRAMEPKG_CMD_PLAYER_SWITCH_HERO_INGAME"/>
+    <entry name="stCmdUseJointSkill" type="FRAMEPKG_CMD_USE_JOINT_SKILL"/>
+    <entry name="stCmdPlayerOneStepBuyEquip" type="FRAMEPKG_CMD_PLAYER_ONESTEP_BUY_EQUIP"/>
+    <entry name="stCmdPlayerContinueCommonAttackMode" type="FRAMEPKG_CMD_PLAYER_CONTINUE_COMMON_ATTACK_MODE"/>
+    <entry name="stCmdUseChargeSkill" type="FRAMEPKG_CMD_USE_CHARGE_SKILL"/>
+    <entry name="stCmdSetSkillIndicatorDirection" type="FRAMEPKG_CMD_SET_SKILL_INDICATIOR_DIRECTION"/>
+    <entry name="stCmdPickDropItem" type="FRAMEPKG_CMD_PICK_DROPITEM"/>
+    <entry name="stCmdSuicideActor" type="FRAMEPKG_CMD_ACTOR_SUICIDE"/>
+    <entry name="stCmdPlayerSwitchAllGodMode" type="FRAMEPKG_CMD_SWITCH_ALL_GOD_MODE"/>
+    <entry name="stCmdPlayBattleAction" type="FRAMEPKG_CMD_PLAY_BATTLE_ACTION"/>
+    <entry name="stCmdPlayerCancelSkill" type="FRAMEPKG_CMD_PLAYER_CANCEL_SKILL"/>
+    <entry name="stCmdLearnPVETalent" type="FRAMEPKG_CMD_LEARNPVETALENT"/>
+    <entry name="stCmdRequestPVETalentList" type="FRAMEPKG_CMD_REQUEST_PVETALENT_LIST"/>
+    <entry name="stCmdSetAutoBattle" type="FRAMEPKG_CMD_SET_AUTO_BATTLE"/>
+    <entry name="stCmdBlueprintBroadcast" type="FRAMEPKG_CMD_BLUEPRINT_BROADCAST"/>
+    <entry name="stCmdSetSkillIndicatorPosition" type="FRAMEPKG_CMD_SET_SKILL_INDICATIOR_POSITION"/>
+    <entry name="stCmdProject8DragHero" type="FRAMEPKG_CMD_PROJECT8_DRAG_HERO"/>
+    <entry name="stCmdProject8BuyExp" type="FRAMEPKG_CMD_PROJECT8_BUY_EXP"/>
+    <entry name="stCmdProject8PickCard" type="FRAMEPKG_CMD_PROJECT8_PICK_CARD_INFO"/>
+    <entry name="stCmdProject8DragSlotHero" type="FRAMEPKG_CMD_PROJECT8_DRAG_HERO"/>
+    <entry name="stCmdProject8PutHeroToSlot" type="FRAMEPKG_CMD_PROJECT8_HERO"/>
+    <entry name="stCmdProject8SellHero" type="FRAMEPKG_CMD_PROJECT8_HERO"/>
+    <entry name="stCmdProject8SetHero" type="FRAMEPKG_CMD_PROJECT8_HERO"/>
+    <entry name="stCmdProject8PickUpDrop" type="FRAMEPKG_CMD_PROJECT8_PICK_UP_DROP"/>
+    <entry name="stCmdProject8ChooseEquip" type="FRAMEPKG_CMD_PROJECT8_CHOOSE_EQUIP"/>
+    <entry name="stCmdProject8AddEqipToHero" type="FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO"/>
+    <entry name="stCmdProject8UnloadEqipInHero" type="FRAMEPKG_CMD_PROJECT8_UNLOAD_EQUIP_IN_HERO"/>
+    <entry name="stCmdSetPlayerState" type="FRAMEPKG_CMD_SET_PLAYER_STATE"/>
+    <entry name="stCmdAddActor" type="FRAMEPKG_CMD_ADD_ACTOR"/>
+    <entry name="stCmdProject8UseSkill" type="FRAMEPKG_CMD_PROJECT8_USE_SKILL"/>
+    <entry name="stCmdProject8UnloadSkill" type="FRAMEPKG_CMD_PROJECT8_UNLOAD_SKILL"/>
+    <entry name="stCmdProject8AddEqipToHero2" type="FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO2"/>
+    <entry name="stCmdProject8DragHeroToSlot" type="FRAMEPKG_CMD_PROJECT8_DRAG_HERO"/>
+    <entry name="stCmdProject8ClearDepositCard" type="FRAMEPKG_CMD_PROJECT8_CLEAR_DEPOSIT_CARD"/>
+    <entry name="stCmdProject8AllyGift" type="FRAMEPKG_CMD_PROJECT8_ALLY_GIFT"/>
+    <entry name="stCmdProject8CheckGiftEquip" type="FRAMEPKG_CMD_PROJECT8_CHECK_GIFT_EQUIP"/>
+    <entry name="stCmdProject8AllyRescue" type="FRAMEPKG_CMD_PROJECT8_ALLY_RESCUE"/>
+    <entry name="stCmdProject8UpgradeEquip" type="FRAMEPKG_CMD_PROJECT8_UPGRADE_EQUIP"/>
+    <entry name="stCmdProject8SetFormation" type="FRAMEPKG_CMD_PROJECT8_SET_FORMATION"/>
+    <entry name="stCmdProject8SetRecdArrange" type="FRAMEPKG_CMD_PROJECT8_SET_RECOMMEND_ARRANGE"/>
+    <entry name="stCmdProject8SaleExtraSlotHero" type="FRAMEPKG_CMD_PROJECT8_SALE_EXTRASLOT_HERO"/>
+    <entry name="stCmdProject8MoveExtraSlotToSlot" type="FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_SLOT"/>
+    <entry name="stCmdProject8MoveExtraSlotToBattle" type="FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_BATTLE"/>
+    <entry name="stCmdProject8ChooseTalent" type="FRAMEPKG_CMD_PROJECT8_CHOOSE_TANLENT"/>
+    <entry name="stCmdProject8RequestCardDetail" type="FRAMEPKG_CMD_PROJECT8_REQUEST_CARDDETAIL"/>
+    <entry name="stCmdProject8EnableExtraSlot" type="FRAMEPKG_CMD_PROJECT8_ENABLE_EXTRA_SLOT"/>
+    <entry name="stCmdProject8AddPlayerCoin" type="FRAMEPKG_CMD_PROJECT8_ADD_PLAYER_COIN"/>
+    <entry name="stCmdProject8NBLoadPreset" type="FRAMEPKG_CMD_PROJECT8_NB_LOAD_PRESET"/>
+    <entry name="stCmdProject8NBSetPlayerLevel" type="FRAMEPKG_CMD_PROJECT8_NB_SET_PLAYER_LEVEL"/>
+    <entry name="stCmdProject8FinishPrepare" type="FRAMEPKG_CMD_PROJECT8_FINISH_PREPARE"/>
+    <entry name="stCmdProject8NumenMoveToTarget" type="FRAMEPKG_CMD_PROJECT8_NUMEN_MOVE_TO_TARGET"/>
+    <entry name="stCmdPushProject8DragNumen" type="FRAMEPKG_CMD_PROJECT8_DRAG_NUMEN"/>
+    <entry name="stCmdPushProject8NumenAccumulate" type="FRAMEPKG_CMD_PROJECT8_NUMEN_ACCUMULATE"/>
+    <entry name="stCmdPushProject8NumenClick" type="FRAMEPKG_CMD_PROJECT8_NUMEN_CLICK"/>
+    <entry name="stCmdPushProject8NumenAuto" type="FRAMEPKG_CMD_PROJECT8_NUMEN_AUTO"/>
+    <entry name="stCmdPushProject8WatchFightSta" type="FRAMEPKG_CMD_PROJECT8_WATCH_FIGHT_STA"/>
+    <entry name="stCmdMirrorHero" type="FRAMEPKG_CMD_MIRROR_ACTOR_INGAME"/>
+    <entry name="stCmdPushProject8RebuildTalent" type="FRAMEPKG_CMD_PROJECT8_REBUILD_TALENT"/>
+    <entry name="stCmdPushProject8PetDialog" type="FRAMEPKG_CMD_PROJECT8_PET_DIALOG"/>
+    <entry name="stCmdPushProject8DrawItem" type="FRAMEPKG_CMD_PROJECT8_DRAW_ITEM"/>
+    <entry name="stCmdPushProject8BountyOperation" type="FRAMEPKG_CMD_PROJECT8_BOUNTY_OPERATION"/>
+    <entry name="stCmdPushProject8ReplaceTalent" type="FRAMEPKG_CMD_PROJECT8_REPLACE_TALENT"/>
+    <entry name="stCmdUGCCustomize" type="FRAMEPKG_CMD_UGC_CUSTOMIZE"/>
+    <entry name="stCmdCopyHero" type="FRAMEPKG_CMD_COPY_ACTOR_INGAME"/>
+    <entry name="stCmdProject8BanTheCamp" type="FRAMEPKG_CMD_PROJECT8_BAN_THE_CAMP"/>
+    <entry name="stCmdPushProject8NewChooseEquip" type="FRAMEPKG_CMD_PROJECT8_NEW_CHOOSE_EQUIP"/>
+    <entry name="stCmdPushProject8NewRefreshEquip" type="FRAMEPKG_CMD_PROJECT8_NEW_REFRESH_EQUIP"/>
+    <entry name="stCmdRemoveCallActor" type="FRAMEPKG_CMD_REMOVE_CALL_ACTOR_INGAME"/>
+    <entry name="stCmdProject8BanTheHero" type="FRAMEPKG_CMD_PROJECT8_BAN_THE_HERO"/>
+    <entry name="stCmdNotifyClientRecoverEnd" type="FRAMEPKG_CMD_NOTIFY_CLIENT_RECOVER_END"/>
+    <entry name="stCmdPlayerCommonAttackSearchMode" type="FRAMEPKG_CMD_PLAYER_COMMON_ATTACK_SEARCH_MODE"/>
+    <entry name="stCmdPlayerDropItemInfoChange" type="FRAMEPKG_CMD_PLAYER_DROP_ITEM_INFO_CHANGE"/>
+    <entry name="stCmdPlayerChooseEnterExtendFrame" type="FRAMEPKG_CMD_PLAYER_CHOOSE_ENTER_EXTEND_FRAME"/>
+    <entry name="stCmdPlayerReqQuitExtendFrame" type="FRAMEPKG_CMD_PLAYER_REQ_QUIT_EXTEND_FRAME"/>
+    <entry name="stCmdPlayEmoji" type="FRAMEPKG_CMD_PLAY_EMOJI"/>
+    <entry name="stCmdInBattleInputChatEnableMode" type="FRAMEPKG_CMD_INBATTLEINPUTCHATENABLEMODE"/>
+    <entry name="stCmdInBattleInputChatOnePlayerEnableMode" type="FRAMEPKG_CMD_INBATTLEINPUTCHATONEPLAYERENABLEMODE"/>
+    <entry name="stCmdAIOverallSenseInstruction" type="FRAMEPKG_CMD_AI_OVERALL_SENSE_INSTRUCTION"/>
+    <entry name="stCmdOperateSkillButton" type="FRAMEPKG_CMD_OPERATE_SKILL_BUTTON"/>
+    <entry name="stCmdRightJoyStickMove" type="FRAMEPKG_CMD_RIGHT_JOYSTICK_MOVE"/>
+    <entry name="stCmdPlayerChangeUsedRecommendEquipID" type="FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_ID"/>
+    <entry name="stCmdPlayerStopRotate" type="FRAMEPKG_CMD_STOPROTATE"/>
+    <entry name="stCmdPlayerSetTempUseEquip" type="FRAMEPKG_CMD_PLAYER_SET_TEMPUSE_EQUIP"/>
+    <entry name="stCmdPlayerCheatChangeHero" type="FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_HERO"/>
+    <entry name="stCmdPlayerMakeItem" type="FRAMEPKG_CMD_PLAYER_MAKE_ITEM"/>
+    <entry name="stCmdPlayerGiveItem" type="FRAMEPKG_CMD_PLAYER_MAKE_ITEM"/>
+    <entry name="stCmdPlayerAddSpecialAbility" type="FRAMEPKG_CMD_PLAYER_ADD_SPECIAL_ABILITY"/>
+    <entry name="stCmdPlayerSetPaint" type="FRAMEPKG_CMD_PLAYER_SET_PAINT"/>
+    <entry name="stCmdPlayerPursuitOnMove" type="FRAMEPKG_CMD_PLAYER_PURSUIT_ONMOVE_SWITCH"/>
+    <entry name="stCmdVideoPlayCompleted" type="FRAMEPKG_CMD_VIDEO_PLAY_COMPLETED"/>
+    <entry name="stCmdPercisionAtkTarget" type="FRAMEPKG_CMD_PERCISIONATK_TARGET"/>
+    <entry name="stCmdActorOperate" type="FRAMEPKG_CMD_ACTOR_OPERATE"/>
+    <entry name="stCmdPlaySacredAnimal" type="FRAMEPKG_CMD_PLAY_SACRED_ANIMAL"/>
+    <entry name="stCmdLeftJostickDragStateChange" type="FRAMEPKG_CMD_LEFT_JOYSTICK_DRAG_STATE_CHANGE"/>
+    <entry name="stCmdDimensionHeroChangeSkill" type="FRAMEPKG_CMD_DIMENSION_HERO_CHANGE_SKILL"/>
+    <entry name="stCmdSetPercisionAttackMode" type="FRAMEPKG_CMD_PLAYER_SET_PERCISION_ATTACK_MODE"/>
+    <entry name="stCmdSideSkillBtn" type="FRAMEPKG_CMD_SIDE_SKILL_BTN"/>
+    <entry name="stCmdChangeRecommendEquipList" type="FRAMEPKG_CMD_CHANGE_RECOMMEND_EQUIP_LIST"/>
+    <entry name="stCmdInscribeActionCmd" type="FRAMEPKG_CMD_INSCRIBE_ACTION"/>
+    <entry name="stCmdEasyInStartFightCmd" type="FRAMEPKG_CMD_EASY_IN_START_FIGHT"/>
+    <entry name="stCmdPlayerCheatChangeDimensionWear" type="FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_DIMENSION_WEAR"/>
+    <entry name="stCmdPlaySacredAnimalAction" type="FRAMEPKG_CMD_PLAY_SACRED_ANIMAL_ACTION"/>
+    <entry name="stCmdSwitchCaptainCommanderMode" type="FRAMEPKG_CMD_SWITCH_CAPTAIN_COMMANDER_MODE"/>
+    <entry name="stCmdUltimateAwakenForceSetBDTalents" type="FRAMEPKG_CMD_ULTIMATE_AWAKEN_FORCE_SET_BDTALENTS"/>
+    <entry name="stCmdOMGParachute" type="FRAMEPKG_CMD_OMG_PARACHUTE_MOVE"/>
+    <entry name="stCmdOMGParachuteFollow" type="FRAMEPKG_CMD_OMG_PARACHUTE_FOLLOW"/>
+    <entry name="stCmdOMGInviteParachuteFollow" type="FRAMEPKG_CMD_OMG_INVITE_PARACHUTE_FOLLOW"/>
+    <entry name="stCmdOMGAgreeOrRejectParachuteFollow" type="FRAMEPKG_CMD_OMG_AGREE_OR_REJECT_PARACHUTE_FOLLOW"/>
+    <entry name="stCmdOMGSignalMiniMapPosition" type="FRAMEPKG_CMD_OMG_SIGNAL_MINIMAP_POSITION"/>
+    <entry name="stCmdBluePrintCustomDef" type="FRAMEPKG_CMD_BLUEPRINT_CUSTOMDEF"/>
+    <entry name="stCmdBlueprintNormalBroad" type="FRAMEPKG_CMD_BLUEPRINT_NORMALBROAD"/>
+    <entry name="stCmdNewBieGuide" type="FRAMEPKG_CMD_NEWBIE_GUIDE"/>
+    <entry name="stCmdPauseResumeGame" type="FRAMEPKG_CMD_PAUSE_RESUME_GAME"/>
+    <entry name="stCmdAxisScale" type="FRAMEPKG_CMD_AXISSCALE"/>
+  </union>
+
+  <struct name="FRAME_CMD_PKG" version="1">
+    <entry name="bCmdType" type="uint8"/>
+    <entry name="stCmdInfo" type="FRAME_CMD_INFO"/>
+  </struct>
+
+</metalib>

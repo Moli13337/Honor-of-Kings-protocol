@@ -1,0 +1,565 @@
+syntax = "proto3";
+package CSProtocol;
+
+// 注意: TDR非标准Protobuf, 此为近似还原
+
+message SCDT_CIP_HEADER_INFO {
+  uint32 bIncPatchType = 1;
+  uint64 ullBaseRevision = 2;
+  uint64 ullPatchRevision = 3;
+  uint64 ullIncPatchRevision = 4;
+  uint32 dwIncPatchPlatArchInfoNum = 5;
+  repeated bytes astIncPatchPlatArchInfos = 6; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_UGC_FULL_DATA_UNION {
+  uint32 bOfFail = 1;
+
+  oneof body_selector {
+    COMDT_UGC_OPER_RESULT_BUFFER stOfSucc = 2;
+  }
+}
+
+message SCDT_NTF_SWITCHDETAIL {
+  uint32 bIsLogin = 1;
+  uint32 dwOffTime = 2;
+  bytes szTips = 3; // fixed-length byte array
+  bytes szPreTips = 4; // fixed-length byte array
+  uint32 dwOffMask = 5;
+}
+
+message SCDT_FUNCTION_SWITCH {
+  COMDT_FUNCSWITCH_BITS stFuncSwitchBits = 1;
+}
+
+message SCDT_EXTERNFUNCTION_SWITCH {
+  COMDT_USER_EXTERNSWITCH_MASK stExternSwitchMask = 1;
+}
+
+message SCDT_LOGINLIMIT_ACNT_BAN {
+  bytes szReason = 1; // fixed-length byte array
+  bytes szTipsUrl = 2; // fixed-length byte array
+  bytes szBtnContent = 3; // fixed-length byte array
+}
+
+message SCDT_LOGINLIMIT_ERRCODE {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    SCDT_LOGINLIMIT_ACNT_BAN stBanAcnt = 2;
+  }
+}
+
+message SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_PVE {
+  uint32 bBoxType = 1;
+  uint32 bRewardNum = 2;
+  repeated COMDT_REWARD_DETAIL astRewardDetail = 3; // TDR_ARRAY
+  uint32 dwPveScore = 4;
+  uint32 bPveRateLvl = 5;
+  bytes szPveRateContent = 6; // fixed-length byte array
+  uint32 bBoxNum = 7;
+  uint32 bPveConsumeReward = 8;
+  uint32 bPveWeekRewardRestCntBefore = 9;
+  COMDT_PVE_SETTLE_UPGRADE_DETAIL stPveUpgradeDetail = 10;
+}
+
+message SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_GUILD {
+  int32 iOldGuildFightElo = 1;
+  int32 iNowGuildFightElo = 2;
+  int32 iOldGuildGrade = 3;
+  int32 iNowGuildGrade = 4;
+}
+
+message SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC {
+  uint32 dwPlayType = 1;
+  UNDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC stDetail = 2;
+}
+
+message SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL {
+  uint32 bReverse = 1;
+
+  oneof body_selector {
+    SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_PVE stPve = 2;
+    SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_GUILD stGuild = 3;
+    SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC stUgc = 4;
+  }
+}
+
+message SCDT_SETTLE_ACNT_EXTERN_INFO {
+  uint32 dwNoAssistKillNum = 1;
+}
+
+message SCDT_SETTLE_ALL_ACNT_INFO {
+  COMDT_SETTLE_BRANCHINFO stBranchInfo = 1;
+  COMDT_EACH_TYPE_MVP_SCORE_OF_OUTER stOuterScoreDetail = 2;
+  COMDT_EACH_TYPE_MVP_EVALUATE_OF_INNER stInnerMvpEvaluate = 3;
+  uint32 dwFightFlag = 4;
+  uint32 bMapType = 5;
+  SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL stMapDetail = 6;
+  COMDT_SETTLE_SHOW_VIOLATION_INFO stSettleShowViolationInfo = 7;
+  COMDT_EACH_TYPE_MVP_EVALUATE_OF_SHOWINFO stShowMvpEvaluate = 8;
+  COMDT_POS_FIGHT_VALUE_SHOW_IN_PICK stBestPosFightValue = 9;
+  SCDT_SETTLE_ACNT_EXTERN_INFO stExternInfo = 10;
+  COMDT_SHOWHEROTITLE stShowTitle = 11;
+  uint32 dwTeamFlag = 12;
+  uint32 dwPosOfTeam = 13;
+  COMDT_HERO_INSCRIBE_LIST_INBATTLE stInscribeStatInBattle = 14;
+  bytes szHeadUrl = 15; // fixed-length byte array
+  COMDT_GAME_VIP_CLIENT stVip = 16;
+  COMDT_MVP_ONLY_SHOW_INFO stMvpOnlyShowInfo = 17;
+  COMDT_MVP_OUTER_EVALUTE_INFO stMvpOuterEvaluteInfo = 18;
+  COMDT_SETTLE_REVIEW_INFO stSettleReviewInfo = 19;
+  uint32 bIs55TeamIntimacyAddition = 20;
+  uint64 ullCreditPrivilege = 21;
+  uint32 bIsKickOut = 22;
+  COMDT_GAMEPLAY_RATING_SETTLE_INFO stGamePlayRatingSettleInfo = 23;
+}
+
+message SCDT_SETTLE_ALL_ACNT_DETAIL {
+  uint32 bAcntNum = 1;
+  repeated CSDT_ACNT_DETAIL astAcntDetail = 2; // TDR_ARRAY
+}
+
+message SCDT_NTF_ACNT_INFO_UPD {
+  uint32 bUpdType = 1;
+  int32 iUpdValChg = 2;
+  uint32 bFromType = 3;
+  int64 llCurVal = 4;
+}
+
+message SCDT_NTF_HERO_INFO_UPD_PARAM {
+  repeated int32 Value = 1;
+}
+
+message SCDT_FIGHTVALUE_DETAIL {
+  uint32 dwFightValue = 1;
+  uint32 dwRecentFightScore = 2;
+  uint32 dwPerformanceScore = 3;
+  uint32 dwFightValueRatio = 4;
+  uint32 dwCurSeasonBeyondTopFightValue = 5;
+  uint32 dwMasterFightBranch = 6;
+  COMDT_BRANCH_HERO_MASTERMATCH_INFO stBranchHeroMasterMatchInfo = 7;
+  uint32 dwNewPerformScore = 8;
+  uint32 dwMasterRatioBranch = 9;
+  int32 iRecentNum = 10;
+  uint32 dwNewPerformScoreLimit = 11;
+  uint32 dwResHeroBranchMask = 12;
+  uint32 dwLeastSingleValue = 13;
+  uint32 dwPreReducePerformScore = 14;
+  uint32 dwLastReduceTime = 15;
+  COMDT_HEROFIGHTVALUE_5V5_INFO stHeroFightValue5V5Info = 16;
+  COMDT_HERO_MASTERMATCH_STATISTIC stHeroMasterMatchStatistic = 17;
+}
+
+message SCDT_HEROUPD_DETAIL_INFO {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    SCDT_FIGHTVALUE_DETAIL stFightValueDetail = 2;
+    COMDT_1V1_SOLO_HERO_INFO stSoloHeroInfo = 3;
+  }
+}
+
+message SCDT_NTF_HERO_INFO_UPD {
+  uint32 bUpdType = 1;
+  SCDT_NTF_HERO_INFO_UPD_PARAM stValueParam = 2;
+  SCDT_HEROUPD_DETAIL_INFO stUpdDetail = 3;
+}
+
+message SCDT_NTF_HERO_INFO_UPD_DETAIL {
+  uint32 dwHeroID = 1;
+  int32 iHeroUpdNum = 2;
+  repeated bytes astHeroUpdInfo = 3; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_GETCREDITVALUEREWARDINFO_SUCCESS {
+  uint32 dwCreditLevel = 1;
+  uint32 bRewardType = 2;
+  uint32 bRewardIndex = 3;
+  COMDT_CREDITCOMMONREWARD_INFO stRewardGetFlagInfo = 4;
+}
+
+message SCDT_GETCREDITVALUEREWARDINFO {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    SCDT_GETCREDITVALUEREWARDINFO_SUCCESS stSuccessInfo = 2;
+  }
+}
+
+message SCDT_SKINPART_ADD_INFO {
+  uint32 dwSkinPartID = 1;
+  uint32 dwEndTime = 2;
+}
+
+message SCDT_SETTLE_ACNTINFO_TOJUDGE {
+  COMDT_SETTLE_BRANCHINFO stBranchInfo = 1;
+}
+
+message SCDT_USUTASKLIST {
+  int32 iNewUsualTaskCnt = 1;
+  repeated bytes astNewUsualTask = 2; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_USUTASKINFO {
+  uint32 bReserve = 1;
+
+  oneof body_selector {
+    SCDT_USUTASKLIST stUsualTaskList = 2;
+  }
+}
+
+message SCDT_ONEKEY_SUBMIT_TASK_INFO {
+  COMDT_RESULT_INFO stTaskResultInfo = 1;
+  uint32 bTaskNum = 2;
+  repeated COMDT_BACKFLOW_CONTENT_RECOMMEND_TASK astTask = 3; // TDR_ARRAY
+}
+
+message SCDT_UDPPREREQUISITE {
+  uint32 dwTaskID = 1;
+  uint32 bTaskState = 2;
+  uint32 dwRewardID = 3;
+  uint32 dwReachTime = 4;
+  uint32 bPrerequisiteNum = 5;
+  repeated COMDT_TASK_DYNC_PREREQUISITE_INFO astPrerequisiteInfo = 6; // TDR_ARRAY
+}
+
+message SCDT_NEWTASKGET {
+  uint32 dwTaskID = 1;
+  uint32 dwTaskType = 2;
+  uint32 dwCustomValue = 3;
+}
+
+message SCDT_DELTASK {
+  uint32 dwTaskID = 1;
+  uint32 dwTaskType = 2;
+  uint32 bTaskSubType = 3;
+}
+
+message SCDT_TASKCOMMIT {
+  uint32 dwTaskID = 1;
+  uint32 bTaskState = 2;
+}
+
+message SCDT_UDPTASK {
+  uint32 bNouse = 1;
+
+  oneof body_selector {
+    SCDT_UDPPREREQUISITE stUdpPrerequisite = 2;
+    SCDT_TASKCOMMIT stTaskCommit = 3;
+  }
+}
+
+message SCDT_UPDTASKONE {
+  uint32 bUpdateType = 1;
+  SCDT_UDPTASK stUpdTaskInfo = 2;
+}
+
+message SCDT_PERIOD_INFO {
+  COMDT_RESULT_INFO stPeriodResultInfo = 1;
+  COMDT_RESULT_INFO stExtraResultInfo = 2;
+  uint32 dwPeriodID = 3;
+  uint32 dwDrawCnt = 4;
+  uint32 bGroupID = 5;
+  int32 iExtraCode = 6;
+  COMDT_MULTIPLE_INFO_NEW stMultipleInfo = 7;
+}
+
+message SCDT_ONE_WEAL_INFO {
+  uint32 bWealType = 1;
+  uint32 dwWealID = 2;
+  uint32 bNum = 3;
+  repeated CSDT_PERIOD_INFO astPeriodInfo = 4; // TDR_ARRAY
+}
+
+message SCDT_ONEKEY_SUBMIT_WEAL_INFO {
+  COMDT_RESULT_INFO stWealResultInfo = 1;
+  uint32 dwWealNum = 2;
+  repeated CSDT_ONE_WEAL_INFO astOneWealInfo = 3; // TDR_ARRAY
+}
+
+message SCDT_SHOW_MATCH_BADGE_INFO {
+  uint32 wNum = 1;
+  repeated uint32 ID = 2;
+}
+
+message SCDT_MASTER2V2_HOMEPAGE_ITEM {
+  uint64 ullRelationUid = 1;
+  uint32 dwRelationLogicWorldID = 2;
+  uint32 dwMaster2v2Score = 3;
+  uint32 bTitleIntimacyState = 4;
+  COMDT_MASTER2V2_TITLE_ITEM stRelationTitle = 5;
+}
+
+message SCDT_MASTER2V2_INFO {
+  int32 iSeasonID = 1;
+  uint32 dwSeasonState = 2;
+  uint32 dwTitleAdCode = 3;
+  int32 iHomePageNum = 4;
+  repeated bytes astHomePageItem = 5; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_CAMPUS_INFO {
+  uint32 dwCampusID = 1;
+  uint32 dwFinishTime = 2;
+}
+
+message SCDT_SETBATTLELISTOFARENA_SUCC {
+  COMDT_BATTLEHERO stBattleList = 1;
+}
+
+message SCDT_SETBATTLELISTOFARENA_RESULT {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    SCDT_SETBATTLELISTOFARENA_SUCC stSucc = 2;
+  }
+}
+
+message SCDT_CHECKVOICECOMPLAINT_SUCCESS {
+  uint32 dwComplaintTime = 1;
+  int32 iCheckNum = 2;
+  repeated bytes astCheckList = 3; // TDR_ARRAY, element type unknown
+  uint32 dwRandomSeed = 4;
+  uint32 dwDeskID = 5;
+  uint32 dwDeskSeq = 6;
+  uint32 dwTeamId = 7;
+  uint32 dwTeamSeq = 8;
+}
+
+message SCDT_CHECKVOICECOMPLAINT_RSP {
+  uint32 bReserve = 1;
+
+  oneof body_selector {
+    SCDT_CHECKVOICECOMPLAINT_SUCCESS stSuccessInfo = 2;
+  }
+}
+
+message SCDT_CAMP_BAN_HERO_DETAIL {
+  uint32 dwHeroID = 1;
+  uint32 dwObjID = 2;
+  uint32 bEmptyBan = 3;
+  int32 iShowBanIndex = 4;
+}
+
+message SCDT_CAMP_BAN_HERO_RESULT {
+  uint32 bCamp = 1;
+  int32 iBanCount = 2;
+  repeated bytes astBanResult = 3; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_GETCUSTOMTEAMMEMDETAIL_RESULT_SUCC {
+  uint64 ullMemberUid = 1;
+  int32 iMemberLogicWorldID = 2;
+  uint32 dwGameEntity = 3;
+  uint32 bMainBranch = 4;
+  uint32 bMinorBranch = 5;
+  COMDT_PREFER_HERO stPreferHero = 6;
+  uint32 bActiveDay = 7;
+  uint32 bLastWeekActiveTimePeriod = 8;
+  uint32 bGameState = 9;
+  uint32 bGameSubState = 10;
+  uint32 dwGameStartTime = 11;
+  uint32 bRankGrade = 12;
+  uint32 dwRankScore = 13;
+  uint32 dwRankClassOfRank = 14;
+  uint32 dwOtherStateBits = 15;
+}
+
+message SCDT_GETCUSTOMTEAMMEMDETAIL_RESULT {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    SCDT_GETCUSTOMTEAMMEMDETAIL_RESULT_SUCC stSucc = 2;
+  }
+}
+
+message SCDT_BACKFLOW_TAB_SWITCH_INFO {
+  uint32 bSignInSwitch = 1;
+  uint32 bChallengeTrialSwitch = 2;
+  uint32 bFriendShipTrialSwitch = 3;
+  uint32 bDailyPvpTaskSwitch = 4;
+  uint32 bBpTaskSwitch = 5;
+  uint32 bUnionPageSwitch = 6;
+}
+
+message SCDT_BACKFLOW_CUSTOM_SHOW_FUNC_SWITCH {
+  uint32 bTeamRoomSwitch = 1;
+  uint32 bFriendRecentSwitch = 2;
+  uint32 bFriendListSwitch = 3;
+  uint32 bHeroSwitch = 4;
+  uint32 bBattlePrepareSwitch = 5;
+  uint32 bHomepageRemindSwitch = 6;
+  uint32 bRankRapidRemindSwitch = 7;
+}
+
+message SCDT_BACKFLOW_FIRST_GAME_FORCE_START {
+  uint32 bTempHideOpen = 1;
+}
+
+message SCDT_CLIENT_SETTING_TOPPLAYER_HEROOPERATE_INFO {
+  uint32 dwHeroId = 1;
+  uint64 ullUid = 2;
+  uint32 dwLogicWorldID = 3;
+  bytes szSettingString = 4; // fixed-length byte array
+  int32 iSourceType = 5;
+  bytes szPlayerName = 6; // fixed-length byte array
+  bytes szHeadUrl = 7; // fixed-length byte array
+  uint32 dwFightValue = 8;
+  uint32 dwMasterScore = 9;
+  uint32 dwGenerateTime = 10;
+}
+
+message SCDT_REALTIMECOMPLAINTCHKLIST {
+  uint32 bAcntNum = 1;
+  repeated uint32 AcntList = 2;
+}
+
+message SCDT_BATTLE_STAT_REPORT_ACNT_LIST {
+  uint32 bAcntNum = 1;
+  repeated uint32 AcntList = 2;
+}
+
+message SCDT_CAMP_VOTE_PICK_ABORT_RESULT {
+  uint32 bVoteAbort = 1;
+  uint32 dwCampHeroJobCheckId = 2;
+}
+
+message SCDT_SAVE_PROJ8_FORMATION_RSP {
+  COMDT_RESULT_INFO stResultInfo = 1;
+  uint32 dwFormationID = 2;
+  uint32 bHeroNum = 3;
+  repeated uint32 HeroList = 4;
+  uint32 bOptType = 5;
+}
+
+message SCDT_GET_PROJ8_ALLFORMATION_RSP {
+  COMDT_RESULT_INFO stResultInfo = 1;
+  COMDT_PROJ8_FORMATION_INFO stProj8FormationInfo = 2;
+}
+
+message SCDT_PROJECT8_INFO_NTF {
+  COMDT_PROJECT8_CLIENT_PLAYER_INFO stPlayerInfo = 1;
+  COMDT_PROJECT8_HIGHEST_MMR_INFO stProj8HighestMMRInfo = 2;
+}
+
+message SCDT_ONECAMP_FACTIONBONDING {
+  uint32 bCamp = 1;
+  COMDT_FACTIONBONDING_INFO stFactionBondingInfo = 2;
+}
+
+message SCDT_ALL_FACTIONBONDING {
+  uint32 dwCampNum = 1;
+  repeated bytes astCampFactionBondingList = 2; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_GET_ALBUM_LEVEL_REWARD_RSP {
+  COMDT_RESULT_INFO stResultInfo = 1;
+  uint32 dwAlbumID = 2;
+}
+
+message SCDT_UPDATE_HERO_SCENARIO_RSP {
+  COMDT_RESULT_INFO stResultInfo = 1;
+  uint32 bType = 2;
+  uint32 dwUniqueSeq = 3;
+  COMDT_REWARD_DETAIL stReward = 4;
+}
+
+message SCDT_COMMUNICATION_BLOCK_INBATTLE_INFO {
+  uint64 ullUid = 1;
+  uint32 bBlockText = 2;
+  uint32 bBlockSignal = 3;
+  uint32 bBlockVoice = 4;
+  uint32 dwBlockTimeSecond = 5;
+}
+
+message SCDT_QUESTIONNAIRE_FEEDBACK_OPTIONS {
+  uint32 dwValue = 1;
+  bytes szText = 2; // fixed-length byte array
+}
+
+message SCDT_CUSTOMIZE_ITEM_INFO {
+  uint32 dwItemType = 1;
+  uint32 dwItemID = 2;
+}
+
+message SCDT_CUSTOMIZE_RECOMMEND_INFO {
+  uint32 dwRecommendSuitID = 1;
+  int32 iHotScore = 2;
+  bytes szMainTitle = 3; // fixed-length byte array
+  bytes szSubTitle = 4; // fixed-length byte array
+  uint32 dwCoverType = 5;
+  bytes szBannerImgPath = 6; // fixed-length byte array
+  uint32 bIsNewRecommend = 7;
+  uint32 dwRecommendItemNum = 8;
+  repeated bytes astRecommendItemList = 9; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_CUSTOMIZE_RECOMMEND_SUIT_LIST {
+  uint32 dwSuitNum = 1;
+  repeated SCDT_CUSTOMIZE_RECOMMEND_SUIT_LIST astSuitList = 2; // TDR_ARRAY
+}
+
+message SCDT_DIMENSION_MAP_ACTOR_ATTR {
+  uint32 wAttrID = 1;
+  uint32 dwAttrValue = 2;
+}
+
+message SCDT_DIMENSION_MAP_MOVE_INFO {
+  uint64 ullActorUID = 1;
+  COMDT_DIMENSION_MAP_ACTOR_MOVE_INFO stActorMoveInfo = 2;
+}
+
+message SCDT_BAN_HEROSKIN_INBATTLE_DETAIL {
+  uint32 dwHeroID = 1;
+  uint32 dwAppVersion = 2;
+  uint32 dwResVersion = 3;
+  uint64 ullHeroSkinBanBit = 4;
+}
+
+message SCDT_BAN_HEROSKIN_INBATTLE {
+  uint32 dwMapType = 1;
+  uint32 dwMapId = 2;
+  uint32 dwBanHeroSkinNum = 3;
+  repeated bytes astBanHeroSkinList = 4; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_GAME_EFFECT_INFO {
+  uint32 dwNum = 1;
+  repeated COMDT_KEEPSAKE_EFFECT_INFO astEffectInfo = 2; // TDR_ARRAY
+}
+
+message SCDT_BACKFLOW_POWERFUL_HERO_LIST {
+  int32 iHeroNum = 1;
+  repeated uint32 HeroIDList = 2;
+}
+
+message SCDT_FARM_BUILDING_DATA_DETAIL {
+  uint32 dwBuildingID = 1;
+  int64 llExp = 2;
+  int32 iLevel = 3;
+  uint32 dwReverse = 4;
+}
+
+message SCDT_FARM_ACNT_BUILDING {
+  int32 iNum = 1;
+  repeated bytes astBuildingList = 2; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_FARM_FUNC_BATCH {
+  uint32 dwFuncID = 1;
+  uint32 dwBatchID = 2;
+}
+
+message SCDT_FARM_FUNCID_OPEN_TIME_INFO {
+  int32 iNum = 1;
+  repeated bytes astFuncIDList = 2; // TDR_ARRAY, element type unknown
+}
+
+message SCDT_FARM_ACNT_BASE_INFO {
+  uint32 bFarmCreated = 1;
+  uint32 bIsSeedUser = 2;
+  uint32 dwCreateTime = 3;
+  int64 llExp = 4;
+  int32 iLevel = 5;
+}

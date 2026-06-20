@@ -1,0 +1,928 @@
+syntax = "proto3";
+package CSProtocol;
+
+// 注意: TDR非标准Protobuf, 此为近似还原
+
+message FRAMEDT_VECTOR3 {
+  int32 X = 1;
+  int32 Y = 2;
+  int32 Z = 3;
+}
+
+message FRAMEDT_VECTOR2 {
+  int32 X = 1;
+  int32 Z = 2;
+}
+
+message FRAMEPKG_CMD_PLAYERMOVE {
+  FRAMEDT_VECTOR3 stWorldPos = 1;
+}
+
+message FRAMEPKG_CMD_PLAYERMOVEDIRECTION {
+  int32 nDegree = 1;
+  uint32 bMoveSeq = 2;
+}
+
+message FRAMEPKG_CMD_STOPMOVE {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_STOPROTATE {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_USESKILL {
+  int32 chSlotPos = 1;
+}
+
+message FRAMEPKG_CMD_ATTACKPOSITION {
+  FRAMEDT_VECTOR3 stWorldPos = 1;
+}
+
+message FRAMEPKG_CMD_ATTACKACTOR {
+  int32 iObjectID = 1;
+}
+
+message FRAMEPKG_CMD_USECURVETRACKSKILL {
+  int32 nNoUse = 1;
+  int32 chSlotType = 2;
+  int32 iSkillID = 3;
+}
+
+message FRAMEPKG_CMD_SWITCH_AI {
+  int32 chIsAutoAI = 1;
+}
+
+message FRAMEPKG_CMD_SWITCH_ROBOT_STOP {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_SWITCH_CAPTAIN {
+  int32 iObjectID = 1;
+}
+
+message FRAMEPKG_CMD_SWITCH_CAPTAIN_COMMANDER_MODE {
+  int32 iOriObjectID = 1;
+  int32 iNowObjectID = 2;
+  int32 iTagetObjectID = 3;
+}
+
+message FRAMEPKG_CMD_SWITCH_SUPER_KILLER {
+  int32 chIsSuperKiller = 1;
+}
+
+message FRAMEPKG_CMD_SWITCH_GOD_MODE {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_SWITCH_ALL_GOD_MODE {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_LEARN_TALENT {
+  uint32 dwHeroObjID = 1;
+  int32 chTalentLevel = 2;
+  uint32 dwTalentID = 3;
+}
+
+message FRAMEPKG_CMD_TESTCOMMANDDELAY {
+  uint32 dwDelayMs = 1;
+}
+
+message FRAMEPKG_CMD_PLAY_PAINT {
+  uint32 dwPaintId = 1;
+}
+
+message FRAMEPKG_CMD_PLAYERRUNAWAY {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PLAYERDISCONNECT {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PLAYERRECONNECT {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PLAYATTACKTARGETMODE {
+  int32 chAttackTargetMode = 1;
+}
+
+message FRAMEPKG_CMD_SVRNTFCHGKFRAMELATER {
+  uint32 bKFrameLaterNum = 1;
+}
+
+message FRAMEPKG_CMD_ASSISTSTATECHG {
+  uint32 bChgType = 1;
+  uint32 dwAiPlayerObjID = 2;
+  uint32 dwMasterObjID = 3;
+}
+
+message FRAMEPKG_CMD_CHGAUTOAI {
+  uint32 bAutoAIType = 1;
+  uint32 dwPlayerObjID = 2;
+}
+
+message FRAMEPKG_CMD_PLAYER_ONESTEP_BUY_EQUIP {
+  repeated uint32 EquipID = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_ADD_GOLD_COIN_IN_BATTLE {
+  int32 iAddValue = 1;
+  uint32 dwUseGMPlayerID = 2;
+  uint32 dwAddGoldPlayerID = 3;
+}
+
+message FRAMEPKG_CMD_SET_SKILL_LEVEL {
+  uint32 bSkillSlot = 1;
+  uint32 bSkillLevel = 2;
+}
+
+message FRAMEPKG_CMD_PLAYCOMMONATTACKTMODE {
+  uint32 bCommonAttackMode = 1;
+}
+
+message FRAMEPKG_CMD_PLAYLASTHITANDATTACKORGANMODE {
+  uint32 bLastHitAndAttackOrganMode = 1;
+}
+
+message FRAMEPKG_CMD_INBATTLEINPUTCHATENABLEMODE {
+  uint32 bInBattleInputChatEnableMode = 1;
+}
+
+message FRAMEPKG_CMD_INBATTLEINPUTCHATONEPLAYERENABLEMODE {
+  uint32 dwCtrlPlayerID = 1;
+  uint32 bIsEnable = 2;
+}
+
+message FRAMEPKG_CMD_Signal_Btn_Position {
+  uint32 bSignalID = 1;
+  FRAMEDT_VECTOR3 stWorldPos = 2;
+  uint32 dwM_timeStamp = 3;
+  uint32 bIsOpenHci = 4;
+}
+
+message FRAMEPKG_CMD_Signal_MiniMap_Position {
+  uint32 bSignalID = 1;
+  FRAMEDT_VECTOR3 stWorldPos = 2;
+  uint32 bElementType = 3;
+  uint32 dwSendObjID = 4;
+  uint32 dwM_timeStamp = 5;
+  uint32 bIsOpenHci = 6;
+  int32 iConfigId = 7;
+}
+
+message FRAMEPKG_CMD_OMG_SIGNAL_MINIMAP_POSITION {
+  uint32 bSignalID = 1;
+  FRAMEDT_VECTOR3 stWorldPos = 2;
+  uint32 bElementType = 3;
+  uint32 dwSendObjID = 4;
+  uint32 dwM_timeStamp = 5;
+  uint32 bIsOpenHci = 6;
+  int32 iConfigId = 7;
+}
+
+message FRAMEPKG_CMD_Signal_MiniMap_Target {
+  uint32 bSignalID = 1;
+  uint32 bType = 2;
+  uint32 dwTargetObjID = 3;
+  uint32 dwSendObjID = 4;
+  uint32 dwM_timeStamp = 5;
+  uint32 bIsOpenHci = 6;
+  int32 iConfigId = 7;
+}
+
+message FRAMEPKG_CMD_PLAYER_IN_OUT_EQUIPSHOP {
+  uint32 bInOut = 1;
+}
+
+message FRAMEPKG_CMD_PAUSE_RESUME_GAME {
+  uint32 bPauseCommand = 1;
+  uint32 bPauseByCamp = 2;
+  bytes szCampPauseTimes = 3; // fixed-length byte array
+}
+
+message FRAMEPKG_CMD_PLAYER_CHOOSE_EQUIPSKILL {
+  uint32 wEquipID = 1;
+  uint32 bEquipActiveSkillIndex = 2;
+  uint32 bGridIndex = 3;
+  uint32 bContainerType = 4;
+}
+
+message FRAMEPKG_CMD_PLAYER_CHEAT {
+  uint32 bCheatType = 1;
+  uint32 dwCtrlPlayerID = 2;
+  int32 iParam1 = 3;
+  int32 iParam2 = 4;
+  int32 iParam3 = 5;
+  int32 iParam4 = 6;
+  int32 iParam5 = 7;
+  int32 iParam6 = 8;
+}
+
+message FRAMEDT_RECOMMEND_EQUIP_PLAN_INFO {
+  repeated uint32 EquipId = 1;
+  uint32 bIsCustomDefine = 2;
+  bytes szName = 3; // fixed-length byte array
+}
+
+message FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_HERO {
+  uint32 dwCtrlPlayerID = 1;
+  uint32 dwHeroID = 2;
+  uint32 dwSkinID = 3;
+  uint32 dwSkinVoiceID = 4;
+  uint32 dwSummonerSkillId = 5;
+  repeated uint32 SymbolID = 6;
+  uint32 dwEquipPlanCnt = 7;
+  repeated FRAMEDT_RECOMMEND_EQUIP_PLAN_INFO astEquipPlanInfo = 8; // TDR_ARRAY
+  FRAMEDT_RECOMMEND_EQUIP_PLAN_INFO stCurrentEquipPlanInfo = 9;
+  uint32 bForceCreateNew = 10;
+}
+
+message FRAMEPKG_CMD_PLAYER_SWITCH_HERO_INGAME {
+  uint32 dwHeroCfgId = 1;
+}
+
+message FRAMEPKG_CMD_MIRROR_ACTOR_INGAME {
+  uint32 dwSkinId = 1;
+}
+
+message FRAMEPKG_CMD_COPY_ACTOR_INGAME {
+  FRAMEDT_VECTOR2 stActorBornPosOffset = 1;
+  int32 iCallActorIndex = 2;
+  int32 iConfigId = 3;
+  int32 iSkinId = 4;
+  uint32 bIsFriend = 5;
+}
+
+message FRAMEPKG_CMD_REMOVE_CALL_ACTOR_INGAME {
+  int32 iCallActorIndex = 1;
+}
+
+message FRAMEPKG_CMD_USE_JOINT_SKILL {
+  uint32 dwObjID = 1;
+  uint32 dwUniqueId = 2;
+  int32 iSubTargetID = 3;
+  uint32 dwSourceActorId = 4;
+}
+
+message FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_GROUP {
+  uint32 bGroup = 1;
+}
+
+message FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_ID {
+  uint32 bGroup = 1;
+  repeated uint32 EquipID = 2;
+  uint32 dwRecommendType = 3;
+  uint32 dwRecommendID = 4;
+  bytes szSuitEquipName = 5; // fixed-length byte array
+}
+
+message FRAMEPKG_CMD_PLAYER_SET_TEMPUSE_EQUIP {
+  uint32 wEquipID = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_MAKE_ITEM {
+  uint32 dwMakeLevel = 1;
+  uint32 dwMakeIndex = 2;
+}
+
+message FRAMEPKG_CMD_PLAYER_ADD_SPECIAL_ABILITY {
+  uint32 dwSpecialAbilityIndex = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_SET_PAINT {
+  uint32 dwPaintID = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_PURSUIT_ONMOVE_SWITCH {
+  uint32 bPursuitOnMove = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_CONTINUE_COMMON_ATTACK_MODE {
+  uint32 bCommonAttackModeType = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_COMMON_ATTACK_SEARCH_MODE {
+  uint32 bCommonAttackSearchModeType = 1;
+}
+
+message FRAMEPKG_CMD_USE_CHARGE_SKILL {
+  uint32 bSkillslot = 1;
+  uint32 bState = 2;
+  int32 nDegree = 3;
+  FRAMEDT_VECTOR2 stPos = 4;
+  uint32 dwSeq = 5;
+}
+
+message FRAMEPKG_CMD_SET_SKILL_INDICATIOR_DIRECTION {
+  int32 nDegree = 1;
+}
+
+message FRAMEPKG_CMD_SET_SKILL_INDICATIOR_POSITION {
+  FRAMEDT_VECTOR2 stPos = 1;
+}
+
+message FRAMEPKG_CMD_PICK_DROPITEM {
+  uint32 dwPlayerID = 1;
+}
+
+message FRAMEPKG_CMD_ACTOR_SUICIDE {
+  int32 iObjectID = 1;
+}
+
+message FRAMEPKG_CMD_USEREVIVECOIN {
+  uint32 bUseless = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_CANCEL_SKILL {
+  uint32 dwObjID = 1;
+  int32 iParam = 2;
+  uint32 bSkillSlotType = 3;
+}
+
+message FRAMEPKG_CMD_PLAY_BATTLE_ACTION {
+  uint32 dwBattleActionId = 1;
+}
+
+message FRAMEPKG_CMD_PLAY_EMOJI {
+  uint32 dwEmojiId = 1;
+  uint32 bTextIndex = 2;
+}
+
+message FRAMEPKG_CMD_PLAY_SACRED_ANIMAL {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PLAY_SACRED_ANIMAL_ACTION {
+  uint32 dwActionId = 1;
+}
+
+message FRAMEPKG_CMD_BLUEPRINT_BROADCAST {
+  int32 iIntParam1 = 1;
+  int32 iIntParam2 = 2;
+  FRAMEDT_VECTOR3 stVintParam = 3;
+  int32 iUniqueKey = 4;
+  int32 iCmdEnum = 5;
+}
+
+message FRAMEPKG_CMD_BLUEPRINT_NORMALBROAD {
+  int32 iIntParam1 = 1;
+  int32 iIntParam2 = 2;
+  FRAMEDT_VECTOR3 stVintParam = 3;
+  int32 iUniqueKey = 4;
+  int32 iCmdEnum = 5;
+  bytes szStrParam = 6; // fixed-length byte array
+}
+
+message FRAMEPKG_CMD_NEWBIE_GUIDE {
+  int32 iGuideType = 1;
+  int32 iIntParam1 = 2;
+  int32 iIntParam2 = 3;
+  int32 iIntParam3 = 4;
+  int32 iIntParam4 = 5;
+}
+
+message FRAMEPKG_CMD_PROJECT8_DRAG_HERO {
+  uint32 dwObjID = 1;
+  uint32 bReplace = 2;
+  int32 X = 3;
+  int32 Z = 4;
+}
+
+message FRAMEPKG_CMD_PROJECT8_HERO {
+  uint32 dwObjID = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_PICK_CARD_INFO {
+  int32 iBuyCardIndex = 1;
+  uint32 bLock = 2;
+  uint32 bGen = 3;
+}
+
+message FRAMEPKG_CMD_PROJECT8_REQUEST_CARDDETAIL {
+  int32 chReserve = 1;
+  uint32 bIgnoreFirstRoundGen = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_ENABLE_EXTRA_SLOT {
+  uint32 bEnable = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_PICK_UP_DROP {
+  int32 iDropID = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_CHOOSE_EQUIP {
+  int32 iDropID = 1;
+  int32 iEquipID = 2;
+  uint32 bAutoAddEquip = 3;
+}
+
+message FRAMEPKG_CMD_PROJECT8_ADD_PLAYER_COIN {
+  int32 iAddNum = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_NB_LOAD_PRESET {
+  uint32 dwPlayerID = 1;
+  uint32 dwPresetID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_NB_SET_PLAYER_LEVEL {
+  uint32 dwPlayerID = 1;
+  uint32 bLevel = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO {
+  int32 iEquipID = 1;
+  int32 X = 2;
+  int32 Z = 3;
+}
+
+message FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO2 {
+  int32 iEquipID = 1;
+  int32 iHeroObjID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_UNLOAD_EQUIP_IN_HERO {
+  int32 iActorID = 1;
+  int32 iEquipID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_USE_SKILL {
+  int32 iSkillIndex = 1;
+  FRAMEDT_VECTOR3 stWorldPos = 2;
+  uint32 bIsAuto = 3;
+}
+
+message FRAMEPKG_CMD_PROJECT8_UNLOAD_SKILL {
+  int32 iSkillIndex = 1;
+  int32 iBackPackDropID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_BUY_EXP {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_CLEAR_DEPOSIT_CARD {
+  int32 chCampcareer = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_BAN_THE_CAMP {
+  uint32 wCampID = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_BAN_THE_HERO {
+  uint32 dwHeroID = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_ALLY_GIFT {
+  uint32 bGiftOpType = 1;
+  int32 iParam = 2;
+  int32 iParam2 = 3;
+  int32 iParam3 = 4;
+}
+
+message FRAMEPKG_CMD_PROJECT8_CHECK_GIFT_EQUIP {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_FINISH_PREPARE {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_ALLY_RESCUE {
+  uint32 bRescue = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_UPGRADE_EQUIP {
+  int32 iEquipID = 1;
+  int32 iHeroObjID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_SET_FORMATION {
+  uint32 bFormationIndex = 1;
+  uint32 bSubID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_SET_RECOMMEND_ARRANGE {
+  uint32 bType = 1;
+  uint32 dwArrangeCfgId = 2;
+  uint32 dwParam = 3;
+}
+
+message FRAMEPKG_CMD_LEARNPVETALENT {
+  uint32 dwHeroObjID = 1;
+  uint32 dwPVETalentID = 2;
+}
+
+message FRAMEPKG_CMD_REQUEST_PVETALENT_LIST {
+  uint32 dwHeroObjID = 1;
+  uint32 dwIsReRandom = 2;
+}
+
+message FRAMEPKG_CMD_SET_AUTO_BATTLE {
+  uint32 dwPlayerID = 1;
+  uint32 bIsAutoBattle = 2;
+}
+
+message FRAMEPKG_CMD_SET_PLAYER_STATE {
+  FRAMEDT_VECTOR3 stDestPosition = 1;
+  uint32 bSoulLevel = 2;
+  int32 iSoulExp = 3;
+  uint32 bSkill1_level = 4;
+  int32 iSkill1_CD = 5;
+  uint32 bSkill1BeanCount = 6;
+  uint32 bSkill2_level = 7;
+  int32 iSkill2_CD = 8;
+  uint32 bSkill2BeanCount = 9;
+  uint32 bSkill3_level = 10;
+  int32 iSkill3_CD = 11;
+  uint32 bSkill3BeanCount = 12;
+  uint32 bSkillEx3_level = 13;
+  int32 iSkillEx3_CD = 14;
+  uint32 bSkillEx3BeanCount = 15;
+  repeated uint32 EquipID = 16;
+  int32 iHp = 17;
+  int32 iEp = 18;
+}
+
+message FRAMEPKG_CMD_ADD_ACTOR {
+  uint32 bType = 1;
+  uint32 bActorCamp = 2;
+  int32 iConfigId = 3;
+  FRAMEDT_VECTOR3 stDestPosition = 4;
+}
+
+message FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_SLOT {
+  uint32 bIndex = 1;
+  uint32 bSlotIndex = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_SALE_EXTRASLOT_HERO {
+  uint32 bIndex = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_NUMEN_MOVE_TO_TARGET {
+  FRAMEDT_VECTOR3 stWorldPos = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_DRAG_NUMEN {
+  uint32 dwObjID = 1;
+  FRAMEDT_VECTOR3 stWorldPos = 2;
+  uint32 bIsBornPoint = 3;
+}
+
+message FRAMEPKG_CMD_PROJECT8_NUMEN_ACCUMULATE {
+  uint32 dwObjID = 1;
+  uint32 bIsRelease = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_NUMEN_CLICK {
+  uint32 bIsContinuous = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_NUMEN_AUTO {
+  uint32 bEnable = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_WATCH_FIGHT_STA {
+  uint32 dwWatchID = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_REBUILD_TALENT {
+  uint32 bTalentLevelPoint = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_REPLACE_TALENT {
+  uint32 bSelectIndex = 1;
+  uint32 dwTalentReplaceID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_PET_DIALOG {
+  uint32 bDialogType = 1;
+  uint32 bTitleID = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_DRAW_ITEM {
+  uint32 bItemIndex = 1;
+}
+
+message FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_BATTLE {
+  uint32 bIndex = 1;
+  int32 X = 2;
+  int32 Z = 3;
+}
+
+message FRAMEPKG_CMD_PROJECT8_CHOOSE_TANLENT {
+  uint32 dwId = 1;
+  uint32 bIsRebuild = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_BOUNTY_OPERATION {
+  uint32 bOpt = 1;
+  uint32 bParam = 2;
+}
+
+message FRAMEPKG_CMD_UGC_CUSTOMIZE {
+  uint32 bType = 1;
+  uint32 wLen = 2;
+  bytes szBuf = 3; // fixed-length byte array
+}
+
+message FRAMEPKG_CMD_PROJECT8_NEW_CHOOSE_EQUIP {
+  uint32 bItemIndex = 1;
+  uint32 bAutoAddEquip = 2;
+}
+
+message FRAMEPKG_CMD_PROJECT8_NEW_REFRESH_EQUIP {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_NOTIFY_CLIENT_RECOVER_END {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_DROP_ITEM_INFO_CHANGE {
+  uint32 dwItemId = 1;
+  uint32 bItemNum = 2;
+  uint32 bCanPickCnt = 3;
+  uint32 bItemLeftCnt = 4;
+  uint32 bItemTodayLeftCnt = 5;
+}
+
+message FRAMEPKG_CMD_PLAYER_CHOOSE_ENTER_EXTEND_FRAME {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_REQ_QUIT_EXTEND_FRAME {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_AI_OVERALL_SENSE_INSTRUCTION {
+  uint32 dwHostID = 1;
+  uint32 bSignalID = 2;
+  int32 iParam1 = 3;
+  int32 iParam2 = 4;
+  int32 iParam3 = 5;
+  int32 iKillCount = 6;
+  int32 iKillProb = 7;
+  int32 iDeadProb = 8;
+}
+
+message FRAMEPKG_CMD_OPERATE_SKILL_BUTTON {
+  int32 iUiEventId = 1;
+  uint32 bSlot = 2;
+  FRAMEDT_VECTOR2 stPos = 3;
+}
+
+message FRAMEPKG_CMD_RIGHT_JOYSTICK_MOVE {
+  int32 nDegree = 1;
+  uint32 bSeq = 2;
+  uint32 bUseType = 3;
+}
+
+message FRAMEPKG_CMD_VIDEO_PLAY_COMPLETED {
+  int32 iVideoId = 1;
+  uint32 bSkip = 2;
+}
+
+message FRAMEPKG_CMD_PERCISIONATK_TARGET {
+  int32 iTargetId = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_SET_PERCISION_ATTACK_MODE {
+  uint32 bMode = 1;
+}
+
+message FRAMEPKG_CMD_ACTOR_OPERATE {
+  int32 iOpValue = 1;
+}
+
+message FRAMEPKG_CMD_LEFT_JOYSTICK_DRAG_STATE_CHANGE {
+  uint32 bBeginDrag = 1;
+  uint32 dwActorObjID = 2;
+}
+
+message FRAMEPKG_CMD_DIMENSION_HERO_CHANGE_SKILL {
+  uint32 bJobOrder = 1;
+}
+
+message FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_DIMENSION_WEAR {
+  uint32 dwPlayerID = 1;
+  uint32 dwHeroID = 2;
+  uint32 bGender = 3;
+  uint32 bJobType = 4;
+  repeated uint32 Parts = 5;
+  repeated uint32 Weapons = 6;
+  uint32 bIsApplyToActor = 7;
+}
+
+message FRAMEPKG_CMD_SIDE_SKILL_BTN {
+  int32 iUniqueID = 1;
+}
+
+message FRAMEPKG_CMD_CHANGE_RECOMMEND_EQUIP_LIST {
+  uint32 bLen = 1;
+  uint32 dwBoughtState = 2;
+  repeated uint32 EquipID = 3;
+}
+
+message FRAMEPKG_CMD_INSCRIBE_ACTION {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_EASY_IN_START_FIGHT {
+  int32 chReserve = 1;
+}
+
+message FRAMEPKG_CMD_ULTIMATE_AWAKEN_FORCE_SET_BDTALENTS {
+  int32 chReserve = 1;
+  repeated int32 TalentIDs = 2;
+}
+
+message FRAMEPKG_CMD_OMG_PARACHUTE_MOVE {
+  int32 iDirectionDegree = 1;
+  int32 iLastPosX = 2;
+  int32 iLastPosY = 3;
+  int32 iIsHalt = 4;
+  int32 iJumpingSpeed = 5;
+}
+
+message FRAMEPKG_CMD_OMG_PARACHUTE_FOLLOW {
+  uint32 dwTargetObjID = 1;
+  uint32 dwFollowObjID = 2;
+  uint32 bState = 3;
+}
+
+message FRAMEPKG_CMD_OMG_INVITE_PARACHUTE_FOLLOW {
+  uint32 dwInviteObjectID = 1;
+  uint32 dwBeInviteObjID = 2;
+}
+
+message FRAMEPKG_CMD_OMG_AGREE_OR_REJECT_PARACHUTE_FOLLOW {
+  uint32 dwInviteObjectID = 1;
+  uint32 dwBeInviteObjID = 2;
+  uint32 bResult = 3;
+}
+
+message FRAMEPKG_CMD_BLUEPRINT_CUSTOMDEF {
+  int32 iCmdEnum = 1;
+  uint32 wBufferLen = 2;
+  bytes szBuf = 3; // fixed-length byte array
+}
+
+message FRAMEPKG_CMD_AXISSCALE {
+  int32 nScale = 1;
+}
+
+message FRAME_CMD_INFO {
+
+  oneof body_selector {
+    FRAMEPKG_CMD_PLAYERMOVE stCmdPlayerMove = 1;
+    FRAMEPKG_CMD_STOPMOVE stCmdPlayerStopMove = 2;
+    FRAMEPKG_CMD_ATTACKPOSITION stCmdPlayerAttackPosition = 3;
+    FRAMEPKG_CMD_ATTACKACTOR stCmdPlayerAttackPlayer = 4;
+    FRAMEPKG_CMD_USECURVETRACKSKILL stCmdPlayerUseCurveTrackSkill = 5;
+    FRAMEPKG_CMD_SWITCH_AI stCmdPlayerSwithAutoAI = 6;
+    FRAMEPKG_CMD_SWITCH_CAPTAIN stCmdPlayerSwitchCaptain = 7;
+    FRAMEPKG_CMD_SWITCH_SUPER_KILLER stCmdPlayerSwitchSuperKiller = 8;
+    FRAMEPKG_CMD_SWITCH_GOD_MODE stCmdPlayerSwitchGodMode = 9;
+    FRAMEPKG_CMD_LEARN_TALENT stCmdPlayerLearnTalent = 10;
+    FRAMEPKG_CMD_TESTCOMMANDDELAY stCmdTestCommandDelay = 11;
+    FRAMEPKG_CMD_PLAYATTACKTARGETMODE stCmdPlayerAttackTargetMode = 12;
+    FRAMEPKG_CMD_SVRNTFCHGKFRAMELATER stCmdSvrNtfChgFrameLater = 13;
+    FRAMEPKG_CMD_PLAYER_ADD_GOLD_COIN_IN_BATTLE stCmdPlayerAddGoldCoinInBattle = 14;
+    FRAMEPKG_CMD_SET_SKILL_LEVEL stCmdSetSkillLevel = 15;
+    FRAMEPKG_CMD_PLAYCOMMONATTACKTMODE stCmdPlayCommonAttackMode = 16;
+    FFRAMEPKG_CMD_LOCKATTACKTARGET stCmdPlayerLockAttackTarget = 17;
+    FRAMEPKG_CMD_Signal_Btn_Position stCmdSignalBtnPosition = 18;
+    FRAMEPKG_CMD_Signal_MiniMap_Position stCmdSignalMiniMapPosition = 19;
+    FRAMEPKG_CMD_Signal_MiniMap_Target stCmdSignalMiniMapTarget = 20;
+    FRAMEPKG_CMD_PLAYER_IN_OUT_EQUIPSHOP stCmdPlayerInOutEquipShop = 21;
+    FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_GROUP stCmdPlayerChangeUsedRecommendEquipGroup = 22;
+    FRAMEPKG_CMD_PLAYLASTHITANDATTACKORGANMODE stCmdPlayLastHitAndAttackOrganMode = 23;
+    FRAMEPKG_CMD_PLAYER_CHOOSE_EQUIPSKILL stCmdPlayerChooseEquipSkill = 24;
+    FRAMEPKG_CMD_PLAYER_CHEAT stCmdPlayerCheat = 25;
+    FRAMEPKG_CMD_PLAYER_SWITCH_HERO_INGAME stCmdPlayerHeroSwitch = 26;
+    FRAMEPKG_CMD_USE_JOINT_SKILL stCmdUseJointSkill = 27;
+    FRAMEPKG_CMD_PLAYER_ONESTEP_BUY_EQUIP stCmdPlayerOneStepBuyEquip = 28;
+    FRAMEPKG_CMD_PLAYER_CONTINUE_COMMON_ATTACK_MODE stCmdPlayerContinueCommonAttackMode = 29;
+    FRAMEPKG_CMD_USE_CHARGE_SKILL stCmdUseChargeSkill = 30;
+    FRAMEPKG_CMD_SET_SKILL_INDICATIOR_DIRECTION stCmdSetSkillIndicatorDirection = 31;
+    FRAMEPKG_CMD_PICK_DROPITEM stCmdPickDropItem = 32;
+    FRAMEPKG_CMD_ACTOR_SUICIDE stCmdSuicideActor = 33;
+    FRAMEPKG_CMD_SWITCH_ALL_GOD_MODE stCmdPlayerSwitchAllGodMode = 34;
+    FRAMEPKG_CMD_PLAY_BATTLE_ACTION stCmdPlayBattleAction = 35;
+    FRAMEPKG_CMD_PLAYER_CANCEL_SKILL stCmdPlayerCancelSkill = 36;
+    FRAMEPKG_CMD_LEARNPVETALENT stCmdLearnPVETalent = 37;
+    FRAMEPKG_CMD_REQUEST_PVETALENT_LIST stCmdRequestPVETalentList = 38;
+    FRAMEPKG_CMD_SET_AUTO_BATTLE stCmdSetAutoBattle = 39;
+    FRAMEPKG_CMD_BLUEPRINT_BROADCAST stCmdBlueprintBroadcast = 40;
+    FRAMEPKG_CMD_SET_SKILL_INDICATIOR_POSITION stCmdSetSkillIndicatorPosition = 41;
+    FRAMEPKG_CMD_PROJECT8_DRAG_HERO stCmdProject8DragHero = 42;
+    FRAMEPKG_CMD_PROJECT8_BUY_EXP stCmdProject8BuyExp = 43;
+    FRAMEPKG_CMD_PROJECT8_PICK_CARD_INFO stCmdProject8PickCard = 44;
+    FRAMEPKG_CMD_PROJECT8_DRAG_HERO stCmdProject8DragSlotHero = 45;
+    FRAMEPKG_CMD_PROJECT8_HERO stCmdProject8PutHeroToSlot = 46;
+    FRAMEPKG_CMD_PROJECT8_HERO stCmdProject8SellHero = 47;
+    FRAMEPKG_CMD_PROJECT8_HERO stCmdProject8SetHero = 48;
+    FRAMEPKG_CMD_PROJECT8_PICK_UP_DROP stCmdProject8PickUpDrop = 49;
+    FRAMEPKG_CMD_PROJECT8_CHOOSE_EQUIP stCmdProject8ChooseEquip = 50;
+    FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO stCmdProject8AddEqipToHero = 51;
+    FRAMEPKG_CMD_PROJECT8_UNLOAD_EQUIP_IN_HERO stCmdProject8UnloadEqipInHero = 52;
+    FRAMEPKG_CMD_SET_PLAYER_STATE stCmdSetPlayerState = 53;
+    FRAMEPKG_CMD_ADD_ACTOR stCmdAddActor = 54;
+    FRAMEPKG_CMD_PROJECT8_USE_SKILL stCmdProject8UseSkill = 55;
+    FRAMEPKG_CMD_PROJECT8_UNLOAD_SKILL stCmdProject8UnloadSkill = 56;
+    FRAMEPKG_CMD_PROJECT8_ADD_EQUIP_TO_HERO2 stCmdProject8AddEqipToHero2 = 57;
+    FRAMEPKG_CMD_PROJECT8_DRAG_HERO stCmdProject8DragHeroToSlot = 58;
+    FRAMEPKG_CMD_PROJECT8_CLEAR_DEPOSIT_CARD stCmdProject8ClearDepositCard = 59;
+    FRAMEPKG_CMD_PROJECT8_ALLY_GIFT stCmdProject8AllyGift = 60;
+    FRAMEPKG_CMD_PROJECT8_CHECK_GIFT_EQUIP stCmdProject8CheckGiftEquip = 61;
+    FRAMEPKG_CMD_PROJECT8_ALLY_RESCUE stCmdProject8AllyRescue = 62;
+    FRAMEPKG_CMD_PROJECT8_UPGRADE_EQUIP stCmdProject8UpgradeEquip = 63;
+    FRAMEPKG_CMD_PROJECT8_SET_FORMATION stCmdProject8SetFormation = 64;
+    FRAMEPKG_CMD_PROJECT8_SET_RECOMMEND_ARRANGE stCmdProject8SetRecdArrange = 65;
+    FRAMEPKG_CMD_PROJECT8_SALE_EXTRASLOT_HERO stCmdProject8SaleExtraSlotHero = 66;
+    FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_SLOT stCmdProject8MoveExtraSlotToSlot = 67;
+    FRAMEPKG_CMD_PROJECT8_MOVE_EXTRASLOT_TO_BATTLE stCmdProject8MoveExtraSlotToBattle = 68;
+    FRAMEPKG_CMD_PROJECT8_CHOOSE_TANLENT stCmdProject8ChooseTalent = 69;
+    FRAMEPKG_CMD_PROJECT8_REQUEST_CARDDETAIL stCmdProject8RequestCardDetail = 70;
+    FRAMEPKG_CMD_PROJECT8_ENABLE_EXTRA_SLOT stCmdProject8EnableExtraSlot = 71;
+    FRAMEPKG_CMD_PROJECT8_ADD_PLAYER_COIN stCmdProject8AddPlayerCoin = 72;
+    FRAMEPKG_CMD_PROJECT8_NB_LOAD_PRESET stCmdProject8NBLoadPreset = 73;
+    FRAMEPKG_CMD_PROJECT8_NB_SET_PLAYER_LEVEL stCmdProject8NBSetPlayerLevel = 74;
+    FRAMEPKG_CMD_PROJECT8_FINISH_PREPARE stCmdProject8FinishPrepare = 75;
+    FRAMEPKG_CMD_PROJECT8_NUMEN_MOVE_TO_TARGET stCmdProject8NumenMoveToTarget = 76;
+    FRAMEPKG_CMD_PROJECT8_DRAG_NUMEN stCmdPushProject8DragNumen = 77;
+    FRAMEPKG_CMD_PROJECT8_NUMEN_ACCUMULATE stCmdPushProject8NumenAccumulate = 78;
+    FRAMEPKG_CMD_PROJECT8_NUMEN_CLICK stCmdPushProject8NumenClick = 79;
+    FRAMEPKG_CMD_PROJECT8_NUMEN_AUTO stCmdPushProject8NumenAuto = 80;
+    FRAMEPKG_CMD_PROJECT8_WATCH_FIGHT_STA stCmdPushProject8WatchFightSta = 81;
+    FRAMEPKG_CMD_MIRROR_ACTOR_INGAME stCmdMirrorHero = 82;
+    FRAMEPKG_CMD_PROJECT8_REBUILD_TALENT stCmdPushProject8RebuildTalent = 83;
+    FRAMEPKG_CMD_PROJECT8_PET_DIALOG stCmdPushProject8PetDialog = 84;
+    FRAMEPKG_CMD_PROJECT8_DRAW_ITEM stCmdPushProject8DrawItem = 85;
+    FRAMEPKG_CMD_PROJECT8_BOUNTY_OPERATION stCmdPushProject8BountyOperation = 86;
+    FRAMEPKG_CMD_PROJECT8_REPLACE_TALENT stCmdPushProject8ReplaceTalent = 87;
+    FRAMEPKG_CMD_UGC_CUSTOMIZE stCmdUGCCustomize = 88;
+    FRAMEPKG_CMD_COPY_ACTOR_INGAME stCmdCopyHero = 89;
+    FRAMEPKG_CMD_PROJECT8_BAN_THE_CAMP stCmdProject8BanTheCamp = 90;
+    FRAMEPKG_CMD_PROJECT8_NEW_CHOOSE_EQUIP stCmdPushProject8NewChooseEquip = 91;
+    FRAMEPKG_CMD_PROJECT8_NEW_REFRESH_EQUIP stCmdPushProject8NewRefreshEquip = 92;
+    FRAMEPKG_CMD_REMOVE_CALL_ACTOR_INGAME stCmdRemoveCallActor = 93;
+    FRAMEPKG_CMD_PROJECT8_BAN_THE_HERO stCmdProject8BanTheHero = 94;
+    FRAMEPKG_CMD_NOTIFY_CLIENT_RECOVER_END stCmdNotifyClientRecoverEnd = 95;
+    FRAMEPKG_CMD_PLAYER_COMMON_ATTACK_SEARCH_MODE stCmdPlayerCommonAttackSearchMode = 96;
+    FRAMEPKG_CMD_PLAYER_DROP_ITEM_INFO_CHANGE stCmdPlayerDropItemInfoChange = 97;
+    FRAMEPKG_CMD_PLAYER_CHOOSE_ENTER_EXTEND_FRAME stCmdPlayerChooseEnterExtendFrame = 98;
+    FRAMEPKG_CMD_PLAYER_REQ_QUIT_EXTEND_FRAME stCmdPlayerReqQuitExtendFrame = 99;
+    FRAMEPKG_CMD_PLAY_EMOJI stCmdPlayEmoji = 100;
+    FRAMEPKG_CMD_INBATTLEINPUTCHATENABLEMODE stCmdInBattleInputChatEnableMode = 101;
+    FRAMEPKG_CMD_INBATTLEINPUTCHATONEPLAYERENABLEMODE stCmdInBattleInputChatOnePlayerEnableMode = 102;
+    FRAMEPKG_CMD_AI_OVERALL_SENSE_INSTRUCTION stCmdAIOverallSenseInstruction = 103;
+    FRAMEPKG_CMD_OPERATE_SKILL_BUTTON stCmdOperateSkillButton = 104;
+    FRAMEPKG_CMD_RIGHT_JOYSTICK_MOVE stCmdRightJoyStickMove = 105;
+    FRAMEPKG_CMD_CHANGE_USED_RECOMMEND_EQUIP_ID stCmdPlayerChangeUsedRecommendEquipID = 106;
+    FRAMEPKG_CMD_STOPROTATE stCmdPlayerStopRotate = 107;
+    FRAMEPKG_CMD_PLAYER_SET_TEMPUSE_EQUIP stCmdPlayerSetTempUseEquip = 108;
+    FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_HERO stCmdPlayerCheatChangeHero = 109;
+    FRAMEPKG_CMD_PLAYER_MAKE_ITEM stCmdPlayerMakeItem = 110;
+    FRAMEPKG_CMD_PLAYER_MAKE_ITEM stCmdPlayerGiveItem = 111;
+    FRAMEPKG_CMD_PLAYER_ADD_SPECIAL_ABILITY stCmdPlayerAddSpecialAbility = 112;
+    FRAMEPKG_CMD_PLAYER_SET_PAINT stCmdPlayerSetPaint = 113;
+    FRAMEPKG_CMD_PLAYER_PURSUIT_ONMOVE_SWITCH stCmdPlayerPursuitOnMove = 114;
+    FRAMEPKG_CMD_VIDEO_PLAY_COMPLETED stCmdVideoPlayCompleted = 115;
+    FRAMEPKG_CMD_PERCISIONATK_TARGET stCmdPercisionAtkTarget = 116;
+    FRAMEPKG_CMD_ACTOR_OPERATE stCmdActorOperate = 117;
+    FRAMEPKG_CMD_PLAY_SACRED_ANIMAL stCmdPlaySacredAnimal = 118;
+    FRAMEPKG_CMD_LEFT_JOYSTICK_DRAG_STATE_CHANGE stCmdLeftJostickDragStateChange = 119;
+    FRAMEPKG_CMD_DIMENSION_HERO_CHANGE_SKILL stCmdDimensionHeroChangeSkill = 120;
+    FRAMEPKG_CMD_PLAYER_SET_PERCISION_ATTACK_MODE stCmdSetPercisionAttackMode = 121;
+    FRAMEPKG_CMD_SIDE_SKILL_BTN stCmdSideSkillBtn = 122;
+    FRAMEPKG_CMD_CHANGE_RECOMMEND_EQUIP_LIST stCmdChangeRecommendEquipList = 123;
+    FRAMEPKG_CMD_INSCRIBE_ACTION stCmdInscribeActionCmd = 124;
+    FRAMEPKG_CMD_EASY_IN_START_FIGHT stCmdEasyInStartFightCmd = 125;
+    FRAMEPKG_CMD_PLAYER_CHEAT_CHANGE_DIMENSION_WEAR stCmdPlayerCheatChangeDimensionWear = 126;
+    FRAMEPKG_CMD_PLAY_SACRED_ANIMAL_ACTION stCmdPlaySacredAnimalAction = 127;
+    FRAMEPKG_CMD_SWITCH_CAPTAIN_COMMANDER_MODE stCmdSwitchCaptainCommanderMode = 128;
+    FRAMEPKG_CMD_ULTIMATE_AWAKEN_FORCE_SET_BDTALENTS stCmdUltimateAwakenForceSetBDTalents = 129;
+    FRAMEPKG_CMD_OMG_PARACHUTE_MOVE stCmdOMGParachute = 130;
+    FRAMEPKG_CMD_OMG_PARACHUTE_FOLLOW stCmdOMGParachuteFollow = 131;
+    FRAMEPKG_CMD_OMG_INVITE_PARACHUTE_FOLLOW stCmdOMGInviteParachuteFollow = 132;
+    FRAMEPKG_CMD_OMG_AGREE_OR_REJECT_PARACHUTE_FOLLOW stCmdOMGAgreeOrRejectParachuteFollow = 133;
+    FRAMEPKG_CMD_OMG_SIGNAL_MINIMAP_POSITION stCmdOMGSignalMiniMapPosition = 134;
+    FRAMEPKG_CMD_BLUEPRINT_CUSTOMDEF stCmdBluePrintCustomDef = 135;
+    FRAMEPKG_CMD_BLUEPRINT_NORMALBROAD stCmdBlueprintNormalBroad = 136;
+    FRAMEPKG_CMD_NEWBIE_GUIDE stCmdNewBieGuide = 137;
+    FRAMEPKG_CMD_PAUSE_RESUME_GAME stCmdPauseResumeGame = 138;
+    FRAMEPKG_CMD_AXISSCALE stCmdAxisScale = 139;
+  }
+}
+
+message FRAME_CMD_PKG {
+  uint32 bCmdType = 1;
+  FRAME_CMD_INFO stCmdInfo = 2;
+}

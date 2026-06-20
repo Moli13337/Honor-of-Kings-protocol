@@ -1,0 +1,341 @@
+syntax = "proto3";
+package CSProtocol;
+
+// 注意: TDR非标准Protobuf, 此为近似还原
+
+message FFRAMEPKG_CMD_LOCKATTACKTARGET {
+  uint32 dwLockAttackTarget = 1;
+}
+
+message UN_UGC_SETTLE_DETAIL_INFO {
+  uint32 bReserve = 1;
+
+  oneof body_selector {
+    COMDT_CIYUANDZZ_OUTGAME_DATA stCiYuanDZInfo = 2;
+  }
+}
+
+message UN_EXCHANGESHOP_EXTRA_INFO {
+  uint32 bReserve = 1;
+
+  oneof body_selector {
+    COMDT_FARM_ITEM_BRIEF_LIST_FOR_PAY stFarmItemInfo = 2;
+  }
+}
+
+message UNION_GLOBAL_EXCHANGESHOP_OP_PARAM {
+  uint32 bReserve = 1;
+
+  oneof body_selector {
+    COMDT_PLAYER_CIYUANDZZ_EXCHANGE_WEAPON_ONSELL stCiYuanDZZ = 2;
+  }
+}
+
+message UN_GLOBAL_EXCHANGESHOP_SEARCH_PARAM {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    COMDT_CIYUANDZZ_SEARCH_PARAM stCiYuanDZZ = 2;
+  }
+}
+
+message UN_GLOBAL_EXCHANGESHOP_SEARCH_RESULT {
+
+  oneof body_selector {
+    COMDT_CIYUANDZZ_WEAPON_SEARCH_RESULT stCiYuanDZZ = 1;
+  }
+}
+
+message RA_PLAYER_ATTR {
+  uint32 dwPlayerID = 1;
+  uint64 ullAttr = 2;
+}
+
+message RA_PLAYER_ATTR_LIST {
+  uint32 bPlayerAttrNum = 1;
+  repeated RA_PLAYER_ATTR_LIST astPlayerAttrList = 2; // TDR_ARRAY
+}
+
+message RA_INFO {
+  RA_PLAYER_ATTR_LIST stPlayerAttrList = 1;
+}
+
+message UNDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC {
+  uint32 bReverse = 1;
+
+  oneof body_selector {
+    COMDT_CIYUANDZZ_OUTGAME_DATA stCiYuanDZZInfo = 2;
+    COMDT_BLAST_GAME_ACNT_SHOW_INFO stBlastGameShowInfo = 3;
+  }
+}
+
+message DT_USUTASKINFO {
+  uint32 dwTaskID = 1;
+  uint32 bIsNew = 2;
+}
+
+message SSDT_STARTMULTIGAME_DETAIL {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    COMDT_ROOM_MEMBER_UNIQ_LIST stMemberAuthError = 2;
+  }
+}
+
+message UN_GAMING_UPER_DT {
+  int32 chReserve = 1;
+
+  oneof body_selector {
+    CSDT_GAMING_CCSYNCINFO stCCInfo = 2;
+    CSDT_GAMING_CSSYNCINFO stCSInfo = 3;
+  }
+}
+
+message UN_GAMING_UPER_DT_EXTEND {
+  int32 chReserve = 1;
+
+  oneof body_selector {
+    CSDT_GAMING_CCSYNCINFO_EXTEND stCCInfo = 2;
+    CSDT_GAMING_CSSYNCINFO stCSInfo = 3;
+  }
+}
+
+message UN_FRAPBOOT_DT {
+  int32 chReserve = 1;
+
+  oneof body_selector {
+    CSDT_FRAPBOOT_CC stCCBoot = 2;
+    CSDT_FRAPBOOT_CS stCSBoot = 3;
+    CSDT_FRAPBOOT_ACNTSTATE stAcntState = 4;
+    CSDT_FRAPBOOT_ASSISTSTATE stAssistState = 5;
+    CSDT_FRAPBOOT_AISTATE stAiState = 6;
+    CSDT_FRAPBOOT_GAMEOVERNTF stGameOverNtf = 7;
+    CSDT_FRAPBOOT_PAUSE stPause = 8;
+    CSDT_FRAPBOOT_CAMPSTATE stCampState = 9;
+    CSDT_FRAPBOOT_CAMP_SURRENDER stCampSurrender = 10;
+    CSDT_FRAPBOOT_MOVETOBORN stMoveToBorn = 11;
+    CSDT_FRAPBOOT_QUITBATTLENTF stQuitBattleNtf = 12;
+    CSDT_FRAPBOOT_BORNFOLLOW stBornFollow = 13;
+    CSDT_FRAPBOOT_PVEOBJNTF stPveObjNtf = 14;
+    CSDT_FRAPBOOT_CUSTOMROOM_EFFECT stCustomRoomEffect = 15;
+    CSDT_FRAPBOOT_AUTOCHESS_BOUNTYMATCH_ADDCOIN stAutoChessBountyMatchAddCoin = 16;
+    CSDT_FRAPBOOT_BEGIN_FRAME_EXTEND stBeginFrameExtend = 17;
+    CSDT_FRAPBOOT_USE_PAINT_NTF stUsePaintNtf = 18;
+    CSDT_FRAPBOOT_PLAYER_MOVE stPlayerMoveCmd = 19;
+    CSDT_FRAPBOOT_PLAYER_ATTACK stPlayerAttackCmd = 20;
+    CSDT_FRAPBOOT_PLAYER_ATTACKWITHOBJ stPlayerAttackWithObjCmd = 21;
+    CSDT_FRAPBOOT_PLAYER_CHANGE stPlayerChange = 22;
+    CSDT_FRAPBOOT_REQ_QUITBATTLE stQuitBattleReq = 23;
+    CSDT_FRAPBOOT_SWITCH_CONTROL_OBJ stSwitchControlObj = 24;
+    CSDT_FRAPBOOT_GAMEPLAY_GOAL_SYSTEM_GEM_EFFECT stGamePlayGoalSystemGemEffect = 25;
+  }
+}
+
+message ReconnStateInfo {
+
+  oneof body_selector {
+    CSDT_RECONN_VOTEINFO stVoteInfo = 1;
+    CSDT_RECONN_SELECTPOSITIONINFO stSelectPositionInfo = 2;
+    CSDT_RECONN_ASSIGNEDBRANCHSHOW stAssignedBranchShow = 3;
+    CSDT_RECONN_PICKINFO stPickInfo = 4;
+    CSDT_RECONN_ADJUSTINFO stAdjustInfo = 5;
+    CSDT_RECONN_LOADINGINFO stLoadingInfo = 6;
+    CSDT_RECONN_GAMEINGINFO stGamingInfo = 7;
+    CSDT_RECONN_UGC_OPERATE stUGCOperate = 8;
+    CSDT_RECONN_UGC_LOADING stUGCLoading = 9;
+    CSDT_RECONN_SUBSETTLE stSubSettleInfo = 10;
+    CSDT_RECONN_NOMINATE stNominateInfo = 11;
+    CSDT_RECONN_PREPICKHEROINFO stPrePickHeroInfo = 12;
+    CSDT_RECONN_SHOW stShowInfo = 13;
+  }
+}
+
+message CS_MAGIC_LOTTERY_CONTEXT {
+  uint32 bDrawType = 1;
+  uint32 bDrawPoolID = 2;
+  uint32 bPriceID = 3;
+  uint32 bCoinType = 4;
+  uint32 dwPrice = 5;
+  uint32 bRewardNum = 6;
+  repeated uint32 RewardID = 7;
+  uint32 dwExraRewardID = 8;
+  uint32 bIsGMMode = 9;
+  uint32 dwForceRewardID = 10;
+}
+
+message PLAYER_INFO {
+  uint32 dwUid = 1;
+  bytes szName = 2; // fixed-length byte array
+}
+
+message UGCPKG_CMD_NTF_NEW_GAME_CREATE {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+}
+
+message UGCPKG_CMD_NTF_PLAYER_CHANGE {
+  uint32 dwRoomID = 1;
+  uint32 dwPlayerNum = 2;
+  uint32 dwMaxPlayerNum = 3;
+}
+
+message UGCPKG_CMD_NTF_CANCEL_GAME {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+}
+
+message UGCPK_CMD_NTF_ENTER_ROOM {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+}
+
+message UGCPKG_CMD_SEARCH_ROOM {
+  uint32 dwGameVer = 1;
+  uint32 dwRoomID = 2;
+}
+
+message UGCPKG_CMD_NTF_ROOM_INFO {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+  uint32 dwPlayerNum = 4;
+  uint32 dwMaxPlayerNum = 5;
+  bytes szHostPlayerName = 6; // fixed-length byte array
+}
+
+message UGCPKG_CMD_REQUEST_JOIN_ROOM {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+  PLAYER_INFO stPlayer = 4;
+}
+
+message UGCPKG_CMD_RSP_JOIN_ROOM_SUC {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+  uint32 dwPlayerNum = 4;
+  repeated bytes astPlayerInfoList = 5; // TDR_ARRAY, element type unknown
+  uint32 dwAddPlayerID = 6;
+}
+
+message UGCPKG_CMD_RSP_JOIN_ROOM_FAIL {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+  uint32 dwAddPlayerID = 4;
+}
+
+message UGCPKG_CMD_REQUEST_QUIT_ROOM {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+  uint32 dwQuitPlayerID = 4;
+}
+
+message UGCPKG_CMD_RSP_QUIT_ROOM {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwRoomID = 3;
+  uint32 dwQuitPlayerID = 4;
+}
+
+message UGCPKG_CMD_NTF_ROOM_PLAYER_CHANGE {
+  uint64 ullProjectID = 1;
+  uint32 dwRoomID = 2;
+  PLAYER_INFO stPlayer = 3;
+  uint32 bChangeType = 4;
+}
+
+message UGCPKG_CMD_LAUNCH_GAME {
+  uint64 ullProjectID = 1;
+}
+
+message UGCPKG_CMD_NTF_CUSTOM_PROTO {
+  uint32 dwRoomID = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwPlayerID = 3;
+  COMDT_UGC_BUFFER stDataBuf = 4;
+}
+
+message UGCPKG_CMD_NTF_PREPARE_START_GAME {
+  uint32 dwRoomID = 1;
+  uint64 ullProjectID = 2;
+}
+
+message UGCPKG_CMD_RSP_CUSTOM_DATA_FOR_START {
+  uint32 dwRoomID = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwPlayerID = 3;
+  COMDT_UGC_BUFFER stDataBuf = 4;
+}
+
+message UGCPKG_CMD_NTF_START_GAME {
+  uint64 ullProjectID = 1;
+  uint32 dwRoomID = 2;
+  uint32 dwPlayerNum = 3;
+  repeated bytes astPlayerInfoList = 4; // TDR_ARRAY, element type unknown
+  bytes szLevelName = 5; // fixed-length byte array
+  COMDT_UGC_BUFFER stDataBuf = 6;
+}
+
+message UGCPKG_CMD_NTF_CREATEORJOINROOM {
+  uint32 dwGameVer = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwPlayerNum = 3;
+  int32 iCheckCode = 4;
+  PLAYER_INFO stPlayer = 5;
+}
+
+message UGC_CMD_INFO {
+
+  oneof body_selector {
+    UGCPKG_CMD_NTF_NEW_GAME_CREATE stCmdNTFNewGameCreate = 1;
+    UGCPKG_CMD_NTF_PLAYER_CHANGE stCmdNTFPlayerChange = 2;
+    UGCPKG_CMD_NTF_CANCEL_GAME stCmdNTFCancelRoom = 3;
+    UGCPK_CMD_NTF_ENTER_ROOM stCmdNTFEnterRoom = 4;
+    UGCPKG_CMD_SEARCH_ROOM stCmdSearchRoom = 5;
+    UGCPKG_CMD_NTF_ROOM_INFO stCmdNtfRoomInfo = 6;
+    UGCPKG_CMD_REQUEST_JOIN_ROOM stCmdRequestJoinRoom = 7;
+    UGCPKG_CMD_RSP_JOIN_ROOM_SUC stCmdRSPJoinRoomSUC = 8;
+    UGCPKG_CMD_RSP_JOIN_ROOM_FAIL stCmdRSPJoinRoomFail = 9;
+    UGCPKG_CMD_REQUEST_QUIT_ROOM stCmdRequestQuitRoom = 10;
+    UGCPKG_CMD_RSP_QUIT_ROOM stCmdRSPQuitRoom = 11;
+    UGCPKG_CMD_NTF_ROOM_PLAYER_CHANGE stCmdNtfRoomPalyerChange = 12;
+    UGCPKG_CMD_LAUNCH_GAME stCmdLaunchGame = 13;
+    UGCPKG_CMD_NTF_CUSTOM_PROTO stCmdNTFCustomProto = 14;
+    UGCPKG_CMD_NTF_PREPARE_START_GAME stCmdNTFPrepareStartGame = 15;
+    UGCPKG_CMD_RSP_CUSTOM_DATA_FOR_START stCmdRspCustomDataForStart = 16;
+    UGCPKG_CMD_NTF_START_GAME stCmdNTFStartGame = 17;
+    CSPKG_GAMING_UPERMSG stCmdGamingUperMsg = 18;
+    CSPKG_REQUESTFRAPBOOTSINGLE stCmdReqFrapBootSingle = 19;
+    CSPKG_REQUESTFRAPBOOTTIMEOUT stCmdReqFrapBootTimeout = 20;
+    SCPKG_FRAPBOOT_SINGLE stCmdFrapBootSingle = 21;
+    SCPKG_FRAPBOOTINFO stCmdFrapBootInfo = 22;
+    CSPKG_UGC_LOADFIN stCmdGameLoadFin = 23;
+    SCPKG_UGC_BEGINFIGHT stCmdGameBeginFight = 24;
+    UGCPKG_CMD_NTF_CREATEORJOINROOM stCmdCreateOrJoinRoom = 25;
+    CSPKG_UGC_GAME_OVER_REQ_UGC stCmdUGCGameOverReq = 26;
+    SCPKG_UGC_GAME_OVER_RSP_UGC stCmdUGCGameOverRsp = 27;
+    CSPKG_MULTGAME_QUIT_BATTLE_REQ stCmdQuitBattleReq = 28;
+    CSPKG_UGC_OPERATE_COMMAND_REQ_UGC stCmdUGCOperateCommandReq = 29;
+    SCPKG_UGC_OPERATE_FULL_DATA_NTF_UGC stCmdUGCOperateFullDataNtf = 30;
+  }
+}
+
+message UGC_CMD_PKG {
+  uint32 dwCmdType = 1;
+  UGC_CMD_INFO stCmdInfo = 2;
+  uint32 dwReserve = 3;
+  int64 llTime = 4;
+  uint32 bNeedConfirm = 5;
+  uint32 dwSenderID = 6;
+  uint32 dwNeedConfirmRcevNum = 7;
+  repeated uint32 NeedConfirmRcevIDs = 8;
+  uint32 dwRSPCmdType = 9;
+  uint32 dwRSPSenderID = 10;
+  uint32 dwRSPReserve = 11;
+}

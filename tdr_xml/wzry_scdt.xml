@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<metalib name="CSProtocol_scdt" tagsetversion="1" version="1">
+
+  <struct name="SCDT_CIP_HEADER_INFO" version="1">
+    <entry name="bIncPatchType" type="uint8"/>
+    <entry name="ullBaseRevision" type="uint64"/>
+    <entry name="ullPatchRevision" type="uint64"/>
+    <entry name="ullIncPatchRevision" type="uint64"/>
+    <entry name="dwIncPatchPlatArchInfoNum" type="uint32"/>
+    <entry name="astIncPatchPlatArchInfos" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <union name="SCDT_UGC_FULL_DATA_UNION" version="1">
+    <entry name="bOfFail" type="uint8"/>
+    <entry name="stOfSucc" type="COMDT_UGC_OPER_RESULT_BUFFER"/>
+  </union>
+
+  <struct name="SCDT_NTF_SWITCHDETAIL" version="1">
+    <entry name="bIsLogin" type="uint8"/>
+    <entry name="dwOffTime" type="uint32"/>
+    <entry name="szTips" type="char" count="0"/>
+    <entry name="szPreTips" type="char" count="0"/>
+    <entry name="dwOffMask" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_FUNCTION_SWITCH" version="1">
+    <entry name="stFuncSwitchBits" type="COMDT_FUNCSWITCH_BITS"/>
+  </struct>
+
+  <struct name="SCDT_EXTERNFUNCTION_SWITCH" version="1">
+    <entry name="stExternSwitchMask" type="COMDT_USER_EXTERNSWITCH_MASK"/>
+  </struct>
+
+  <struct name="SCDT_LOGINLIMIT_ACNT_BAN" version="1">
+    <entry name="szReason" type="char" count="0"/>
+    <entry name="szTipsUrl" type="char" count="0"/>
+    <entry name="szBtnContent" type="char" count="0"/>
+  </struct>
+
+  <union name="SCDT_LOGINLIMIT_ERRCODE" version="1">
+    <entry name="bReserved" type="uint8"/>
+    <entry name="stBanAcnt" type="SCDT_LOGINLIMIT_ACNT_BAN"/>
+  </union>
+
+  <struct name="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_PVE" version="1">
+    <entry name="bBoxType" type="uint8"/>
+    <entry name="bRewardNum" type="uint8"/>
+    <entry name="astRewardDetail" type="COMDT_REWARD_DETAIL" count="0"/>
+    <entry name="dwPveScore" type="uint32"/>
+    <entry name="bPveRateLvl" type="uint8"/>
+    <entry name="szPveRateContent" type="char" count="0"/>
+    <entry name="bBoxNum" type="uint8"/>
+    <entry name="bPveConsumeReward" type="uint8"/>
+    <entry name="bPveWeekRewardRestCntBefore" type="uint8"/>
+    <entry name="stPveUpgradeDetail" type="COMDT_PVE_SETTLE_UPGRADE_DETAIL"/>
+  </struct>
+
+  <struct name="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_GUILD" version="1">
+    <entry name="iOldGuildFightElo" type="int32"/>
+    <entry name="iNowGuildFightElo" type="int32"/>
+    <entry name="iOldGuildGrade" type="int32"/>
+    <entry name="iNowGuildGrade" type="int32"/>
+  </struct>
+
+  <struct name="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC" version="1">
+    <entry name="dwPlayType" type="uint32"/>
+    <entry name="stDetail" type="UNDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC"/>
+  </struct>
+
+  <union name="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL" version="1">
+    <entry name="bReverse" type="uint8"/>
+    <entry name="stPve" type="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_PVE"/>
+    <entry name="stGuild" type="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_GUILD"/>
+    <entry name="stUgc" type="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC"/>
+  </union>
+
+  <struct name="SCDT_SETTLE_ACNT_EXTERN_INFO" version="1">
+    <entry name="dwNoAssistKillNum" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_SETTLE_ALL_ACNT_INFO" version="1">
+    <entry name="stBranchInfo" type="COMDT_SETTLE_BRANCHINFO"/>
+    <entry name="stOuterScoreDetail" type="COMDT_EACH_TYPE_MVP_SCORE_OF_OUTER"/>
+    <entry name="stInnerMvpEvaluate" type="COMDT_EACH_TYPE_MVP_EVALUATE_OF_INNER"/>
+    <entry name="dwFightFlag" type="uint32"/>
+    <entry name="bMapType" type="uint8"/>
+    <entry name="stMapDetail" type="SCDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL"/>
+    <entry name="stSettleShowViolationInfo" type="COMDT_SETTLE_SHOW_VIOLATION_INFO"/>
+    <entry name="stShowMvpEvaluate" type="COMDT_EACH_TYPE_MVP_EVALUATE_OF_SHOWINFO"/>
+    <entry name="stBestPosFightValue" type="COMDT_POS_FIGHT_VALUE_SHOW_IN_PICK"/>
+    <entry name="stExternInfo" type="SCDT_SETTLE_ACNT_EXTERN_INFO"/>
+    <entry name="stShowTitle" type="COMDT_SHOWHEROTITLE"/>
+    <entry name="dwTeamFlag" type="uint32"/>
+    <entry name="dwPosOfTeam" type="uint32"/>
+    <entry name="stInscribeStatInBattle" type="COMDT_HERO_INSCRIBE_LIST_INBATTLE"/>
+    <entry name="szHeadUrl" type="char" count="0"/>
+    <entry name="stVip" type="COMDT_GAME_VIP_CLIENT"/>
+    <entry name="stMvpOnlyShowInfo" type="COMDT_MVP_ONLY_SHOW_INFO"/>
+    <entry name="stMvpOuterEvaluteInfo" type="COMDT_MVP_OUTER_EVALUTE_INFO"/>
+    <entry name="stSettleReviewInfo" type="COMDT_SETTLE_REVIEW_INFO"/>
+    <entry name="bIs55TeamIntimacyAddition" type="uint8"/>
+    <entry name="ullCreditPrivilege" type="uint64"/>
+    <entry name="bIsKickOut" type="uint8"/>
+    <entry name="stGamePlayRatingSettleInfo" type="COMDT_GAMEPLAY_RATING_SETTLE_INFO"/>
+  </struct>
+
+  <struct name="SCDT_SETTLE_ALL_ACNT_DETAIL" version="1">
+    <entry name="bAcntNum" type="uint8"/>
+    <entry name="astAcntDetail" type="CSDT_ACNT_DETAIL" count="0"/>
+  </struct>
+
+  <struct name="SCDT_NTF_ACNT_INFO_UPD" version="1">
+    <entry name="bUpdType" type="uint8"/>
+    <entry name="iUpdValChg" type="int32"/>
+    <entry name="bFromType" type="uint8"/>
+    <entry name="llCurVal" type="int64"/>
+  </struct>
+
+  <struct name="SCDT_NTF_HERO_INFO_UPD_PARAM" version="1">
+    <entry name="Value" type="int32" count="0"/>
+  </struct>
+
+  <struct name="SCDT_FIGHTVALUE_DETAIL" version="1">
+    <entry name="dwFightValue" type="uint32"/>
+    <entry name="dwRecentFightScore" type="uint32"/>
+    <entry name="dwPerformanceScore" type="uint32"/>
+    <entry name="dwFightValueRatio" type="uint32"/>
+    <entry name="dwCurSeasonBeyondTopFightValue" type="uint32"/>
+    <entry name="dwMasterFightBranch" type="uint32"/>
+    <entry name="stBranchHeroMasterMatchInfo" type="COMDT_BRANCH_HERO_MASTERMATCH_INFO"/>
+    <entry name="dwNewPerformScore" type="uint32"/>
+    <entry name="dwMasterRatioBranch" type="uint32"/>
+    <entry name="iRecentNum" type="int32"/>
+    <entry name="dwNewPerformScoreLimit" type="uint32"/>
+    <entry name="dwResHeroBranchMask" type="uint32"/>
+    <entry name="dwLeastSingleValue" type="uint32"/>
+    <entry name="dwPreReducePerformScore" type="uint32"/>
+    <entry name="dwLastReduceTime" type="uint32"/>
+    <entry name="stHeroFightValue5V5Info" type="COMDT_HEROFIGHTVALUE_5V5_INFO"/>
+    <entry name="stHeroMasterMatchStatistic" type="COMDT_HERO_MASTERMATCH_STATISTIC"/>
+  </struct>
+
+  <union name="SCDT_HEROUPD_DETAIL_INFO" version="1">
+    <entry name="bReserved" type="uint8"/>
+    <entry name="stFightValueDetail" type="SCDT_FIGHTVALUE_DETAIL"/>
+    <entry name="stSoloHeroInfo" type="COMDT_1V1_SOLO_HERO_INFO"/>
+  </union>
+
+  <struct name="SCDT_NTF_HERO_INFO_UPD" version="1">
+    <entry name="bUpdType" type="uint8"/>
+    <entry name="stValueParam" type="SCDT_NTF_HERO_INFO_UPD_PARAM"/>
+    <entry name="stUpdDetail" type="SCDT_HEROUPD_DETAIL_INFO"/>
+  </struct>
+
+  <struct name="SCDT_NTF_HERO_INFO_UPD_DETAIL" version="1">
+    <entry name="dwHeroID" type="uint32"/>
+    <entry name="iHeroUpdNum" type="int32"/>
+    <entry name="astHeroUpdInfo" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_GETCREDITVALUEREWARDINFO_SUCCESS" version="1">
+    <entry name="dwCreditLevel" type="uint32"/>
+    <entry name="bRewardType" type="uint8"/>
+    <entry name="bRewardIndex" type="uint8"/>
+    <entry name="stRewardGetFlagInfo" type="COMDT_CREDITCOMMONREWARD_INFO"/>
+  </struct>
+
+  <union name="SCDT_GETCREDITVALUEREWARDINFO" version="1">
+    <entry name="bReserved" type="uint8"/>
+    <entry name="stSuccessInfo" type="SCDT_GETCREDITVALUEREWARDINFO_SUCCESS"/>
+  </union>
+
+  <struct name="SCDT_SKINPART_ADD_INFO" version="1">
+    <entry name="dwSkinPartID" type="uint32"/>
+    <entry name="dwEndTime" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_SETTLE_ACNTINFO_TOJUDGE" version="1">
+    <entry name="stBranchInfo" type="COMDT_SETTLE_BRANCHINFO"/>
+  </struct>
+
+  <struct name="SCDT_USUTASKLIST" version="1">
+    <entry name="iNewUsualTaskCnt" type="int32"/>
+    <entry name="astNewUsualTask" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <union name="SCDT_USUTASKINFO" version="1">
+    <entry name="bReserve" type="uint8"/>
+    <entry name="stUsualTaskList" type="SCDT_USUTASKLIST"/>
+  </union>
+
+  <struct name="SCDT_ONEKEY_SUBMIT_TASK_INFO" version="1">
+    <entry name="stTaskResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="bTaskNum" type="uint8"/>
+    <entry name="astTask" type="SCDT_UDPTASK" count="0"/>
+  </struct>
+
+  <struct name="SCDT_UDPPREREQUISITE" version="1">
+    <entry name="dwTaskID" type="uint32"/>
+    <entry name="bTaskState" type="uint8"/>
+    <entry name="dwRewardID" type="uint32"/>
+    <entry name="dwReachTime" type="uint32"/>
+    <entry name="bPrerequisiteNum" type="uint8"/>
+    <entry name="astPrerequisiteInfo" type="COMDT_TASK_DYNC_PREREQUISITE_INFO" count="0"/>
+  </struct>
+
+  <struct name="SCDT_NEWTASKGET" version="1">
+    <entry name="dwTaskID" type="uint32"/>
+    <entry name="dwTaskType" type="uint32"/>
+    <entry name="dwCustomValue" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_DELTASK" version="1">
+    <entry name="dwTaskID" type="uint32"/>
+    <entry name="dwTaskType" type="uint32"/>
+    <entry name="bTaskSubType" type="uint8"/>
+  </struct>
+
+  <struct name="SCDT_TASKCOMMIT" version="1">
+    <entry name="dwTaskID" type="uint32"/>
+    <entry name="bTaskState" type="uint8"/>
+  </struct>
+
+  <union name="SCDT_UDPTASK" version="1">
+    <entry name="bNouse" type="uint8"/>
+    <entry name="stUdpPrerequisite" type="SCDT_UDPPREREQUISITE"/>
+    <entry name="stTaskCommit" type="SCDT_TASKCOMMIT"/>
+  </union>
+
+  <struct name="SCDT_UPDTASKONE" version="1">
+    <entry name="bUpdateType" type="uint8"/>
+    <entry name="stUpdTaskInfo" type="SCDT_UDPTASK"/>
+  </struct>
+
+  <struct name="SCDT_PERIOD_INFO" version="1">
+    <entry name="stPeriodResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="stExtraResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="dwPeriodID" type="uint32"/>
+    <entry name="dwDrawCnt" type="uint32"/>
+    <entry name="bGroupID" type="uint8"/>
+    <entry name="iExtraCode" type="int32"/>
+    <entry name="stMultipleInfo" type="COMDT_MULTIPLE_INFO_NEW"/>
+  </struct>
+
+  <struct name="SCDT_ONE_WEAL_INFO" version="1">
+    <entry name="bWealType" type="uint8"/>
+    <entry name="dwWealID" type="uint32"/>
+    <entry name="bNum" type="uint8"/>
+    <entry name="astPeriodInfo" type="CSDT_PERIOD_INFO" count="0"/>
+  </struct>
+
+  <struct name="SCDT_ONEKEY_SUBMIT_WEAL_INFO" version="1">
+    <entry name="stWealResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="dwWealNum" type="uint32"/>
+    <entry name="astOneWealInfo" type="CSDT_ONE_WEAL_INFO" count="0"/>
+  </struct>
+
+  <struct name="SCDT_SHOW_MATCH_BADGE_INFO" version="1">
+    <entry name="wNum" type="uint16"/>
+    <entry name="ID" type="uint32" count="0"/>
+  </struct>
+
+  <struct name="SCDT_MASTER2V2_HOMEPAGE_ITEM" version="1">
+    <entry name="ullRelationUid" type="uint64"/>
+    <entry name="dwRelationLogicWorldID" type="uint32"/>
+    <entry name="dwMaster2v2Score" type="uint32"/>
+    <entry name="bTitleIntimacyState" type="uint8"/>
+    <entry name="stRelationTitle" type="COMDT_MASTER2V2_TITLE_ITEM"/>
+  </struct>
+
+  <struct name="SCDT_MASTER2V2_INFO" version="1">
+    <entry name="iSeasonID" type="int32"/>
+    <entry name="dwSeasonState" type="uint32"/>
+    <entry name="dwTitleAdCode" type="uint32"/>
+    <entry name="iHomePageNum" type="int32"/>
+    <entry name="astHomePageItem" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_CAMPUS_INFO" version="1">
+    <entry name="dwCampusID" type="uint32"/>
+    <entry name="dwFinishTime" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_SETBATTLELISTOFARENA_SUCC" version="1">
+    <entry name="stBattleList" type="COMDT_BATTLEHERO"/>
+  </struct>
+
+  <union name="SCDT_SETBATTLELISTOFARENA_RESULT" version="1">
+    <entry name="bReserved" type="uint8"/>
+    <entry name="stSucc" type="SCDT_SETBATTLELISTOFARENA_SUCC"/>
+  </union>
+
+  <struct name="SCDT_CHECKVOICECOMPLAINT_SUCCESS" version="1">
+    <entry name="dwComplaintTime" type="uint32"/>
+    <entry name="iCheckNum" type="int32"/>
+    <entry name="astCheckList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+    <entry name="dwRandomSeed" type="uint32"/>
+    <entry name="dwDeskID" type="uint32"/>
+    <entry name="dwDeskSeq" type="uint32"/>
+    <entry name="dwTeamId" type="uint32"/>
+    <entry name="dwTeamSeq" type="uint32"/>
+  </struct>
+
+  <union name="SCDT_CHECKVOICECOMPLAINT_RSP" version="1">
+    <entry name="bReserve" type="uint8"/>
+    <entry name="stSuccessInfo" type="SCDT_CHECKVOICECOMPLAINT_SUCCESS"/>
+  </union>
+
+  <struct name="SCDT_CAMP_BAN_HERO_DETAIL" version="1">
+    <entry name="dwHeroID" type="uint32"/>
+    <entry name="dwObjID" type="uint32"/>
+    <entry name="bEmptyBan" type="uint8"/>
+    <entry name="iShowBanIndex" type="int32"/>
+  </struct>
+
+  <struct name="SCDT_CAMP_BAN_HERO_RESULT" version="1">
+    <entry name="bCamp" type="uint8"/>
+    <entry name="iBanCount" type="int32"/>
+    <entry name="astBanResult" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_GETCUSTOMTEAMMEMDETAIL_RESULT_SUCC" version="1">
+    <entry name="ullMemberUid" type="uint64"/>
+    <entry name="iMemberLogicWorldID" type="int32"/>
+    <entry name="dwGameEntity" type="uint32"/>
+    <entry name="bMainBranch" type="uint8"/>
+    <entry name="bMinorBranch" type="uint8"/>
+    <entry name="stPreferHero" type="COMDT_PREFER_HERO"/>
+    <entry name="bActiveDay" type="uint8"/>
+    <entry name="bLastWeekActiveTimePeriod" type="uint8"/>
+    <entry name="bGameState" type="uint8"/>
+    <entry name="bGameSubState" type="uint8"/>
+    <entry name="dwGameStartTime" type="uint32"/>
+    <entry name="bRankGrade" type="uint8"/>
+    <entry name="dwRankScore" type="uint32"/>
+    <entry name="dwRankClassOfRank" type="uint32"/>
+    <entry name="dwOtherStateBits" type="uint32"/>
+  </struct>
+
+  <union name="SCDT_GETCUSTOMTEAMMEMDETAIL_RESULT" version="1">
+    <entry name="bReserved" type="uint8"/>
+    <entry name="stSucc" type="SCDT_GETCUSTOMTEAMMEMDETAIL_RESULT_SUCC"/>
+  </union>
+
+  <struct name="SCDT_BACKFLOW_TAB_SWITCH_INFO" version="1">
+    <entry name="bSignInSwitch" type="uint8"/>
+    <entry name="bChallengeTrialSwitch" type="uint8"/>
+    <entry name="bFriendShipTrialSwitch" type="uint8"/>
+    <entry name="bDailyPvpTaskSwitch" type="uint8"/>
+    <entry name="bBpTaskSwitch" type="uint8"/>
+    <entry name="bUnionPageSwitch" type="uint8"/>
+  </struct>
+
+  <struct name="SCDT_BACKFLOW_CUSTOM_SHOW_FUNC_SWITCH" version="1">
+    <entry name="bTeamRoomSwitch" type="uint8"/>
+    <entry name="bFriendRecentSwitch" type="uint8"/>
+    <entry name="bFriendListSwitch" type="uint8"/>
+    <entry name="bHeroSwitch" type="uint8"/>
+    <entry name="bBattlePrepareSwitch" type="uint8"/>
+    <entry name="bHomepageRemindSwitch" type="uint8"/>
+    <entry name="bRankRapidRemindSwitch" type="uint8"/>
+  </struct>
+
+  <struct name="SCDT_BACKFLOW_FIRST_GAME_FORCE_START" version="1">
+    <entry name="bTempHideOpen" type="uint8"/>
+  </struct>
+
+  <struct name="SCDT_CLIENT_SETTING_TOPPLAYER_HEROOPERATE_INFO" version="1">
+    <entry name="dwHeroId" type="uint32"/>
+    <entry name="ullUid" type="uint64"/>
+    <entry name="dwLogicWorldID" type="uint32"/>
+    <entry name="szSettingString" type="char" count="0"/>
+    <entry name="iSourceType" type="int32"/>
+    <entry name="szPlayerName" type="char" count="0"/>
+    <entry name="szHeadUrl" type="char" count="0"/>
+    <entry name="dwFightValue" type="uint32"/>
+    <entry name="dwMasterScore" type="uint32"/>
+    <entry name="dwGenerateTime" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_REALTIMECOMPLAINTCHKLIST" version="1">
+    <entry name="bAcntNum" type="uint8"/>
+    <entry name="AcntList" type="uint32" count="0"/>
+  </struct>
+
+  <struct name="SCDT_BATTLE_STAT_REPORT_ACNT_LIST" version="1">
+    <entry name="bAcntNum" type="uint8"/>
+    <entry name="AcntList" type="uint32" count="0"/>
+  </struct>
+
+  <struct name="SCDT_CAMP_VOTE_PICK_ABORT_RESULT" version="1">
+    <entry name="bVoteAbort" type="uint8"/>
+    <entry name="dwCampHeroJobCheckId" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_SAVE_PROJ8_FORMATION_RSP" version="1">
+    <entry name="stResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="dwFormationID" type="uint32"/>
+    <entry name="bHeroNum" type="uint8"/>
+    <entry name="HeroList" type="uint32" count="0"/>
+    <entry name="bOptType" type="uint8"/>
+  </struct>
+
+  <struct name="SCDT_GET_PROJ8_ALLFORMATION_RSP" version="1">
+    <entry name="stResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="stProj8FormationInfo" type="COMDT_PROJ8_FORMATION_INFO"/>
+  </struct>
+
+  <struct name="SCDT_PROJECT8_INFO_NTF" version="1">
+    <entry name="stPlayerInfo" type="COMDT_PROJECT8_CLIENT_PLAYER_INFO"/>
+    <entry name="stProj8HighestMMRInfo" type="COMDT_PROJECT8_HIGHEST_MMR_INFO"/>
+  </struct>
+
+  <struct name="SCDT_ONECAMP_FACTIONBONDING" version="1">
+    <entry name="bCamp" type="uint8"/>
+    <entry name="stFactionBondingInfo" type="COMDT_FACTIONBONDING_INFO"/>
+  </struct>
+
+  <struct name="SCDT_ALL_FACTIONBONDING" version="1">
+    <entry name="dwCampNum" type="uint32"/>
+    <entry name="astCampFactionBondingList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_GET_ALBUM_LEVEL_REWARD_RSP" version="1">
+    <entry name="stResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="dwAlbumID" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_UPDATE_HERO_SCENARIO_RSP" version="1">
+    <entry name="stResultInfo" type="COMDT_RESULT_INFO"/>
+    <entry name="bType" type="uint8"/>
+    <entry name="dwUniqueSeq" type="uint32"/>
+    <entry name="stReward" type="COMDT_REWARD_DETAIL"/>
+  </struct>
+
+  <struct name="SCDT_COMMUNICATION_BLOCK_INBATTLE_INFO" version="1">
+    <entry name="ullUid" type="uint64"/>
+    <entry name="bBlockText" type="uint8"/>
+    <entry name="bBlockSignal" type="uint8"/>
+    <entry name="bBlockVoice" type="uint8"/>
+    <entry name="dwBlockTimeSecond" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_QUESTIONNAIRE_FEEDBACK_OPTIONS" version="1">
+    <entry name="dwValue" type="uint32"/>
+    <entry name="szText" type="char" count="0"/>
+  </struct>
+
+  <struct name="SCDT_CUSTOMIZE_ITEM_INFO" version="1">
+    <entry name="dwItemType" type="uint32"/>
+    <entry name="dwItemID" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_CUSTOMIZE_RECOMMEND_INFO" version="1">
+    <entry name="dwRecommendSuitID" type="uint32"/>
+    <entry name="iHotScore" type="int32"/>
+    <entry name="szMainTitle" type="char" count="0"/>
+    <entry name="szSubTitle" type="char" count="0"/>
+    <entry name="dwCoverType" type="uint32"/>
+    <entry name="szBannerImgPath" type="char" count="0"/>
+    <entry name="bIsNewRecommend" type="uint8"/>
+    <entry name="dwRecommendItemNum" type="uint32"/>
+    <entry name="astRecommendItemList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_CUSTOMIZE_RECOMMEND_SUIT_LIST" version="1">
+    <entry name="dwSuitNum" type="uint32"/>
+    <entry name="astSuitList" type="COMDT_OWNED_SKINPARTSUIT_LIST" count="0"/>
+  </struct>
+
+  <struct name="SCDT_DIMENSION_MAP_ACTOR_ATTR" version="1">
+    <entry name="wAttrID" type="uint16"/>
+    <entry name="dwAttrValue" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_DIMENSION_MAP_MOVE_INFO" version="1">
+    <entry name="ullActorUID" type="uint64"/>
+    <entry name="stActorMoveInfo" type="COMDT_DIMENSION_MAP_ACTOR_MOVE_INFO"/>
+  </struct>
+
+  <struct name="SCDT_BAN_HEROSKIN_INBATTLE_DETAIL" version="1">
+    <entry name="dwHeroID" type="uint32"/>
+    <entry name="dwAppVersion" type="uint32"/>
+    <entry name="dwResVersion" type="uint32"/>
+    <entry name="ullHeroSkinBanBit" type="uint64"/>
+  </struct>
+
+  <struct name="SCDT_BAN_HEROSKIN_INBATTLE" version="1">
+    <entry name="dwMapType" type="uint32"/>
+    <entry name="dwMapId" type="uint32"/>
+    <entry name="dwBanHeroSkinNum" type="uint32"/>
+    <entry name="astBanHeroSkinList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_GAME_EFFECT_INFO" version="1">
+    <entry name="dwNum" type="uint32"/>
+    <entry name="astEffectInfo" type="COMDT_PICK_EFFECT_INFO" count="0"/>
+  </struct>
+
+  <struct name="SCDT_BACKFLOW_POWERFUL_HERO_LIST" version="1">
+    <entry name="iHeroNum" type="int32"/>
+    <entry name="HeroIDList" type="uint32" count="0"/>
+  </struct>
+
+  <struct name="SCDT_FARM_BUILDING_DATA_DETAIL" version="1">
+    <entry name="dwBuildingID" type="uint32"/>
+    <entry name="llExp" type="int64"/>
+    <entry name="iLevel" type="int32"/>
+    <entry name="dwReverse" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_FARM_ACNT_BUILDING" version="1">
+    <entry name="iNum" type="int32"/>
+    <entry name="astBuildingList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_FARM_FUNC_BATCH" version="1">
+    <entry name="dwFuncID" type="uint32"/>
+    <entry name="dwBatchID" type="uint32"/>
+  </struct>
+
+  <struct name="SCDT_FARM_FUNCID_OPEN_TIME_INFO" version="1">
+    <entry name="iNum" type="int32"/>
+    <entry name="astFuncIDList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+  </struct>
+
+  <struct name="SCDT_FARM_ACNT_BASE_INFO" version="1">
+    <entry name="bFarmCreated" type="uint8"/>
+    <entry name="bIsSeedUser" type="uint8"/>
+    <entry name="dwCreateTime" type="uint32"/>
+    <entry name="llExp" type="int64"/>
+    <entry name="iLevel" type="int32"/>
+  </struct>
+
+</metalib>

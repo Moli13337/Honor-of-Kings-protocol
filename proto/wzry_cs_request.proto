@@ -1,0 +1,6624 @@
+syntax = "proto3";
+package CSProtocol;
+
+// 注意: TDR非标准Protobuf, 此为近似还原
+
+message CSPKG_UGC_QUIT_GAME_REQ {
+  uint32 bGameOverType = 1;
+  uint32 bPlayerCnt = 2;
+  repeated uint32 PlayerObjID = 3;
+}
+
+message CSPKG_UGC_GAME_OVER_REQ {
+  COMDT_UGC_GAME_OVER_OF_BIG stPlayerGameOverData = 1;
+}
+
+message CSPKG_UGC_OPERATE_COMMAND_REQ {
+  COMDT_UGC_OPER_COMMAND_BUFFER stCommand = 1;
+}
+
+message CSPKG_UGC_OPERATE_FULL_DATA_REQ {
+  COMDT_UGC_OPER_RESULT_BUFFER stData = 1;
+}
+
+message CSPKG_UGC_OPERATE_CONFIRM_REQ {
+  bytes szUGCLevelName = 1; // fixed-length byte array
+}
+
+message CSPKG_UGC_SMALL_SETTLE_REQ {
+  COMDT_UGC_GAME_OVER_OF_SMALL stSmallData = 1;
+}
+
+message CSPKG_SET_CUSTOM_STATUS_REQ {
+  uint32 wStatusID = 1;
+  uint32 bCanDirectEnterRoom = 2;
+}
+
+message CSPKG_LIKE_CUSTOM_STATUS_REQ {
+  COMDT_LIKE_CUSTOM_STATUS_REQ stReqCommInfo = 1;
+}
+
+message CSPKG_AUTOCHESS_FORMATION_RECOMMEND_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_RELAYSVRPING {
+  uint64 ullTime = 1;
+  uint32 dwSeqNo = 2;
+  uint32 bExtraInfoType = 3;
+  CSDT_RELAYPING_EXTRA_INFO stExtraInfo = 4;
+  uint64 ullStateBits = 5;
+  uint32 wDeviceTemperature = 6;
+}
+
+message CSPKG_GAMESVRPING {
+  uint32 dwTime = 1;
+  uint32 dwRtt = 2;
+}
+
+message CSPKG_CMD_GAMELOGINREQ {
+  int32 iCltAppVersion = 1;
+  int32 iCltResVersion = 2;
+  COMDT_CLIENT_INFO_DATA stClientInfo = 3;
+  uint64 ullVisitorUid = 4;
+  int32 iLogicWorldID = 5;
+  uint32 dwTaccZoneID = 6;
+  bytes szCltIMEI = 7; // fixed-length byte array
+  bytes szRealIMEI = 8; // fixed-length byte array
+  uint32 bPrivilege = 9;
+  uint32 bSelectGameSvr = 10;
+  COMDT_ACNT_REGIONINFO stRegionInfo = 11;
+  COMDT_MAP_DOWNLOAD_INFO stMapDownLoadInfo = 12;
+  bytes szIPArea = 13; // fixed-length byte array
+  bytes szAndroidOAIDOrIosCAID = 14; // fixed-length byte array
+  bytes szIOSUA = 15; // fixed-length byte array
+  COMDT_PAY_CONFIRM_INFO stPayConfirmInfo = 16;
+  bytes szTGPAXID = 17; // fixed-length byte array
+  uint64 ullCampStealthCode = 18;
+  uint32 bGameDirChannel = 19;
+  int32 iMaplePlatId = 20;
+  uint64 ullAcntUid = 21;
+  bytes szAcntOpenID = 22; // fixed-length byte array
+  uint32 bIsScanLogin = 23;
+  int32 iRealClientSysPlatType = 24;
+  bytes szStartupChannel = 25; // fixed-length byte array
+  uint32 dwStartExternChannel = 26;
+}
+
+message CSPKG_CMD_GAMELOGOUTREQ {
+  int32 iLogoutType = 1;
+}
+
+message CSPKG_CMD_DUALCHANNEL_CLIENTINFO_REQ {
+  int32 iIsSupportNOS = 1;
+}
+
+message CSPKG_MULPOSITION_OP_REPORT_REQ {
+  uint32 bType = 1;
+  uint32 bHeroPosition = 2;
+}
+
+message CSPKG_OFFINGRESTART_RSP {
+  int32 iLogicWorldID = 1;
+  int32 iCltAppVersion = 2;
+  int32 iCltResVersion = 3;
+  bytes szCltIMEI = 4; // fixed-length byte array
+  bytes szRealIMEI = 5; // fixed-length byte array
+  uint32 bPrivilege = 6;
+  COMDT_ACNT_REGIONINFO stRegionInfo = 7;
+  uint32 bNeedLoginRsp = 8;
+  COMDT_MAP_DOWNLOAD_INFO stMapDownLoadInfo = 9;
+  bytes szAndroidOAIDOrIosCAID = 10; // fixed-length byte array
+  bytes szIOSUA = 11; // fixed-length byte array
+  bytes szTGPAXID = 12; // fixed-length byte array
+  uint64 ullCampStealthCode = 13;
+  uint64 ullClientResVersion = 14;
+}
+
+message CSPKG_CMD_LOGINSYN_RSP {
+  bytes szOpenKey = 1; // fixed-length byte array
+  bytes szPf = 2; // fixed-length byte array
+}
+
+message CSPKG_CREATEULTIGAMEREQ {
+  repeated int32 szRoomName = 1;
+  uint32 bGameMode = 2;
+  uint32 bMapType = 3;
+  uint32 dwMapId = 4;
+  COMDT_UGC_UNIQ_INFO stUGCUniqInfo = 5;
+  uint32 bAILevel = 6;
+  uint32 bExtraType = 7;
+  COMDT_CREATEINFO_EXTRA stExtraInfo = 8;
+  uint32 bIsCreateByExtern = 9;
+  COMDT_EXTERN_TEAM_PARAM stExternParam = 10;
+  uint32 bIsAiVoiceOpen = 11;
+  int32 iOfflineRelayEntityID = 12;
+  uint64 ullExternGameFuncBit = 13;
+  bytes szExternGameJsonParam = 14; // fixed-length byte array
+  COMDT_EXTERNGAME_EXTERNINFO_TODESK stExternInfoToDesk = 15;
+  COMDT_SPECIFIED_CAMP_MAX_PLAYER_INFO stSpecifiedCampMaxPlayerInfo = 16;
+  uint32 dwExternValidAcntNum = 17;
+  repeated bytes astExternValidAcntList = 18; // TDR_ARRAY, element type unknown
+  uint32 bCanHiddenRoomUI = 19;
+  bytes szUGCLaunchParam = 20; // fixed-length byte array
+  COMDT_CUSTOM_SET_INFO stCustomSetInfo = 21;
+}
+
+message CSPKG_QUITMULTIGAMEREQ {
+  uint32 bManualQuit = 1;
+  COMDT_EXTRA_INVITEINFO stExtraInviteInfo = 2;
+}
+
+message CSPKG_RECOVERGAMEFRAP_REQ {
+  uint32 dwCurLen = 1;
+  uint32 bIsNew = 2;
+  uint32 dwCltSeq = 3;
+}
+
+message CSPKG_ANNI_GET_HOPESEED_REQ {
+  COMDT_ANNI_HOPE_SEED_GOT_INFO stGotInfo = 1;
+}
+
+message CSPKG_COMPLAINT_MARK_REQ {
+  int32 iComplaintNum = 1;
+  repeated uint32 ComplaintID = 2;
+}
+
+message CSPKG_REALTIME_COMPLAINT_VOTE_REQ {
+  uint32 dwChoice = 1;
+}
+
+message CSPKG_NOMINATE_REQ {
+  uint32 dwType = 1;
+  CSDT_NOMINATE_DATA_UNION stData = 2;
+}
+
+message CSPKG_MULTGAME_LOADFIN {
+  int32 chReserve = 1;
+}
+
+message CSPKG_MULTGAME_LOADPROCESS {
+  uint32 wProcess = 1;
+}
+
+message CSPKG_MULTGAME_LOAD_PEPTALK {
+  uint32 dwLocationIconID = 1;
+  uint32 bOnlyEffect = 2;
+  uint32 dwActivityType = 3;
+}
+
+message CSPKG_MULTGAME_LOAD_SHOW_BRANCH_INFO_REQ {
+  int32 chReserve = 1;
+}
+
+message CSPKG_MULTGAME_DIE_REQ {
+  uint32 bType = 1;
+  uint32 dwReliveSeconds = 2;
+}
+
+message CSPKG_KDA_REPORT_REQ {
+  uint32 dwKill = 1;
+  uint32 dwDead = 2;
+  uint32 dwAssist = 3;
+}
+
+message CSPKG_MULTGAME_BATTLE_INFO_REPORT {
+  uint32 dwReportType = 1;
+  CSDT_MULTGAME_BATTLE_INFO_REPORT_DATA stReportData = 2;
+}
+
+message CSPKG_WEAK_TIME_CONFIG_REQ {
+  int32 chReserve = 1;
+}
+
+message CSPKG_USE_SKY_SCREEN_REQ {
+  uint32 dwSkyScreenID = 1;
+}
+
+message CSPKG_ADMIRE_SKY_SCREEN_REQ {
+  int32 c = 1;
+}
+
+message CSPKG_SECURE_INFO_START_REQ {
+  uint32 dwClientStartTime = 1;
+  int32 iSvrBossCount = 2;
+  int32 iSvrBossHPMax = 3;
+  int32 iSvrBossHPMin = 4;
+  int32 iSvrBossHPTotal = 5;
+  int32 iSvrEmenyBuildingHPMax = 6;
+  int32 iSvrEmenyBuildingHPMin = 7;
+  int32 iSvrEmenyHPTotal = 8;
+  int32 iSvrEmenyHPMax = 9;
+  int32 iSvrEmenyHPMin = 10;
+  int32 iSvrBossAttackMax = 11;
+  int32 iSvrBossAttackMin = 12;
+  int32 iSvrEmenyBuildingAttackMax = 13;
+  int32 iSvrEmenyBuildingAttackMin = 14;
+  int32 iSvrEmenyAttackMax = 15;
+  int32 iSvrEmenyAttackMin = 16;
+  int32 iSvrBuildingHPMax = 17;
+  int32 iSvrBuildingHPMin = 18;
+  int32 iSvrBuildingAttackMax = 19;
+  int32 iSvrBuildingAttackMin = 20;
+  int32 iSvrUserBattlePoint = 21;
+  int32 iSvrUserCardID1 = 22;
+  int32 iSvrUserCardHP1 = 23;
+  int32 iSvrUserCardATN1 = 24;
+  int32 iSvrUserCardINT1 = 25;
+  int32 iSvrUserCardSpeed1 = 26;
+  int32 iSvrUserCardPhyDef1 = 27;
+  int32 iSvrUserCardSpellDef1 = 28;
+  int32 iSvrUserCardID2 = 29;
+  int32 iSvrUserCardHP2 = 30;
+  int32 iSvrUserCardATN2 = 31;
+  int32 iSvrUserCardINT2 = 32;
+  int32 iSvrUserCardSpeed2 = 33;
+  int32 iSvrUserCardPhyDef2 = 34;
+  int32 iSvrUserCardSpellDef2 = 35;
+  int32 iSvrUserCardID3 = 36;
+  int32 iSvrUserCardHP3 = 37;
+  int32 iSvrUserCardATN3 = 38;
+  int32 iSvrUserCardINT3 = 39;
+  int32 iSvrUserCardSpeed3 = 40;
+  int32 iSvrUserCardPhyDef3 = 41;
+  int32 iSvrUserCardSpellDef3 = 42;
+  int32 iSvrEmenyBattlePoint = 43;
+  int32 iSvrEmenyCardID1 = 44;
+  int32 iSvrEmenyCardHP1 = 45;
+  int32 iSvrEmenyCardATN1 = 46;
+  int32 iSvrEmenyCardINT1 = 47;
+  int32 iSvrEmenyCardSpeed1 = 48;
+  int32 iSvrEmenyCardPhyDef1 = 49;
+  int32 iSvrEmenyCardSpellDef1 = 50;
+  int32 iSvrEmenyCardID2 = 51;
+  int32 iSvrEmenyCardHP2 = 52;
+  int32 iSvrEmenyCardATN2 = 53;
+  int32 iSvrEmenyCardINT2 = 54;
+  int32 iSvrEmenyCardSpeed2 = 55;
+  int32 iSvrEmenyCardPhyDef2 = 56;
+  int32 iSvrEmenyCardSpellDef2 = 57;
+  int32 iSvrEmenyCardID3 = 58;
+  int32 iSvrEmenyCardHP3 = 59;
+  int32 iSvrEmenyCardATN3 = 60;
+  int32 iSvrEmenyCardINT3 = 61;
+  int32 iSvrEmenyCardSpeed3 = 62;
+  int32 iSvrEmenyCardPhyDef3 = 63;
+  int32 iSvrEmenyCardSpellDef3 = 64;
+}
+
+message CSPKG_STARTSINGLEGAMEREQ {
+  CSDT_BATTLE_PLAYER_BRIEF stBattlePlayer = 1;
+  CSDT_START_SINGLE_GAME_PARAM stBattleParam = 2;
+  COMDT_BATTLELIST stBattleList = 3;
+  COMDT_REUSE_NPCINFO stReuseNpcInfo = 4;
+  COMDT_CUSTOM_SET_INFO stCustomSetInfo = 5;
+  uint32 dwSeq = 6;
+}
+
+message CSPKG_QUITSINGLEGAMEREQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_ASKINMULTGAME_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_PUSH_BACK_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_RESUME_FROM_BACK_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_SUBGAME_REPORT_CLEARFIGHT_REQ {
+  uint32 bTurn = 1;
+}
+
+message CSPKG_SUBGAME_OVER_REQ {
+  COMDT_GAME_OVER_INFO stObjData = 1;
+  uint64 ullHashCode = 2;
+  uint32 bAcntNum = 3;
+  repeated COMDT_ACNT_INFO astAcntInfo = 4; // TDR_ARRAY
+  uint32 bTurn = 5;
+}
+
+message CSPKG_GAME_OVER_REQ {
+  COMDT_GAME_OVER_INFO stObjData = 1;
+  COMDT_GAME30SEC stGame30SecDetail = 2;
+  uint64 ullHashCode = 3;
+  uint32 bAcntNum = 4;
+  repeated COMDT_ACNT_INFO astAcntInfo = 5; // TDR_ARRAY
+  uint32 bAINum = 6;
+  repeated CSDT_TRAINING_AI_INFO astAIInfo = 7; // TDR_ARRAY
+  COMDT_CSMODE_EXTRA_GAME_OVER_BRIEF_INFO stGameOverBriefInfo = 8;
+  COMDT_GAMEOVER_MULTI_ACHV_LIST stMultiAchvList = 9;
+  uint32 bIsSingleLogReport = 10;
+}
+
+message CSPKG_REPORT_SETTLE_LOG_REQ {
+  uint32 dwIndex = 1;
+  CSDT_REPORT_SETTLE_LOG_UNION stLogInfo = 2;
+}
+
+message CSPKG_MARK_SPECIAL_GEAR_FLAG_REQ {
+  uint32 bFlag = 1;
+}
+
+message CSPKG_MULTGAME_QUIT_BATTLE_REQ {
+  uint32 bObjNum = 1;
+  repeated uint32 ObjID = 2;
+}
+
+message CSPKG_MULTGAME_REPORT_QUIT_ACNT_DATA {
+  uint32 dwObjID = 1;
+  int32 iAcntNum = 2;
+  repeated COMDT_ACNT_INFO astAcntInfo = 3; // TDR_ARRAY
+  int32 iAINum = 4;
+  repeated CSDT_TRAINING_AI_INFO astAIInfo = 5; // TDR_ARRAY
+  COMDT_CSMODE_EXTRA_GAME_OVER_BRIEF_INFO stGameOverBriefInfo = 6;
+  COMDT_MAP_EXTRA_REPORT_INFO stExtraReportInfo = 7;
+}
+
+message CSPKG_LOOK_CITANINFO_REQ {
+  CSDT_VOTE_CITAN_LOOKINFO stBeLookInfo = 1;
+}
+
+message CSPKG_WANTLOOK_CITANINFO_REQ {
+  uint64 ullBeLookUid = 1;
+}
+
+message CSPKG_KFRAPLATERCHG_REQ {
+  uint32 bKFrapsLater = 1;
+}
+
+message CSPKG_RELAYHASHCHECK {
+  uint32 dwKFrapsNo = 1;
+  uint64 ullHashToChk = 2;
+  int32 iCampKillCntDiff = 3;
+  uint32 dwCampHash = 4;
+  uint32 dwHashSeed = 5;
+  uint32 dwDummy1 = 6;
+  uint32 dwDummy2 = 7;
+  uint32 dwDummy3 = 8;
+  uint32 dwDummy4 = 9;
+  uint32 dwDummy5 = 10;
+  uint32 wGameSafeDataLen = 11;
+  bytes szGameSafeData = 12; // fixed-length byte array
+  uint32 bAcntNum = 13;
+  repeated COMDT_RELAYHASH_DYNAMIC_INFO astDynamicInfo = 14; // TDR_ARRAY
+  uint32 wCampKillCnt = 15;
+  uint32 bCombineGameTurn = 16;
+  CSDT_HASHCHECK_DESKSYNC_INFO stDeskSyncInfo = 17;
+  uint32 dwSource = 18;
+}
+
+message CSPKG_REQ_HELP_CHOOSE_HERO {
+  uint32 dwHeroID = 1;
+}
+
+message CSPKG_DO_HELP_CHOOSE_HERO {
+  uint32 dwNeedHelpObjID = 1;
+  uint32 dwHelpChooseHeroID = 2;
+}
+
+message CSPKG_POS_TITLE_SET_SHOW_REQ {
+  uint32 bBranchType = 1;
+  uint32 dwPosTitleID = 2;
+}
+
+message CSPKG_ACNT_REGISTER_REQ {
+  uint32 dwHeadId = 1;
+  bytes szUserName = 2; // fixed-length byte array
+  bytes szTelecomOper = 3; // fixed-length byte array
+  int32 iRegChannel = 4;
+  uint32 bLanguage = 5;
+  uint32 bIsNeedRandomBySvr = 6;
+  uint32 bDimensionGender = 7;
+}
+
+message CSPKG_ACNT_REGISTER_RES {
+  COMDT_RESULT_INFO stResultInfo = 1;
+}
+
+message CSPKG_ANTIDATA_REQ {
+  uint32 wLen = 1;
+  bytes szBuff = 2; // fixed-length byte array
+}
+
+message CSPKG_CMD_CHEATCMD {
+  int32 iCheatCmd = 1;
+  CSDT_CHEATCMD_DETAIL stCheatCmdDetail = 2;
+  bytes szReqCallBackData = 3; // fixed-length byte array
+}
+
+message CSPKG_ACHIEVEHERO_REQ {
+  uint32 dwHeroId = 1;
+}
+
+message CSPKG_OPERATE_USER_PRIVACY_REQ {
+  uint32 bOpenOrClose = 1;
+  uint32 dwUserPrivacyBit = 2;
+  uint32 bIsPrivacyBitsChged = 3;
+}
+
+message CSPKG_CHG_FRIEND_CARD_REQ {
+  COMDT_FRIEND_CARD stFriendCardInfo = 1;
+}
+
+message CSPKG_CHG_FRIEND_CARD_TAGS_REQ {
+  uint32 bTagNum = 1;
+  repeated uint32 TagList = 2;
+}
+
+message CSPKG_CHG_OTHERSTATE_BIT_REQ {
+  uint32 bChgType = 1;
+  uint32 dwOtherStateMask = 2;
+}
+
+message CSPKG_CHG_FRIEND_REMARKS_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+  bytes szFriendRemarks = 2; // fixed-length byte array
+}
+
+message CSPKG_ACNTHEROEXTRASTATINFO_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+}
+
+message CSPKG_BATTLELIST_REQ {
+  COMDT_BATTLELIST stBattleList = 1;
+}
+
+message CSPKG_CLTUPLOADDATA_RSP {
+  uint32 bMemberNum = 1;
+  repeated COMDT_GUILD_MEMBER_DATA astMemberData = 2; // TDR_ARRAY
+}
+
+message CSPKG_FREEHERO_REQ {
+  int32 chReserve = 1;
+}
+
+message CSPKG_BUYHERO_REQ {
+  uint32 dwBillNo = 1;
+  uint32 bBuyType = 2;
+  uint32 bBuyChannel = 3;
+  uint32 bIsPromotion = 4;
+  uint32 dwHeroID = 5;
+  uint32 dwRebateID = 6;
+  uint32 dwRebateCnt = 7;
+  bytes szSource = 8; // fixed-length byte array
+  bytes szRecommendID = 9; // fixed-length byte array
+}
+
+message CSPKG_BUYHEROSKIN_REQ {
+  uint32 dwBillNo = 1;
+  uint32 bBuyType = 2;
+  uint32 dwResID = 3;
+  uint32 bIsPromotion = 4;
+  uint32 dwRebateID = 5;
+  uint32 dwRebateCnt = 6;
+  COMDT_HEROSKIN_BUY_SRCINFO stSrcInfo = 7;
+  uint32 bIsFreeOfCharge = 8;
+  uint32 dwReplaceCoinType = 9;
+  uint32 dwReplaceCoinCnt = 10;
+}
+
+message CSPKG_PARTBUY_REQ {
+  uint32 dwBillNo = 1;
+  uint32 dwResType = 2;
+  uint32 dwResID = 3;
+  uint32 dwRebateID = 4;
+  uint32 dwRebateCnt = 5;
+  uint32 bBuyChannel = 6;
+  uint32 dwPayType = 7;
+}
+
+message CSPKG_GETHISTORYCREDITDATA_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GETCREDITVALUEREWARD_REQ {
+  uint32 dwCreditLevel = 1;
+  uint32 bRewardType = 2;
+  uint32 bRewardIndex = 3;
+}
+
+message CSPKG_CMD_SKINPART_PACKBUY_REQ {
+  uint32 dwBillNo = 1;
+  COMDT_COMMON_PACKBUY stBuyItems = 2;
+  uint32 bBuyChannel = 3;
+}
+
+message CSPKG_WEARHEROSKIN_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bSkinID = 2;
+  uint32 bIsVipShareSkin = 3;
+  uint32 bIsFreedomSkinCard = 4;
+  uint32 dwShareSkinPartSuitID = 5;
+}
+
+message CSPKG_FREEHEROSKIN_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SAVE_SKINPART_WEAING_SCHEME_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bSkinID = 2;
+  uint32 bWearScheme = 3;
+  uint32 bSchemePos = 4;
+  repeated uint32 PartID = 5;
+}
+
+message CSPKG_CLEAR_SKINPART_REDDOT_REQ {
+  uint32 bPartNum = 1;
+  repeated uint32 PartID = 2;
+}
+
+message CSPKG_OPEN_WANDER_SHOP_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_BUY_WANDER_SHOP_REQ {
+  uint32 dwBuyBits = 1;
+}
+
+message CSPKG_GET_WANDER_SHOP_ACCUMULATE_BUY_REWARD_REQ {
+  uint32 dwID = 1;
+}
+
+message CSPKG_CURRENCY_EXCHANGE_REQ {
+  uint32 dwBillNo = 1;
+  uint32 bFrom = 2;
+  uint32 bTo = 3;
+  uint32 dwAmount = 4;
+  uint32 bFromType = 5;
+}
+
+message CSPKG_HEROSKIN_PRESENT_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  bytes szFriendName = 2; // fixed-length byte array
+  uint32 wItemType = 3;
+  uint32 dwItemID = 4;
+  repeated int32 szPswdInfo = 5;
+  uint32 dwGiftID = 6;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 7;
+  uint32 bIsPromotion = 8;
+  uint32 bIsWishGet = 9;
+}
+
+message CSPKG_SPECITEM_PRESENT_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  bytes szFriendName = 2; // fixed-length byte array
+  uint32 dwSpecID = 3;
+  uint32 dwPresentCnt = 4;
+  repeated int32 szPswdInfo = 5;
+  uint32 dwGiftID = 6;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 7;
+  uint32 bIsWishGet = 8;
+  uint32 bVisibleType = 9;
+}
+
+message CSPKG_PKGITEM_PRESENT_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  bytes szFriendName = 2; // fixed-length byte array
+  COMDT_ITEM_SIMPINFO stItemInfo = 3;
+  repeated int32 szPswdInfo = 4;
+  uint32 dwGiftID = 5;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 6;
+}
+
+message CSPKG_PRESENT_ROLLINGMSG_REQ {
+  uint32 bIsNoSet = 1;
+}
+
+message CSPKG_CMD_DEL_PRESENT_TAEKN_HISTORY_REQ {
+  int32 iDelIndex = 1;
+}
+
+message CSPKG_CMD_PRESENTGET_GET {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_CMD_PRESENTTHX_GET {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_CMD_PRESENTGET_DEL {
+  int32 iReqIndex = 1;
+}
+
+message CSPKG_CMD_PRESENTGET_PICK {
+  int32 iReqIndex = 1;
+}
+
+message CSPKG_CMD_PRESENTSEND_DEL {
+  int32 iReqIndex = 1;
+}
+
+message CSPKG_CMD_PRESENTTHX_DEL {
+  int32 iReqIndex = 1;
+}
+
+message CSPKG_PRESENT_SEND_THANKS_GIFT_REQ {
+  COMDT_ACNT_UNIQ stFriendUniq = 1;
+}
+
+message CSPKG_GET_POPULARITY_INFO_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_CMD_ITEMBUY {
+  int32 iRefreshTime = 1;
+  uint32 wShopType = 2;
+  uint32 bItemIdx = 3;
+  uint32 wItemCnt = 4;
+}
+
+message CSPKG_CMD_ITEMSALE {
+  CSDT_ITEM_DELLIST stSaleList = 1;
+  repeated int32 szPswdInfo = 2;
+}
+
+message CSPKG_CMD_PROPUSE {
+  CSDT_USE_PROPLIST stPropList = 1;
+  uint32 bPropUseType = 2;
+  repeated int32 szPswdInfo = 3;
+  uint32 bExtraType = 4;
+  COMDT_USEPROP_EXTRA stExtraInfo = 5;
+  int32 iSource = 6;
+}
+
+message CSPKG_CMD_LIMITPROP_USE {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  COMDT_LIMITITEM_CHGLIST stItemInfo = 2;
+}
+
+message CSPKG_CMD_HORNUSE {
+  uint64 ullUniqueID = 1;
+  bytes szContent = 2; // fixed-length byte array
+}
+
+message CSPKG_CMD_PKGQUERY {
+  uint32 bNoUse = 1;
+}
+
+message CSPKG_CMD_ITEMCOMP {
+  uint32 wTargetType = 1;
+  uint32 dwTargetID = 2;
+}
+
+message CSPKG_CMD_SHOPBUY {
+  int32 iBuyType = 1;
+  int32 iBuySubType = 2;
+  COMDT_SHOPBUY_EXTRA stExtraInfo = 3;
+}
+
+message CSPKG_CMD_AUTOREFRESH {
+  uint32 wShopType = 1;
+}
+
+message CSPKG_CMD_MANUALREFRESH {
+  uint32 wShopType = 1;
+}
+
+message CSPKG_CMD_GOODSREFRESH {
+  uint32 wShopType = 1;
+}
+
+message CSPKG_AKALISHOP_BUYREQ {
+  uint32 dwBillNo = 1;
+  uint32 wCoinType = 2;
+  uint32 bBuyIdx = 3;
+  uint32 bIsFreeOfCharge = 4;
+}
+
+message CSPKG_AKALISHOP_FLAGREQ {
+  uint32 wCoinType = 1;
+  uint32 dwBillNo = 2;
+}
+
+message CSPKG_USEHONOR_REQ {
+  int32 iHonorID = 1;
+  uint32 bHonorType = 2;
+}
+
+message CSPKG_FIGHTHISTORY_REQ {
+  COMDT_PLAYER_FIGHT_RECORD stFightRecord = 1;
+}
+
+message CSPKG_ADD_PVE_FIGHT_RECORD_REQ {
+  COMDT_PLAYER_PVE_FIGHT_RECORD stPveFightRecord = 1;
+}
+
+message CSPKG_FIGHTHISTORYLIST_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+  int32 iLastLoginResVersion = 3;
+  uint32 dwFakeDescID = 4;
+}
+
+message CSPKG_CMD_SYMBOL_BREAKALL {
+  uint32 bData = 1;
+}
+
+message CSPKG_CMD_SYMBOL_LVLDOWN_INPKG {
+  repeated int32 szPswdInfo = 1;
+  CSDT_SYMBOL_LVLDOWN_ALL_INFO stSymbolList = 2;
+}
+
+message CSPKG_CMD_SYMBOL_LVLUP {
+  uint32 bType = 1;
+  uint32 bCount = 2;
+  repeated COMDT_TASK_DYNC_PREREQUISITE_ITEM astItem = 3; // TDR_ARRAY
+}
+
+message CSPKG_PRESENT_POPULARITY_REQ {
+  COMDT_ACNT_UNIQ stAcntUin = 1;
+  uint32 bPropIDCnt = 2;
+  repeated bytes astPropIDList = 3; // TDR_ARRAY, element type unknown
+  bytes szMessageStr = 4; // fixed-length byte array
+}
+
+message CSPKG_CMD_ACNTCOUPONS {
+  uint32 bPayType = 1;
+  uint32 dwReason = 2;
+}
+
+message CSPKG_CMD_SPECSALEBUY {
+  uint32 wCostType = 1;
+  uint32 dwSelfSelectionID = 2;
+  uint32 dwBuySpecSaleID = 3;
+  uint32 dwBuySpecSaleNum = 4;
+  uint32 dwFreeSpecSaleID = 5;
+  uint32 dwFreeSpecSaleNum = 6;
+  uint32 dwBillNo = 7;
+  uint32 bBuyChannel = 8;
+  uint32 bBuySubChannel = 9;
+  bytes szSource = 10; // fixed-length byte array
+  uint32 dwRebateID = 11;
+  uint32 dwRebateCnt = 12;
+  bytes szRecommendID = 13; // fixed-length byte array
+}
+
+message CSPKG_CMD_COUPONS_REWARDGET {
+  uint32 bPayType = 1;
+  uint32 bRewardIdx = 2;
+  uint32 wRewardItemType = 3;
+  uint32 dwRewardItemID = 4;
+}
+
+message CSPKG_CMD_GANGUP_BINDLIVEID {
+  bytes szLiveID = 1; // fixed-length byte array
+  uint32 bBindFlag = 2;
+}
+
+message CSPKG_CMD_FRIENDSHOP_BUYREQ {
+  uint32 dwGoodsID = 1;
+  uint32 wItemType = 2;
+  uint32 dwItemID = 3;
+  uint32 dwItemCnt = 4;
+}
+
+message CSPKG_CMD_BACKFLOW_FRIENDFLAG_SETREQ {
+  uint32 bIsSet = 1;
+}
+
+message CSPKG_CMD_FRIENDCOIN_GETHISTORY_REQ {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_SET_STAR_FRIEND_REQ {
+  COMDT_ACNT_UNIQ stAcntUniq = 1;
+  uint32 bOpType = 2;
+}
+
+message CSPKG_SET_SHOW_COLLECTION_INFO_REQ {
+  COMDT_SHOW_COLLECTION_INFO stShowCollectionInfo = 1;
+}
+
+message CSPKG_COLLECTION_SHARE_REWARD_REQ {
+  uint32 wShareType = 1;
+}
+
+message CSPKG_RECRUITMENT_REWARD_REQ {
+  uint32 wRecruitRewardId = 1;
+  COMDT_ACNT_UNIQ stUin = 2;
+}
+
+message CSPKG_CMD_CHG_SIGNATURE {
+  bytes szSignatureInfo = 1; // fixed-length byte array
+}
+
+message CSPKG_CMD_DEL_INDIRECT_FRIEND_REQ {
+  COMDT_ACNT_UNIQ stFriendUinq = 1;
+}
+
+message CSPKG_CMD_LIST_FRIENDREQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_DELETE_FRIENDREQ_LIST_REQ {
+  uint32 bReserve = 1;
+  uint32 bIsDeleteByCondition = 2;
+  int32 iFriendReqNum = 3;
+  repeated bytes astFriendReqList = 4; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_SHARE_EXTERN_PLATFORM_REQ {
+  COMDT_SHARE_EXTERN_PLATFORM_INFO stShareExternPlatformInfo = 1;
+}
+
+message CSPKG_UPDATE_EXTERN_USER_INFO_REQ {
+  COMDT_EXTERN_PLATFORM_USER_INFO stExternUserInfo = 1;
+}
+
+message CSPKG_PLAY_UNIQUE_SKILL_CHANGE_REQ {
+  uint32 dwHeroID = 1;
+  uint32 dwPlayGroupID = 2;
+  uint32 dwSkillID = 3;
+}
+
+message CSPKG_CMD_SEARCH_PLAYER {
+  uint32 bSearchPlatType = 1;
+  bytes szUserName = 2; // fixed-length byte array
+  uint32 dwFakeDescID = 3;
+}
+
+message CSPKG_CMD_ADD_FRIEND {
+  COMDT_ACNT_UNIQ stUin = 1;
+  COMDT_FRIEND_SOURCE stUserSource = 2;
+  bytes szVerificationInfo = 3; // fixed-length byte array
+  uint32 bIsDefaultVerificationInfo = 4;
+  uint32 bSrcFriendType = 5;
+  int32 iIsTemplateText = 6;
+  uint32 dwFakeDescID = 7;
+}
+
+message CSPKG_CMD_DEL_FRIEND {
+  COMDT_ACNT_UNIQ stUin = 1;
+  bytes szPswdInfo = 2; // fixed-length byte array
+}
+
+message CSPKG_CMD_ADD_SNSFRIEND_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_INVITE_WATCH_TV_REQ {
+  COMDT_ACNT_UNIQ stInviteeUin = 1;
+  uint32 dwGameSvrEntityId = 2;
+  uint32 bRelationType = 3;
+  uint32 dwBussinessType = 4;
+  bytes szWatchContent = 5; // fixed-length byte array
+}
+
+message CSPKG_CHG_PLAYBRANCH_REQ {
+  uint32 wPlayBranch = 1;
+}
+
+message CSPKG_CMD_ADD_FRIEND_CONFIRM {
+  COMDT_ACNT_UNIQ stUin = 1;
+  uint32 bAddSource = 2;
+}
+
+message CSPKG_CMD_ADD_FRIEND_DENY {
+  COMDT_ACNT_UNIQ stUin = 1;
+  uint32 bAddSource = 2;
+}
+
+message CSPKG_CMD_INVITE_GAME {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CMD_DONATE_FRIEND_POINT {
+  COMDT_ACNT_UNIQ stUin = 1;
+  uint32 bFriendType = 2;
+  bytes szOpenID = 3; // fixed-length byte array
+}
+
+message CSPKG_CMD_INTIMACY_RELATION_REQUEST {
+  COMDT_ACNT_UNIQ stUin = 1;
+  uint32 bIntimacyState = 2;
+  uint32 bRelationChgType = 3;
+  uint32 wIntimacyTitleId = 4;
+}
+
+message CSPKG_CMD_CHG_INTIMACY_CONFIRM {
+  COMDT_ACNT_UNIQ stUin = 1;
+  uint32 bRelationChgType = 2;
+  uint32 bIntimacyState = 3;
+  uint32 wIntimacyTitleId = 4;
+}
+
+message CSPKG_CMD_CHG_INTIMACY_DENY {
+  COMDT_ACNT_UNIQ stUin = 1;
+  uint32 bRelationChgType = 2;
+  uint32 bIntimacyState = 3;
+}
+
+message CSPKG_CMD_CHG_INTIMACYPRIORITY {
+  uint32 bIntimacyState = 1;
+}
+
+message CSPKG_CMD_GET_PEER_INTIMACY_INFO_REQ {
+  COMDT_ACNT_UNIQ stTarUin = 1;
+}
+
+message CSPKG_CMD_DEFRIEND {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_CMD_CANCEL_DEFRIEND {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_CMD_LBS_REPORT {
+  int32 iLongitude = 1;
+  int32 iLatitude = 2;
+}
+
+message CSPKG_CMD_LBS_SEARCH {
+  int32 iLongitude = 1;
+  int32 iLatitude = 2;
+  uint32 bGender = 3;
+  uint32 bTriggerScene = 4;
+}
+
+message CSPKG_CMD_LBS_USER_UPDINFO_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CMD_LBS_REMOVE {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CMD_LIKE_REQ {
+  COMDT_ACNT_UNIQ stAcntUin = 1;
+  uint32 dwTarHeroID = 2;
+  uint32 dwLikeSceneType = 3;
+}
+
+message CSPKG_ROGUE_MOW_GET_INFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_ROGUE_MOW_GET_APOLLORANK_REWARD_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_ROGUE_MOW_MODIFY_INIT_EQUIP_REQ {
+  uint32 dwHeroID = 1;
+  uint32 dwInitItemID = 2;
+  uint32 dwInitWeaponID = 3;
+}
+
+message CSPKG_ROGUE_MOW_JUMP_DIFFICULTY_REQ {
+  uint32 dwReserved = 1;
+}
+
+message CSPKG_CMD_LIGHT_REQ {
+  COMDT_ACNT_UNIQ stLightUin = 1;
+  uint32 bIsAuto = 2;
+}
+
+message CSPKG_CMD_DEL_TMP_FRIEND {
+  COMDT_ACNT_UNIQ stTmpFriendUin = 1;
+}
+
+message CSPKG_CMD_RECALL_FRIEND {
+  COMDT_ACNT_UNIQ stUin = 1;
+  uint32 bFriendType = 2;
+}
+
+message CSPKG_CMD_GAIN_CHEST {
+  bytes szPf = 1; // fixed-length byte array
+}
+
+message CSPKG_CMD_FRIEND_REFUSE_RECALL {
+  uint32 bRefuseStatus = 1;
+  uint32 bRefuseType = 2;
+}
+
+message CSPKG_CMD_NOASKFORFLAG_CHG {
+  uint32 bNoAskforFlag = 1;
+}
+
+message CSPKG_CMD_LIST_FREC {
+  uint32 bType = 1;
+}
+
+message CSPKG_CHG_INTIMACY_TITLE_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  uint32 wIntimacyTitleId = 2;
+}
+
+message CSPKG_INTIMACY_MEMOIR_BRIEF_INFO_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_INTIMACY_MEMOIR_DETAIL_INFO_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  bytes szFriendOpenID = 2; // fixed-length byte array
+}
+
+message CSPKG_CMD_GET_RECFRIEND_LIST_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CMD_RECFRIEND_UPD_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CMD_CHAT_REQ {
+  COMDT_CHAT_INFO stChatInfo = 1;
+  uint32 bIsPrivateTeamMsg = 2;
+  uint32 bIsVoiceMsgInValid = 3;
+  uint32 bIsVoiceChecked = 4;
+  COMDT_CHAT_VISIBLE_ACNT stVisibleAcnt = 5;
+  uint32 dwEmojiComboID = 6;
+}
+
+message CSPKG_CMD_GET_CHAT_MSG_REQ {
+  uint32 bChatType = 1;
+  uint64 ullLastTimeStamp = 2;
+  CSDT_GETCHAT_MSG_EXTRA_UNION stExtraInfo = 3;
+  uint64 ullChannelID = 4;
+  uint64 ullBriefLastTimeStamp = 5;
+  uint32 bNeedOnlineCnt = 6;
+}
+
+message CSPKG_CMD_GET_HORNMSG {
+  uint32 bHornType = 1;
+  uint32 dwBeginShowSec = 2;
+}
+
+message CSPKG_CLEAN_OFFLINE_CHAT_REQ {
+  uint32 bDelChatCnt = 1;
+  repeated int32 ChatIndex = 2;
+}
+
+message CSPKG_CHAT_COMPLAINT_REQ {
+  uint64 ullComplaintRoleID = 1;
+  bytes szComplaintName = 2; // fixed-length byte array
+  bytes szComplaintOpenID = 3; // fixed-length byte array
+  uint32 dwComplaintLogicworldID = 4;
+  bytes szComplaintChatContent = 5; // fixed-length byte array
+  uint32 dwComplaintChatType = 6;
+  uint32 dwComplaintClassType = 7;
+  bytes szComplaintRemark = 8; // fixed-length byte array
+}
+
+message CSPKG_SET_CHAT_LOCATION_REQ {
+  uint32 dwAdcode = 1;
+  uint32 bSetLocationType = 2;
+}
+
+message CSPKG_REPORT_WEAK_TIME_REQ {
+  uint32 dwDuration = 1;
+  uint32 dwEventNum = 2;
+  repeated uint32 EventList = 3;
+  uint32 wKillCnt = 4;
+  uint32 wDeadCnt = 5;
+  uint32 wAssistCnt = 6;
+  uint32 wCoinPct = 7;
+}
+
+message CSPKG_USUALTASK_REQ {
+  uint32 bRefreshMethod = 1;
+  uint32 dwTaskID = 2;
+}
+
+message CSPKG_TASKSUBMIT_REQ {
+  uint32 dwTaskID = 1;
+}
+
+message CSPKG_TASKDONE_CLIENTREPORT {
+  uint32 bEventType = 1;
+  uint32 dwTaskID = 2;
+}
+
+message CSPKG_TRIGGERMIDISTASK_REQ {
+  int32 iErrorCode = 1;
+  int32 iBusinessLevel = 2;
+}
+
+message CSPKG_ONEKEY_SUBMIT_TASK_REQ {
+  COMDT_ONEKEY_SUBMIT_TASK_INFO stTaskInfo = 1;
+}
+
+message CSPKG_SEASON_HONOR_ROAD_SUBMIT_REQ {
+  uint32 dwLevel = 1;
+}
+
+message CSPKG_SEASON_HONOR_ROAD_ACCUMU_EXTRA_REWARD_SUBMIT_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GETHUOYUEDUREWARD_REQ {
+  uint32 wHuoYueDuId = 1;
+  uint32 dwExtraID = 2;
+}
+
+message CSPKG_GETPVPLEVELREWARD_REQ {
+  int32 iLevel = 1;
+}
+
+message CSPKG_CMD_ASKFORREQ_GET {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_CMD_ASKFORREQ_DEL {
+  int32 iReqIndex = 1;
+}
+
+message CSPKG_CMD_ASKFORREQ_SEND {
+  COMDT_ACNT_UNIQ stAskforUniq = 1;
+  COMDT_ITEM_SIMPINFO stItemInfo = 2;
+  COMDT_ACNT_ASKFORMSG_INFO stMsgInfo = 3;
+  uint32 bFrom = 4;
+}
+
+message CSPKG_CMD_ASKFORREQ_READ {
+  int32 iReqIndex = 1;
+}
+
+message CSPKG_CMD_ASKFORREQ_REFUSE {
+  int32 iReqIndex = 1;
+}
+
+message CSPKG_CMD_ASKFORREQ_CONFIRM {
+  int32 iReqIndex = 1;
+  bytes szAskforName = 2; // fixed-length byte array
+  repeated int32 szPswdStr = 3;
+  uint32 dwGiftID = 4;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 5;
+  uint32 bIsPromotion = 6;
+  uint32 bIsWishGet = 7;
+}
+
+message CSPKG_CMD_EXTERNPRESENT_START_REQ {
+  bytes szLogicWorldName = 1; // fixed-length byte array
+  uint32 wItemType = 2;
+  uint32 dwItemID = 3;
+  uint32 dwItemCnt = 4;
+}
+
+message CSPKG_CMD_MATCHSUBSCRIBE_GET_REQ {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_CMD_QQCHATSWITCH_REQ {
+  uint64 ullFriendUid = 1;
+  uint32 dwFriendLogicWorldID = 2;
+}
+
+message CSPKG_CMD_CHATSWITCH_CHG {
+  uint32 bIsChatOpen = 1;
+}
+
+message CSPKG_CMD_PRIVATECHAT_FINISH {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_CMD_XUNYOUMAIL_SEND {
+  uint32 wValidYear = 1;
+  uint32 bValidMonth = 2;
+  uint32 bValidDay = 3;
+}
+
+message CSPKG_FUNCUNLOCK_REQ {
+  uint64 ullUnlockFlag = 1;
+}
+
+message CSPKG_CMD_LICENSE_REQ {
+  uint32 dwLicenseID = 1;
+}
+
+message CSPKG_INBATTLEEVENT_INFO {
+  uint32 dwEventType = 1;
+}
+
+message CSPKG_RECREWARD_REQ {
+  uint32 bRecRewardType = 1;
+}
+
+message CSPKG_UPLOAD_EVENT {
+  uint32 dwTime = 1;
+  int32 iEventType = 2;
+  CSDT_EVENT_DATA stEventData = 3;
+}
+
+message CSPKG_NOTICENEW_REQ {
+  uint32 dwDataVersion = 1;
+  uint32 bDataType = 2;
+}
+
+message CSPKG_NOTICELIST_REQ {
+  uint32 dwDataVersion = 1;
+  int32 iClientVersion = 2;
+  uint32 bDataType = 3;
+}
+
+message CSPKG_NOTICEINFO_REQ {
+  uint32 dwNoticeID = 1;
+  uint64 ullNoticeTime = 2;
+  uint32 dwLogicWorldID = 3;
+  uint32 bDataType = 4;
+}
+
+message CSPKG_GET_SYSREDENVELOPE_REQ {
+  uint64 ullInsertTime = 1;
+}
+
+message CSPKG_SET_ISOPENSHIPINHAO {
+  uint32 bIsOpen = 1;
+}
+
+message CSPKG_CHKXUNYOUSERV_REQ {
+  uint32 dwServEndTime = 1;
+  uint32 bFirstUse = 2;
+  bytes szBaoBiaoUrl = 3; // fixed-length byte array
+}
+
+message CSPKG_REDDOTLIST_REQ {
+  uint32 dwLastGetTime = 1;
+}
+
+message CSPKG_MATCH_REQ {
+  COMDT_MATCH_INFO stMatchInfo = 1;
+}
+
+message CSPKG_OPER_HERO_REQ {
+  uint32 bOperType = 1;
+  CSDT_OPER_HERO stOperDetail = 2;
+}
+
+message CSPKG_CONFIRM_HERO {
+  uint32 bReserved = 1;
+  uint32 bIsCurrentVersionAdjusted = 2;
+}
+
+message CSPKG_HERO_CANCEL_CONFIRM {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_SHOW_HERO_INFO {
+  uint32 bShowInfoType = 1;
+  uint32 bUseFakeShowInfo = 2;
+  COMDT_HERO_STATISTIC_EXTRA_INFO stFakeHighLightInfo = 3;
+}
+
+message CSPKG_EXPECT_BANPICK_HERO {
+  uint32 bIsBanOrPick = 1;
+  uint32 dwHeroID = 2;
+}
+
+message CSPKG_START_MULTI_GAME_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_ADD_NPC_REQ {
+  COMDT_ADDNPC_REQ stNpcInfo = 1;
+}
+
+message CSPKG_INVITE_FRIEND_JOIN_ROOM_REQ {
+  COMDT_ACNT_UNIQ stFriendInfo = 1;
+  uint32 bFriendType = 2;
+  uint32 dwGameSvrEntity = 3;
+  uint32 bIsFromApply = 4;
+}
+
+message CSPKG_KICKOUT_ROOMMEMBER_REQ {
+  COMDT_KICKOUT_ROOMMEMBER_REQ stKickMemberInfo = 1;
+}
+
+message CSPKG_INVITE_JOIN_GAME_RSP {
+  COMDT_RESULT_INFO stResultInfo = 1;
+  bytes szDenyReason = 2; // fixed-length byte array
+  COMDT_EXTRA_INVITEINFO stExtraInviteInfo = 3;
+}
+
+message CSPKG_APPLY_JOIN_FRIEND_GAME_REQ {
+  COMDT_ACNT_UNIQ stFriendUniq = 1;
+  uint32 bFriendType = 2;
+  uint32 dwGameSvrEntity = 3;
+  uint32 bApplyType = 4;
+  COMDT_FRIEND_EXTRAINFO stFriendExtraInfo = 5;
+}
+
+message CSPKG_PKAI_LEVEL_CONF_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_PKAI_TRAINING_LEVEL_CONF_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_PKAI_TRAINING_SET_MODE_REQ {
+  uint32 bMode = 1;
+  uint32 bAILevelID = 2;
+}
+
+message CSPKG_PICK_AI_HERO_REQ {
+  uint32 dwAIObjId = 1;
+  uint32 dwHeroID = 2;
+}
+
+message CSPKG_PICK_AI_HERO_CONFIRM {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_CREATE_GAME_BY_EXTERN_PLAT_REQ {
+  COMDT_CREATE_GAME_BY_EXTERN_PLAT_PARAM stParam = 1;
+}
+
+message CSPKG_CREATE_TEAM_REQ {
+  COMDT_CREATE_TEAM_DATA stCreatTeamData = 1;
+}
+
+message CSPKG_INVITE_FRIEND_JOIN_TEAM_REQ {
+  COMDT_ACNT_UNIQ stFriendInfo = 1;
+  uint32 bFriendType = 2;
+  uint32 dwGameSvrEntity = 3;
+  uint32 bChannelType = 4;
+  uint32 dwPlayBranch = 5;
+  uint32 bIsFromApply = 6;
+  COMDT_FRIEND_EXTRAINFO stFriendExtraInfo = 7;
+  uint32 dwFakeDescID = 8;
+}
+
+message CSPKG_LEAVE_TEAM {
+  COMDT_EXTRA_INVITEINFO stExtraInviteInfo = 1;
+}
+
+message CSPKG_OPER_TEAM_REQ {
+  COMDT_OPER_TEAM stOper = 1;
+}
+
+message CSPKG_SET_FIVE_RANK_NAME_PREFIX_REQ {
+  int32 iPrefixID = 1;
+}
+
+message CSPKG_SET_FIVE_RANK_NAME_REQ {
+  bytes szFiveRankName = 1; // fixed-length byte array
+}
+
+message CSPKG_ROOM_CONFIRM_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_TEAMCHG_COMMON_DATA_SYNC_REQ {
+  COMDT_TEAMCHG_COMMON_SYNC stSyncData = 1;
+}
+
+message CSPKG_TRANSFER_TEAM_MASTER_REQ {
+  uint64 ullNewMasterUid = 1;
+}
+
+message CSPKG_TEAM_MOVE_TO_EMPTY_POS_REQ {
+  uint32 bCurrentPos = 1;
+  uint32 bTargetPos = 2;
+}
+
+message CSPKG_TEAM_APPLY_TO_SWAP_POS_REQ {
+  uint32 bCurrentPos = 1;
+  uint32 bTargetPos = 2;
+  uint64 ullTargetPosUid = 3;
+}
+
+message CSPKG_TEAM_HANDLE_SWAP_POS_REQ {
+  uint32 bIsAccepted = 1;
+  uint32 bIsTimeout = 2;
+  uint64 ullApplyUid = 3;
+  uint32 bFromPos = 4;
+  uint32 bTargetPos = 5;
+}
+
+message CSPKG_TEAM_PLAY_VA_ACTION_REQ {
+  uint32 dwActionID = 1;
+}
+
+message CSPKG_ROOM_CHGMEMBERPOS_REQ {
+  uint32 bCamp = 1;
+  uint32 bPosOfCamp = 2;
+  uint32 bChgType = 3;
+}
+
+message CSPKG_ROOM_CHGPOS_CONFIRM_REQ {
+  uint32 bIsAccept = 1;
+  uint32 dwChgSeq = 2;
+}
+
+message CSPKG_DRAWWEAL_REQ {
+  uint32 bWealType = 1;
+  uint32 dwWealID = 2;
+  uint32 dwPeriodID = 3;
+  uint32 dwDrawCnt = 4;
+  uint32 bGroupID = 5;
+}
+
+message CSPKG_DRAWWEAL_ONEKEY_REQ {
+  CSDT_ONEKEY_SUBMIT_WEAL_INFO stWealInfo = 1;
+}
+
+message CSPKG_GET_RANKING_LIST_REQ {
+  uint32 bNumberType = 1;
+  int32 iStart = 2;
+  int32 iLimit = 3;
+  int32 iImageFlag = 4;
+  uint32 dwSubType1 = 5;
+  uint32 dwSubType2 = 6;
+  uint32 bGetScene = 7;
+  uint32 bLbsRankType = 8;
+  uint32 dwImageIndex = 9;
+}
+
+message CSPKG_GET_DETAILMONTH_NATIONRANK_REQ {
+  uint32 dwHeroID = 1;
+  uint32 dwDate = 2;
+  int32 iTheaterID = 3;
+}
+
+message CSPKG_CHK_CLIENTTXT_REQ {
+  uint32 dwChkType = 1;
+  bytes szChkTxtStr = 2; // fixed-length byte array
+}
+
+message CSPKG_GET_RANKLIST_BY_SPECIAL_SCORE_REQ {
+  uint32 bNumberType = 1;
+  int32 iScore = 2;
+}
+
+message CSPKG_GET_SPECIAL_GUILD_RANK_INFO_REQ {
+  uint32 bNumberType = 1;
+  uint32 bImageFlag = 2;
+}
+
+message CSPKG_GET_RANKING_ACNT_INFO_REQ {
+  uint32 bNumberType = 1;
+  uint32 bGetScene = 2;
+  uint32 dwExtraParam = 3;
+  uint32 bImageFlag = 4;
+  uint64 ullRelationUid = 5;
+  uint32 dwRelationLogicWorldID = 6;
+}
+
+message CSPKG_GET_ACNT_TOPNEXT_MULTIRANK_REQ {
+  uint32 dwNumberType = 1;
+  uint32 bImageFlag = 2;
+  CSDT_TOPNEXT_MULTIRANK_REQ_LIST stMultiRankReqList = 3;
+}
+
+message CSPKG_GET_ACNT_DETAIL_INFO_REQ {
+  uint64 ullUid = 1;
+  int32 iLogicWorldId = 2;
+  uint32 dwFakeDescID = 3;
+  uint32 bIsVisitor = 4;
+  uint32 bFrom = 5;
+  uint32 bIsQueryGangUpMutualFriend = 6;
+  uint32 bIsQueryVideoHomepage = 7;
+}
+
+message CSPKG_GET_INTIMACY_RELATION_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldId = 2;
+}
+
+message CSPKG_RECORD_LOOK_FRIEND_CARD_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldId = 2;
+}
+
+message CSPKG_HEADURL_COMPLAINT_REQ {
+  bytes szComplaintName = 1; // fixed-length byte array
+  bytes szComplaintOpenID = 2; // fixed-length byte array
+  uint32 dwComplaintLogicworldID = 3;
+  int32 iComplaintType = 4;
+  bytes szComplaintContent = 5; // fixed-length byte array
+  bytes szHeadUrl = 6; // fixed-length byte array
+  int32 iPicType = 7;
+  int32 iComplaintScene = 8;
+  uint32 dwFakeDescID = 9;
+}
+
+message CSPKG_CHG_PRETEAM_CARD_REQ {
+  COMDT_PRETEAM_CARD stPreTeamCard = 1;
+}
+
+message CSPKG_RECOMMEND_TEAMMATE_REQ {
+  uint32 dwPlayMode = 1;
+  uint32 bIsIncrement = 2;
+  uint32 dwNeedPlayBranch = 3;
+}
+
+message CSPKG_GET_ACNT_SMALL_DETAIL_INFO_REQ {
+  COMDT_ACNT_UNIQ stAcntUniq = 1;
+}
+
+message CSPKG_NEXTFIRSTWINSEC_NTF {
+  uint32 dwNextFirstWinSec = 1;
+}
+
+message CSPKG_GAMING_UPERMSG {
+  uint32 dwObjID = 1;
+  CSDT_GAMING_UPERMSG stUperMsg = 2;
+}
+
+message CSPKG_AI_UPERMSG {
+  uint32 dwObjID = 1;
+  CSDT_GAMING_UPERMSG stUperMsg = 2;
+}
+
+message CSPKG_SERVERAI_UPERMSG {
+  uint32 dwObjID = 1;
+  CSDT_GAMING_UPERMSG stUperMsg = 2;
+}
+
+message CSPKG_REQUESTFRAPBOOTSINGLE {
+  uint32 dwSeq = 1;
+  uint32 bSource = 2;
+  uint32 bNum = 3;
+  repeated bytes astKFrapsNo = 4; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_REQUESTFRAPBOOTTIMEOUT {
+  uint32 bSession = 1;
+  uint32 dwCurKFrapsNo = 2;
+}
+
+message CSPKG_ISACCEPT_AIPLAYER_RSP {
+  uint32 bResult = 1;
+}
+
+message CSPKG_NOTIFYRUNAI_RSP {
+  int32 iResult = 1;
+  uint32 dwNum = 2;
+  repeated bytes astAcntHostAIInfo = 3; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_GET_BURNING_PROGRESS_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_BURNING_REWARD_REQ {
+  uint32 bLevelNo = 1;
+  int32 iLevelID = 2;
+}
+
+message CSPKG_RESET_BURNING_PROGRESS_REQ {
+  uint32 bDifficultType = 1;
+}
+
+message CSPKG_RECOVERGAMESUCC {
+  int32 chReserve = 1;
+}
+
+message CSPKG_GET_PREPARE_GUILD_LIST_REQ {
+  uint32 bPageID = 1;
+}
+
+message CSPKG_GET_GUILD_INFO_REQ {
+  uint64 ullGuildID = 1;
+}
+
+message CSPKG_GET_GUILD_BRIEFINFO_REQ {
+  uint64 ullGuildID = 1;
+  int32 iGuildLogicWorldID = 2;
+}
+
+message CSPKG_GET_PREPARE_GUILD_INFO_REQ {
+  uint64 ullGuildID = 1;
+}
+
+message CSPKG_CREATE_GUILD_REQ {
+  bytes szName = 1; // fixed-length byte array
+  uint32 dwHeadID = 2;
+  bytes szNotice = 3; // fixed-length byte array
+  uint32 bIsOnlyFriend = 4;
+  COMDT_GUILD_LOCATION stLocation = 5;
+}
+
+message CSPKG_JOIN_PREPARE_GUILD_REQ {
+  uint64 ullGuildID = 1;
+  int32 iGuildLogicWorldID = 2;
+}
+
+message CSPKG_MODIFY_GUILD_SETTING_REQ {
+  uint32 dwSettingMask = 1;
+  uint32 bLimitLevel = 2;
+  uint32 bLimitGrade = 3;
+}
+
+message CSPKG_GET_GUILD_APPLY_LIST_REQ {
+  uint32 bPageId = 1;
+}
+
+message CSPKG_APPLY_JOIN_GUILD_REQ {
+  uint64 ullGuildID = 1;
+  int32 iGuildLogicWorldID = 2;
+  uint32 bIsZhaomu = 3;
+  bytes szApplyContent = 4; // fixed-length byte array
+}
+
+message CSPKG_APPROVE_JOIN_GUILD_APPLY {
+  uint32 bAgree = 1;
+  COMDT_GUILD_MEMBER_BRIEF_INFO stApplyInfo = 2;
+}
+
+message CSPKG_QUIT_GUILD_REQ {
+  uint32 bBlank = 1;
+}
+
+message CSPKG_GUILD_INVITE_REQ {
+  uint64 ullBeInviteUid = 1;
+  int32 iBeInviteLogicWorldID = 2;
+}
+
+message CSPKG_SEARCH_GUILD_REQ {
+  bytes szGuildName = 1; // fixed-length byte array
+  uint64 ullGuildID = 2;
+  int32 iGuildLogicWorldID = 3;
+  uint32 bSearchType = 4;
+  uint32 bSearchPlatType = 5;
+}
+
+message CSPKG_DEAL_GUILD_INVITE {
+  uint32 bAgree = 1;
+  uint64 ullInviteUid = 2;
+  uint64 ullGuildID = 3;
+  int32 iGuildLogicWorldID = 4;
+}
+
+message CSPKG_GUILD_RECOMMEND_REQ {
+  uint64 ullAcntUid = 1;
+  int32 iAcntLogicWorldID = 2;
+}
+
+message CSPKG_REJECT_GUILD_RECOMMEND {
+  uint64 ullPlayerUid = 1;
+  int32 iPlayerLogicWorldID = 2;
+}
+
+message CSPKG_SEARCH_PREGUILD_REQ {
+  bytes szGuildName = 1; // fixed-length byte array
+  uint64 ullGuildID = 2;
+  int32 iGuildLogicWorldID = 3;
+  uint32 bSearchType = 4;
+  uint32 bSearchPlatType = 5;
+}
+
+message CSPKG_GETGUILDHUOYUEREWARD_REQ {
+  uint32 dwRewardID = 1;
+}
+
+message CSPKG_APPOINT_POSITION_REQ {
+  uint64 ullUid = 1;
+  uint32 bPosition = 2;
+  bytes szPswdInfo = 3; // fixed-length byte array
+}
+
+message CSPKG_FIRE_GUILD_MEMBER_REQ {
+  uint64 ullUid = 1;
+}
+
+message CSPKG_CHG_GUILD_HEADID_REQ {
+  uint32 dwHeadID = 1;
+}
+
+message CSPKG_CHG_GUILD_NOTICE_REQ {
+  bytes szNotice = 1; // fixed-length byte array
+}
+
+message CSPKG_CHG_GUILD_GONGGAO_REQ {
+  bytes szGongGao = 1; // fixed-length byte array
+}
+
+message CSPKG_UPGRADE_GUILD_BY_COUPONS_REQ {
+  uint32 dwCurLevel = 1;
+}
+
+message CSPKG_UPGRADE_GUILD_BY_MONEY_REQ {
+  uint32 bCurGuildLevel = 1;
+}
+
+message CSPKG_DONATE_GUILDMONEY_REQ {
+  uint32 bType = 1;
+  uint32 bCurDonateCnt = 2;
+}
+
+message CSPKG_APPLY_DISMISS_GUILD_CAPTAIN_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CANCEL_DISMISS_GUILD_CAPTAIN_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_GUILD_HONOR_HISTORY_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_PERSONAL_GUILD_HONOR_HISTORY_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_REMINDINFO_REQ {
+  uint32 dwModuleID = 1;
+}
+
+message CSPKG_DEL_REMINDINFO_REQ {
+  int32 iIndex = 1;
+}
+
+message CSPKG_GET_GUILDMEMBER_FIGHTVALUE_REWARD_REQ {
+  uint32 bRewardLvl = 1;
+}
+
+message CSPKG_SET_FIGHTVALUE_REWARD_LOCATION_REQ {
+  uint32 dwProvinceAdCode = 1;
+}
+
+message CSPKG_SYN_GUILDMEMBER_BINDINFO_REQ {
+  uint32 bIsInQun = 1;
+  uint32 dwQunMemberCnt = 2;
+}
+
+message CSPKG_CHK_QQSTATION_SIGNATURE_REQ {
+  uint32 bFlag = 1;
+  bytes szSignature = 2; // fixed-length byte array
+}
+
+message CSPKG_GET_GUILDMEMBER_BINDREWARD_REQ {
+  uint32 bRewardLvl = 1;
+}
+
+message CSPKG_GET_GUILDMEMBER_BINDINFO_REQ {
+  bytes szGroupOpenID = 1; // fixed-length byte array
+}
+
+message CSPKG_GET_REDENVELOPE_LIST_REQ {
+  uint32 bPageID = 1;
+}
+
+message CSPKG_CREATE_REDENVELOPE_REQ {
+  COMDT_REDENVELOPE_CREATE_PARAM stCreateParam = 1;
+  bytes szPswdInfo = 2; // fixed-length byte array
+}
+
+message CSPKG_CAPTURE_REDENVELOPE_REQ {
+  uint32 bCatalog = 1;
+  uint64 ullCreateUid = 2;
+  uint32 dwCreateEntity = 3;
+  uint64 ullRedEnvelopeID = 4;
+  uint32 bType = 5;
+  uint32 dwItemID = 6;
+  bytes szAnswer = 7; // fixed-length byte array
+  COMDT_REDENVELOPE_COMMON_PARAM stCommonParam = 8;
+}
+
+message CSPKG_QUERY_REDENVELOPE_TAKEN_RECORD_REQ {
+  uint32 bCatalog = 1;
+  uint64 ullRedEnvelopeID = 2;
+  uint32 bPageID = 3;
+  COMDT_REDENVELOPE_COMMON_PARAM stCommonParam = 4;
+}
+
+message CSPKG_PVE_DATA_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_PVE_WEAR_EQUIP_REQ {
+  uint32 dwEquipID = 1;
+  uint32 bTabIndex = 2;
+}
+
+message CSPKG_PVE_SYNTHETIC_EQUIP_REQ {
+  uint32 dwEquipID = 1;
+}
+
+message CSPKG_PVE_TAKE_OFF_EQUIP_REQ {
+  uint32 bTabIndex = 1;
+  uint32 bEquipPos = 2;
+}
+
+message CSPKG_PVE_CHOOSE_WEAR_EQUIP_TAB_REQ {
+  uint32 bTabIndex = 1;
+}
+
+message CSPKG_PVE_OBJ_STATUS_CHG_REQ {
+  uint32 dwDieSeq = 1;
+  uint32 bDieOrRevive = 2;
+  uint32 dwObjID = 3;
+}
+
+message CSPKG_PVE_MULTI_REVIVE_REQ {
+  uint32 dwReviveObjID = 1;
+  uint32 bIsShareRevive = 2;
+}
+
+message CSPKG_PVE_CONSUME_REWARD_REQ {
+  uint32 bPveConsumeReward = 1;
+}
+
+message CSPKG_PVE_CHG_WEAR_EQUIP_TAB_NAME {
+  uint32 bTabIndex = 1;
+  bytes szNewName = 2; // fixed-length byte array
+}
+
+message CSPKG_SETBATTLELISTOFARENA_REQ {
+  COMDT_BATTLEHERO stBattleList = 1;
+}
+
+message CSPKG_JOINARENA_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_CHGARENAFIGHTERREQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GETTOPFIGHTEROFARENA_REQ {
+  uint32 bTopNum = 1;
+}
+
+message CSPKG_CLRCDLIMIT_REQ {
+  uint32 dwCdType = 1;
+}
+
+message CSPKG_VOTE_HERO_REQ {
+  CSDT_VOTE_HERO_DETAIL stVoteHeroDetail = 1;
+}
+
+message CSPKG_UPDATECLIENTBITS_NTF {
+  COMDT_CLIENT_BITS stClientBits = 1;
+}
+
+message CSPKG_UPDNEWCLIENTBITS_NTF {
+  COMDT_NEWCLIENT_BITS stClientBits = 1;
+}
+
+message CSPKG_GETARENAFIGHTHISTORY_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_QUERY_RANK10V10_INFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_RANK10V10_REWARD_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_SERVERTIME_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_FUNCWHITELISTSET_REQ {
+  uint32 bWhitelistType = 1;
+  uint32 bIsOpen = 2;
+}
+
+message CSPKG_CAMPUS_INVITED_WHITELISTSET_REQ {
+  bytes szInviteOpenID = 1; // fixed-length byte array
+  int32 iInvitePlat = 2;
+  uint32 dwInviteChannelID = 3;
+}
+
+message CSPKG_GET_SEASONREVIEWINFO_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_SEASONREVIEW_MSG_ADD_REQ {
+  COMDT_ACNT_UNIQ stToUniq = 1;
+  COMDT_SEASONREVIEW_MSG_INFO stMsgInfo = 2;
+}
+
+message CSPKG_SEASONREVIEW_MSG_LIMITINFO_REQ {
+  COMDT_ACNT_UNIQ stToUniq = 1;
+}
+
+message CSPKG_GET_DETAILHEROEXTRAINFO_REQ {
+  uint32 dwHeroID = 1;
+  COMDT_ACNT_UNIQ stTarUniq = 2;
+}
+
+message CSPKG_SET_DETAILHERO_SHOWTITLE_REQ {
+  uint32 dwHeroID = 1;
+  COMDT_SHOWHEROTITLE stShowTitle = 2;
+}
+
+message CSPKG_GET_HEROROADBRIEFINFO_REQ {
+  COMDT_ACNT_UNIQ stTarUniq = 1;
+}
+
+message CSPKG_RANDOM_GROWTHBADGETASK_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_GROWTHBADGEREWARD_REQ {
+  uint32 bGetRewardType = 1;
+  CSDT_GET_GROWTHBADGEREWARD_INFO stGrowthBadgeRewardInfo = 2;
+}
+
+message CSPKG_GET_ADULTHOOD_REWARD_REQ {
+  uint32 dwFateHeroID = 1;
+}
+
+message CSPKG_BATTLERECORD_RECOVER_REQ {
+  uint32 bRecoverType = 1;
+  uint32 dwHeroID = 2;
+  bytes szPswdInfo = 3; // fixed-length byte array
+}
+
+message CSPKG_GET_BATTLERECORD_USEDHEROINFO_REQ {
+  COMDT_ACNT_UNIQ stAcntUniq = 1;
+}
+
+message CSPKG_DEVICE_NET_ACC_SWITCH_REPORT_REQ {
+  uint32 dwSwitchState = 1;
+}
+
+message CSPKG_DEVICE_TEMPERATURE_LIMIT_REPORT_REQ {
+  uint32 dwLimitTemperature = 1;
+}
+
+message CSPKG_RSP_ACNT_TRANS_VISITORSVRDATA {
+  uint32 bAgree = 1;
+}
+
+message CSPKG_QQVIPINFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_USER_COMPLAINT_REQ {
+  COMDT_USER_COMPLAINT_REQ_INFO stComplaintReqInfo = 1;
+}
+
+message CSPKG_DYE_NEWBIEBIT_REQ {
+  uint32 dwType = 1;
+  uint32 bIsDye = 2;
+}
+
+message CSPKG_SHARE_TLOG_REQ {
+  uint32 bNum = 1;
+  repeated bytes astShareDetail = 2; // TDR_ARRAY, element type unknown
+  uint32 dwSecretaryNum = 3;
+  repeated uint32 SecretaryDetail = 4;
+  uint32 dwTrankNum = 5;
+  repeated bytes astTrankDetail = 6; // TDR_ARRAY, element type unknown
+  uint32 bNewNum = 7;
+  repeated bytes astNewShareDetail = 8; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_DYE_INBATTLE_NEWBIEBIT_REQ {
+  int32 iLevelID = 1;
+  uint32 dwFinishedAgeID = 2;
+  uint32 dwFinishTime = 3;
+  uint32 bIsLastAge = 4;
+}
+
+message CSPKG_WEAL_DATA_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_WEAL_EXCHANGE_HOTSPOT_SET {
+  uint32 bWealType = 1;
+  uint32 dwWealID = 2;
+  uint32 bWealIdx = 3;
+  uint32 bNoHotSpotSet = 4;
+}
+
+message CSPKG_WEALSTEP_GRADEREWARD_SELREQ {
+  uint32 dwWealID = 1;
+  uint32 bPeriodID = 2;
+  uint32 bItemIdx = 3;
+}
+
+message CSPKG_WEAL_STAMP_LIGHT_REQ {
+  uint32 dwWealID = 1;
+  uint32 bXIdx = 2;
+  uint32 bYIdx = 3;
+}
+
+message CSPKG_WEAL_STAMP_GETREWARD_REQ {
+  uint32 dwWealID = 1;
+  uint32 bRewardIdx = 2;
+}
+
+message CSPKG_WEAL_STAMP_BUY_REQ {
+  uint32 dwWealID = 1;
+  uint32 bXIdx = 2;
+  uint32 bYIdx = 3;
+}
+
+message CSPKG_WEAL_STAMP_DRAW_REQ {
+  uint32 dwWealID = 1;
+  CSDT_WEAL_STAMP_LIST stStampList = 2;
+}
+
+message CSPKG_WEAL_STAMP_GET_LIGHT_REWARD_REQ {
+  uint32 dwWealID = 1;
+}
+
+message CSPKG_WEAL_STAMP_GET_LIGHT_REWARD_RSP {
+  COMDT_RESULT_INFO stResultInfo = 1;
+  uint32 dwWealID = 2;
+}
+
+message CSPKG_GET_SELFRANKINFO {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GETRANKREWARD_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_ACHIEVEMENT_REWARD_REQ {
+  uint32 dwAchievementID = 1;
+}
+
+message CSPKG_GET_TROPHYLVL_REWARD_REQ {
+  uint32 dwTrophyLvl = 1;
+}
+
+message CSPKG_ESCHR_INCREMENTAL_PATCH_REQ {
+  uint32 bIncPatchType = 1;
+  uint32 bNeedPatchTypeBits = 2;
+  uint64 ullBaseRv = 3;
+  uint64 ullPatchRv = 4;
+  uint32 bPlatform = 5;
+  uint32 bArch = 6;
+  uint64 ullReceivedSeqBits = 7;
+  uint32 bSenderType = 8;
+}
+
+message CSPKG_VIP_DEGRADE_GIFT_REQ {
+  uint32 bReq = 1;
+}
+
+message CSPKG_QUERY_ALL_ROLE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_VIP_INHERIT_LIST_ADD_REQ {
+  COMDT_ACNT_UNIQ stFriend = 1;
+}
+
+message CSPKG_VIP_INHERIT_LIST_DEL_REQ {
+  COMDT_ACNT_UNIQ stFriend = 1;
+}
+
+message CSPKG_VIP_INHERIT_ASSET_LIST_PULL_REQ {
+  uint32 dwPage = 1;
+}
+
+message CSPKG_VIP_INHERIT_SELECT_REQ {
+  COMDT_ACNT_UNIQ stFriend = 1;
+}
+
+message CSPKG_VIP_INHERIT_USE_REQ {
+  COMDT_ACNT_UNIQ stFriend = 1;
+}
+
+message CSPKG_UPDATE_EXTEND_VIP_STATE_REQ {
+  uint32 dwMaskBits = 1;
+  uint32 dwValue = 2;
+}
+
+message CSPKG_HEADIMG_CHG_REQ {
+  uint32 dwHeadImgID = 1;
+}
+
+message CSPKG_HEADIMG_FLAGCLR_REQ {
+  uint32 dwHeadImgID = 1;
+}
+
+message CSPKG_HEADIMG_CHG_BIND_HEAD_SHOW_REQ {
+  uint32 dwHeadImgID = 1;
+  uint32 bIsShowBindHead = 2;
+}
+
+message CSPKG_LUCKYDRAW_REQ {
+  uint32 dwBillNo = 1;
+  uint32 bMoneyType = 2;
+  uint32 bDrawType = 3;
+  uint32 bEggRewardType = 4;
+}
+
+message CSPKG_LUCKYDRAW_EXTERN_REQ {
+  uint32 bMoneyType = 1;
+  uint32 bExternIndex = 2;
+  uint32 bIsAllReceive = 3;
+}
+
+message CSPKG_ACNT_VOICESTATE {
+  uint32 bTvoipRoomType = 1;
+  uint32 bVoiceState = 2;
+}
+
+message CSPKG_REPORT_VOICESTATE_REQ {
+  uint32 bTvoipRoomType = 1;
+  uint32 bVoiceState = 2;
+}
+
+message CSPKG_REPORT_CLIENT_INTERFACE {
+  uint32 dwReportType = 1;
+  int32 iResult = 2;
+}
+
+message CSPKG_QUIT_GVOICE_ROOM_REQ {
+  uint32 dwGvoiceRoomType = 1;
+  COMDT_GVOICE_ROOM_KEY_INFO stRoomKey = 2;
+}
+
+message CSPKG_REPORT_GVOICE_ROOM_MEMBERID {
+  uint32 dwMemberID = 1;
+  uint32 dwGvoiceRoomType = 2;
+}
+
+message CSPKG_REPORT_VOICECOMPLAINT_RESULT {
+  uint32 bVoiceComplaintType = 1;
+  COMDT_REPORT_VOICECOMPLAINT_RESULT stResultInfo = 2;
+  uint32 dwWeakValue = 3;
+  uint32 bEventCnt = 4;
+  repeated uint32 EventIDs = 5;
+}
+
+message CSPKG_CHECKVOICECOMPLAINT_REQ {
+  uint32 bVoiceComplaintType = 1;
+  CSDT_VOICECOMPLAINT_PARAM stVoiceComplaintParam = 2;
+}
+
+message CSPKG_CHECK_SINGLE_VOICECOMPLAINT_REQ {
+  uint32 bVoiceComplaintType = 1;
+  uint64 ullUid = 2;
+}
+
+message CSPKG_CHANGE_NAME_REQ {
+  uint32 bType = 1;
+  bytes szNewName = 2; // fixed-length byte array
+}
+
+message CSPKG_CMD_SALERECMD_BUY {
+  uint32 bBuyType = 1;
+  uint32 wItemType = 2;
+  uint32 dwItemID = 3;
+  uint32 dwRebateID = 4;
+  uint32 dwRebateCnt = 5;
+  uint32 bBuyChannel = 6;
+  uint32 dwBillNo = 7;
+}
+
+message CSPKG_CMD_RANDDRAW_FREEREQ {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_CMD_RANDDRAW_REQ {
+  COMDT_ITEM_SIMPINFO stDrawItem = 1;
+  uint32 dwReqDrawCnt = 2;
+  uint32 wCoinType = 3;
+}
+
+message CSPKG_SURRENDER_REQ {
+  uint32 bSurrender = 1;
+  uint32 bPassive = 2;
+}
+
+message CSPKG_SETDESKREFUSESURRENDER_REQ {
+  uint32 bRefuseSurrender = 1;
+}
+
+message CSPKG_CLT_PERFORMANCE {
+  int32 iMapID = 1;
+  int32 iPlayerCnt = 2;
+  int32 chModelLOD = 3;
+  int32 chParticleLOD = 4;
+  int32 chCameraHeight = 5;
+  int32 chEnableOutline = 6;
+  int32 iFps10PercentNum = 7;
+  int32 iFps18PercentNum = 8;
+  int32 iAveFps = 9;
+  int32 iPingAverage = 10;
+  int32 iPingVariance = 11;
+  bytes szDeviceModel = 12; // fixed-length byte array
+  bytes szGPUName = 13; // fixed-length byte array
+  int32 iCpuCoreNum = 14;
+  int32 iSysMemorySize = 15;
+  int32 iAvailMemory = 16;
+  int32 iIsTongCai = 17;
+  int32 iIsSpeedUp = 18;
+  int32 iSendUdpDataNum = 19;
+  int32 iSendUdpDataFailNum = 20;
+  int32 iSendDataNum = 21;
+  int32 iSendDataFailNum = 22;
+  int32 iPackDataFail = 23;
+}
+
+message CSPKG_INVITE_GUILD_MEMBER_JOIN_REQ {
+  int32 iInviteType = 1;
+  uint64 ullInviteeUid = 2;
+  uint32 bChannelType = 3;
+  uint32 bIsFromApply = 4;
+  uint32 dwInviteeLogicWorldId = 5;
+}
+
+message CSPKG_GET_GUILD_MEMBER_GAME_STATE_REQ {
+  int32 iMemberCnt = 1;
+  repeated uint64 MemberUid = 2;
+}
+
+message CSPKG_CLT_ACTION_STATISTICS {
+  uint32 bActionType = 1;
+  CSDT_CLT_ACTION_DATA stActionData = 2;
+  bytes szPreClickList = 3; // fixed-length byte array
+}
+
+message CSPKG_GETAWARDPOOL_REQ {
+  uint32 dwMapId = 1;
+}
+
+message CSPKG_BUY_MATCHTICKET_REQ {
+  uint32 dwMapId = 1;
+  uint32 dwNum = 2;
+}
+
+message CSPKG_GET_MATCHINFO_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_GUILD_SIGNIN_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GUILD_EVENT_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GUILD_BINDQUNLOG_REQ {
+  bytes szGroupOpenID = 1; // fixed-length byte array
+}
+
+message CSPKG_GUILD_UNBINDQUNLOG_REQ {
+  bytes szGroupOpenID = 1; // fixed-length byte array
+}
+
+message CSPKG_REALAI_CREATE_GUILD_REQ {
+  bytes szName = 1; // fixed-length byte array
+  uint32 dwHeadID = 2;
+  bytes szNotice = 3; // fixed-length byte array
+  COMDT_GUILD_LOCATION stLocation = 4;
+}
+
+message CSPKG_REALAI_JOIN_GUILD_REQ {
+  uint64 ullGuildID = 1;
+  int32 iGuildLogicWorldID = 2;
+}
+
+message CSPKG_REALAI_QUIT_GUILD_REQ {
+  uint64 ullGuildID = 1;
+  int32 iGuildLogicWorldID = 2;
+}
+
+message CSPKG_GET_GROUP_GUILD_ID_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SET_GUILD_GROUP_OPENID_REQ {
+  bytes szGroupOpenID = 1; // fixed-length byte array
+  uint32 bIsBindQQStation = 2;
+}
+
+message CSPKG_SEND_GUILD_RECRUIT_REQ {
+  bytes szRecruitContent = 1; // fixed-length byte array
+}
+
+message CSPKG_GET_GUILD_RECRUIT_REQ {
+  uint32 dwStartTime = 1;
+}
+
+message CSPKG_JOINMULTIGAMEREQ {
+  int32 iRoomEntity = 1;
+  uint32 dwRoomID = 2;
+  uint32 dwRoomSeq = 3;
+  uint32 bMapType = 4;
+  uint32 dwMapId = 5;
+  COMDT_UGC_UNIQ_INFO stUGCUniqInfo = 6;
+  uint64 ullFeature = 7;
+  uint32 bJoinOrg = 8;
+  COMDT_ADD_ACNT_TO_ROOM stJoinType = 9;
+}
+
+message CSPKG_JOIN_TEAM_REQ {
+  COMDT_INVITE_JOIN_INFO stInviteJoinInfo = 1;
+}
+
+message CSPKG_EXTERN_PLAT_TICKET_CHECK_REQ {
+  bytes szTicket = 1; // fixed-length byte array
+  uint32 bUserType = 2;
+  uint32 dwPlatID = 3;
+  uint32 bSceneType = 4;
+}
+
+message CSPKG_BAN_HERO_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bType = 2;
+  uint32 dwObjID = 3;
+  uint32 bEmptyBan = 4;
+  uint32 bHelpBan = 5;
+  uint32 bIsFromAI = 6;
+}
+
+message CSPKG_SWAP_HERO_REQ {
+  uint32 dwPassiveObjID = 1;
+}
+
+message CSPKG_CONFIRM_SWAP_HERO_REQ {
+  uint32 bAccept = 1;
+}
+
+message CSPKG_CANCEL_SWAP_HERO_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_OBSERVE_FRIEND_REQ {
+  COMDT_OB_DESK stDeskInfo = 1;
+  uint64 ullFriendUID = 2;
+}
+
+message CSPKG_OBSERVE_GREAT_REQ {
+  COMDT_OB_DESK stDesk = 1;
+}
+
+message CSPKG_GET_GREATMATCH_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_SELFDEFINE_CHATINFO_CHG_REQ {
+  uint32 bIsReset = 1;
+  uint32 bPageIndex = 2;
+  uint32 bType = 3;
+  CSDT_SELFDEFINE_CHATINFO_CHG_INFO stChgInfo = 4;
+}
+
+message CSPKG_ACNT_HEROBATTLEMSG_USE {
+  uint32 bIsUse = 1;
+  uint32 dwHeroID = 2;
+}
+
+message CSPKG_GET_VIDEOFRAPS_REQ {
+  uint32 dwOffset = 1;
+  uint32 bNew = 2;
+}
+
+message CSPKG_QUITOBSERVE_REQ {
+  uint32 bQuitType = 1;
+}
+
+message CSPKG_GET_REWARDMATCH_INFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_REWARDMATCH_STATE_CHG_REQ {
+  uint32 dwMapId = 1;
+  uint32 bState = 2;
+}
+
+message CSPKG_SEND_GUILD_MAIL_REQ {
+  bytes szSubject = 1; // fixed-length byte array
+  bytes szContent = 2; // fixed-length byte array
+}
+
+message CSPKG_ACNT_QUITSETTLEUI_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GETFRIEND_GAMESTATE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_WEAL_CONTENT_SHARE_DONE {
+  uint32 bShareType = 1;
+  uint32 bParamCnt = 2;
+  repeated uint32 ShareParam = 3;
+}
+
+message CSPKG_TRANSDATA_RENAME_REQ {
+  bytes szNewName = 1; // fixed-length byte array
+}
+
+message CSPKG_UPLOADCLTLOG_NTF {
+  uint32 dwLogType = 1;
+  uint32 dwBuffOffset = 2;
+  uint32 dwBufLen = 3;
+  bytes szBuf = 4; // fixed-length byte array
+  uint32 bThisLogOver = 5;
+  uint32 bAllLogOver = 6;
+  uint32 dwCustomFlag = 7;
+}
+
+message CSPKG_ACNT_SET_OLD_TYPE {
+  uint32 bYes = 1;
+}
+
+message CSPKG_PAUSE_REQ {
+  uint32 bType = 1;
+}
+
+message CSPKG_WATCH_KPL_GAME_REQ {
+  uint32 bIsWatch = 1;
+}
+
+message CSPKG_QUERY_MASTER_MATCH_REQ {
+  uint32 bData = 1;
+}
+
+message CSPKG_NEWBIEGUIDE_STATDATA_REQ {
+  uint32 bStatNum = 1;
+  repeated bytes astNewbieGuideStatData = 2; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_ACNT_PSWDINFO_OPEN {
+  repeated int32 szPswdStr = 1;
+}
+
+message CSPKG_ACNT_PSWDINFO_CLOSE {
+  repeated int32 szPswdStr = 1;
+}
+
+message CSPKG_ACNT_PSWDINFO_CHG {
+  repeated int32 szOldPswdStr = 1;
+  repeated int32 szNewPswdStr = 2;
+}
+
+message CSPKG_ACNT_PSWDINFO_FORCE {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_ACNT_PSWDINFO_FORCECAL {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_ACNT_NOPASSWD_CHG {
+  uint32 bIsSet = 1;
+  repeated int32 szPswdInfo = 2;
+}
+
+message CSPKG_CMD_RAREEXCHANGE_REQ {
+  uint32 dwID = 1;
+  uint32 wItemType = 2;
+  uint32 dwItemID = 3;
+}
+
+message CSPKG_ACNT_TIME_SYNC {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_LIKE_PERSONAL_DATA_REQ {
+  COMDT_ACNT_UNIQ stAcntUin = 1;
+  uint32 dwAcntGameEntity = 2;
+  uint32 bLikeType = 3;
+  uint32 bLikeFrom = 4;
+  uint32 dwRankType = 5;
+  uint32 dwSubRankType = 6;
+  uint32 dwFakeDescID = 7;
+}
+
+message CSPKG_GET_LIKE_PERSONAL_LIST {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_GET_LIKEANDFANS_NUM_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_GET_POPULARITY_REWARD_REQ {
+  uint32 dwPopularityLv = 1;
+}
+
+message CSPKG_GET_VISITOR_BRIEFINFO_LIST {
+  uint32 bIsGetVisitorBrief = 1;
+}
+
+message CSPKG_GET_VISITOR_DETAILINFO_LIST {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_SET_OPENLIKELISTTIME_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_SET_ACNT_GENDER_REQ {
+  uint32 bGender = 1;
+}
+
+message CSPKG_GET_ACNT_APPAUTH_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SET_ACNT_APPAUTH_REQ {
+  uint32 bAuthState = 1;
+}
+
+message CSPKG_INVITE_GUILD_MATCH_MEMBER_REQ {
+  uint64 ullUid = 1;
+}
+
+message CSPKG_DEAL_GUILD_MATCH_MEMBER_INVITE {
+  uint32 bAgree = 1;
+  uint64 ullTeamLeaderUid = 2;
+}
+
+message CSPKG_KICK_GUILD_MATCH_MEMBER_REQ {
+  uint64 ullUid = 1;
+}
+
+message CSPKG_LEAVE_GUILD_MATCH_TEAM_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_START_GUILD_MATCH_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SET_GUILD_MATCH_READY_REQ {
+  uint32 wReadyType = 1;
+  uint32 bIsReady = 2;
+}
+
+message CSPKG_OB_GUILD_MATCH_REQ {
+  uint64 ullOBUid = 1;
+}
+
+message CSPKG_GET_GUILD_MATCH_HISTORY_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GUILD_MATCH_REMIND_REQ {
+  uint32 wRemindType = 1;
+  uint64 ullRemindUid = 2;
+}
+
+message CSPKG_KINGOFGUILD_SIGNUP_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_KINGOFGUILD_INFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_GUILD_MATCH_OB_CNT_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SHOWRECENTUSEDHERO_REQ {
+  uint32 dwCtrlMask = 1;
+  uint32 bTurnOn = 2;
+}
+
+message CSPKG_APPLY_MASTER_REQ {
+  uint32 bType = 1;
+  COMDT_ACNT_UNIQ stUin = 2;
+  bytes szVerificationInfo = 3; // fixed-length byte array
+  uint32 dwFakeDescID = 4;
+}
+
+message CSPKG_CONFIRM_MASTER_REQ {
+  uint32 bConfirmType = 1;
+  uint32 bReqType = 2;
+  COMDT_ACNT_UNIQ stUin = 3;
+}
+
+message CSPKG_REMOVE_MASTER_REQ {
+  COMDT_ACNT_UNIQ stTargetUin = 1;
+  uint32 bType = 2;
+  uint32 bSubStudentType = 3;
+}
+
+message CSPKG_GETSTUDENTLIST_REQ {
+  uint32 bListType = 1;
+}
+
+message CSPKG_GET_LADDER_REWARD_SKIN_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_GET_BATTLE_ROYALE_REWARD_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_CLIENT_TRIGGER_REWARD_REQ {
+  uint32 bAwardType = 1;
+  uint32 dwAwardID = 2;
+}
+
+message CSPKG_SERVER_PING_RSP {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_CMD_PERFEFT_ONE_SKIN {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  uint32 dwPerfEFtID = 2;
+  int32 chWearPos = 3;
+}
+
+message CSPKG_CMD_SKIN_SUIT_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bSkinID = 2;
+  int32 chPos = 3;
+  COMDT_SKIN_WEARING_SUIT stSuit = 4;
+  uint32 bIsWearing = 5;
+}
+
+message CSPKG_CMD_WEAR_SKIN_SUIT_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bSkinID = 2;
+  int32 chWearPos = 3;
+  uint32 bIsVipShareSkin = 4;
+  uint32 dwShareSkinPartSuitID = 5;
+}
+
+message CSPKG_CMD_SET_SKILL_PRIORITY_REQ {
+  COMDT_HERO_SKILL_PRIORITY_ITEM stSkillPriorityInfo = 1;
+}
+
+message CSPKG_SETADDR_REQ {
+  COMDT_ACNT_LOCATION stLocation = 1;
+}
+
+message CSPKG_GETALLTITLE_REQ {
+  uint32 bEntryType = 1;
+  uint64 ullUid = 2;
+  uint32 dwLogicWorldID = 3;
+}
+
+message CSPKG_CHG_LBSTITLE_REQ {
+  uint32 dwTitleRank = 1;
+  uint32 dwTitleHeroID = 2;
+  uint32 bTitleLocationType = 3;
+  uint32 bTitleBadgeLocationType = 4;
+  uint32 dwTitleBadgeRank = 5;
+  uint32 bTitleType = 6;
+}
+
+message CSPKG_GET_LBSSTREE_TITLE_REQ {
+  uint32 dwTitleHeroID = 1;
+  uint64 ullBuildingID = 2;
+  int32 iLongitude = 3;
+  int32 iLatitude = 4;
+  uint32 bIsInsertMap = 5;
+}
+
+message CSPKG_GET_LBSSTREE_TITLELIST_REQ {
+  COMDT_MAP_RECTANGLE stCurRectangle = 1;
+  COMDT_MAP_RECTANGLE stPreRectangle = 2;
+  uint32 bGender = 3;
+  uint32 dwBigGrade = 4;
+}
+
+message CSPKG_LBSAREA_TITLE_SETREAD_REQ {
+  uint32 bReadBit = 1;
+  uint32 bIsMasterMatchTitleRead = 2;
+}
+
+message CSPKG_SET_CUSTOM_SKILL_SLOT {
+  CSDT_SET_CUSTOM_SKILL_SLOT stDetail = 1;
+}
+
+message CSPKG_IOSCOMMENT_CLOSEREQ {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_CMD_IOSCOMMENT_FINISH {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_BUGREPORT_REQ {
+  int32 iBugCategory = 1;
+  CSDT_BUGREPORT_CONTENT_DETAIL stBugDetail = 2;
+}
+
+message CSPKG_USER_SATISFACTION_REQ {
+  uint32 bMapType = 1;
+  uint32 bSatisfactionType = 2;
+}
+
+message CSPKG_INPUTPROMISE_REQ {
+  bytes szPromise = 1; // fixed-length byte array
+}
+
+message CSPKG_CHG_MUTUAL_FANS {
+  COMDT_ACNT_UNIQ stAcntUniq = 1;
+  uint32 wChgType = 2;
+}
+
+message CSPKG_SET_GUILDADDR_REQ {
+  COMDT_GUILD_LOCATION stGuildLocation = 1;
+}
+
+message CSPKG_GUILD_PROMOTE_REQ {
+  uint32 bGuildePromoteLevel = 1;
+}
+
+message CSPKG_GUILD_COMBAT_UPD_REQ {
+  uint32 dwCombatId = 1;
+}
+
+message CSPKG_GET_LBSSTREET_TITLESTATUS_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_SET_LBSTREETATTR_REQ {
+  uint32 dwAttrType = 1;
+  uint32 dwAttrValue = 2;
+}
+
+message CSPKG_ACNT_PREPARE_REQ {
+  uint32 bPrepare = 1;
+  int32 iReason = 2;
+}
+
+message CSPKG_GET_STUDENTTASK_REQ {
+  uint64 ullUid = 1;
+  int32 iLogicWorldID = 2;
+}
+
+message CSPKG_GET_RECENT_PLAYER_GAMESTATE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_BATTLEZONE_CHATROOMLIST_REQ {
+  uint32 dwAdCodeID = 1;
+}
+
+message CSPKG_JOIN_BATTLEZONE_CHATROOM_REQ {
+  uint32 dwAdCodeID = 1;
+  uint32 dwChannelID = 2;
+}
+
+message CSPKG_QUIT_BATTLEZONE_CHATROOM_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_PREMADE_FLAGSET_REQ {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_QQARK_FLAGSET_REQ {
+  uint32 bOpt = 1;
+}
+
+message CSPKG_FORCETIPS_REMOVE_REQ {
+  uint32 dwTipsType = 1;
+}
+
+message CSPKG_PREMADE_TEAMSHARE {
+  bytes szShareStr = 1; // fixed-length byte array
+}
+
+message CSPKG_PREMADE_ROOMSHARE {
+  bytes szShareStr = 1; // fixed-length byte array
+}
+
+message CSPKG_CUSTOMTEAM_INVITE_REQ {
+  COMDT_ACNT_UNIQ stDestUniq = 1;
+  uint32 bFriendType = 2;
+  bytes szInviteeName = 3; // fixed-length byte array
+}
+
+message CSPKG_CUSTOMTEAM_ACCEPT_INVITE_REQ {
+  uint32 bType = 1;
+  uint64 ullInviteUid = 2;
+  int32 iInviteLogicWorldID = 3;
+}
+
+message CSPKG_CUSTOMTEAM_MEMBER_SETPOS_REQ {
+  uint64 ullSrcMemUid = 1;
+  int32 iSrcMemLogicWorldID = 2;
+  int32 iSrcPos = 3;
+  uint64 ullDestMemUid = 4;
+  int32 iDestMemLogicWorldID = 5;
+  int32 iDestPos = 6;
+}
+
+message CSPKG_CUSTOMTEAM_MEMBER_KICK_REQ {
+  uint64 ullDestMemUid = 1;
+  int32 iDestMemLogicWorldID = 2;
+}
+
+message CSPKG_CUSTOMTEAM_MEMBER_QUIT_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_CUSTOMTEAM_GETEVENT_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_GET_CUSTOMTEAM_GAME_HISTORY_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_CUSTOMTEAM_REFRESH_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_CUSTOMTEAM_NEWBIE_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_CUSTOMTEAM_REQUEST_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  uint32 bFriendType = 2;
+  COMDT_ACNT_UNIQ stTeamID = 3;
+}
+
+message CSPKG_CUSTOMTEAM_CONFIRMREQUEST_REQ {
+  uint32 bType = 1;
+  uint64 ullRequestUid = 2;
+  int32 iRequestLogicWorldID = 3;
+}
+
+message CSPKG_CUSTOMTEAM_LOOKOTHER_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  uint32 bFriendType = 2;
+}
+
+message CSPKG_GET_CUSTOMTEAM_GAME_STATIS_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_RAND_CUSTOMTEAMTASK_REQ {
+  uint32 dwHeroHeadID = 1;
+}
+
+message CSPKG_GET_CUSTOMTEAMSVRDATA_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CUSTOMTEAM_ACTIVEPT_GETREQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CUSTOMTEAM_SHOPBUY_REQ {
+  uint32 dwGoodID = 1;
+  uint32 wItemType = 2;
+  uint32 dwItemID = 3;
+  uint32 dwItemCnt = 4;
+}
+
+message CSPKG_CUSTOMTEAMZAN_REQ {
+  uint32 bType = 1;
+  uint64 ullMemUid = 2;
+  int32 iMemLogicWorldID = 3;
+}
+
+message CSPKG_CUSTOMTEAM_IMAGEUSE_REQ {
+  uint32 dwImageID = 1;
+}
+
+message CSPKG_GET_CUSTOMTEAM_MEMBER_DETAIL_INFO_REQ {
+  uint64 ullMemberUid = 1;
+  int32 iMemberLogicWorldID = 2;
+}
+
+message CSPKG_CHG_CUSTOMTEAM_MEMBER_DETAIL_INFO_REQ {
+  uint64 ullTarUid = 1;
+  int32 iTarLogicWorldID = 2;
+  uint32 bChgType = 3;
+  repeated int32 ChgParm = 4;
+  bytes szMsgContent = 5; // fixed-length byte array
+}
+
+message CSPKG_GET_CUSTOMTEAM_MEMBER_MSG_INFO_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GETCUSTOMTEAM_TASKPOINT_REWARD_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SET_CUSTOM_CAMP_BAN_HERO_REQ {
+  COMDT_CUSTOM_CAMP_BAN_HERO_INFO stCampBanHeroInfo = 1;
+}
+
+message CSPKG_QUERY_CUSTOM_ROOM_SET_REQ {
+  int32 chReserve = 1;
+}
+
+message CSPKG_ACNT_CUSTOM_ROOM_SET_MODIFY_REQ {
+  uint32 bIndex = 1;
+  COMDT_ACNT_CUSTOM_ROOM_SET_INFO stRoomCustomSet = 2;
+  uint32 bSetForCurrRoom = 3;
+}
+
+message CSPKG_SET_CUSTOM_ROOM_REQ {
+  COMDT_CUSTOM_SET_INFO stCustomSetInfo = 1;
+}
+
+message CSPKG_GET_PROPLAYER_INFO_REQ {
+  uint64 ullProPlayerUid = 1;
+  int32 iProPlayerLogicWorldID = 2;
+}
+
+message CSPKG_GET_KPL_LADDER_REQ {
+  uint32 bKplLadderType = 1;
+  uint32 dwKplLadderSubType = 2;
+}
+
+message CSPKG_KPL_TEAM_SUBSCRIPTION_REQ {
+  bytes szTeamName = 1; // fixed-length byte array
+}
+
+message CSPKG_GET_CUSTOMTEAM_COMPETITION_STATIS_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CREATE_COMPETITION_REQ {
+  uint32 bCompType = 1;
+  uint32 dwConfigID = 2;
+  uint32 dwMapID = 3;
+  bytes szName = 4; // fixed-length byte array
+  bytes szDesc = 5; // fixed-length byte array
+  uint32 dwSettingMask = 6;
+  uint32 dwSignUpTime = 7;
+  uint32 bGameTotalStep = 8;
+  repeated uint32 GameStepTime = 9;
+}
+
+message CSPKG_COMPETITION_SIGNUP_REQ {
+  uint64 ullCompetitionID = 1;
+  uint32 wSignUpID = 2;
+}
+
+message CSPKG_GET_COMPETITION_DATA_REQ {
+  uint64 ullCompetitionID = 1;
+  uint32 wSignUpID = 2;
+}
+
+message CSPKG_CANCEL_COMPETITION_SIGNUP_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_KICK_COMPETITION_TEAM_REQ {
+  uint64 ullCompetitionID = 1;
+  uint64 ullTeamUid = 2;
+  int32 iTeamLogicWorldID = 3;
+}
+
+message CSPKG_GET_COMPETITION_GAME_RECORD_REQ {
+  uint64 ullCompetitionID = 1;
+  uint32 bGameNode1 = 2;
+  uint32 bGameNode2 = 3;
+  uint32 bGameIndex = 4;
+}
+
+message CSPKG_CHG_COMPETITION_SETTING_REQ {
+  uint32 dwSettingMask = 1;
+}
+
+message CSPKG_ATTENTION_COMPETITION_REQ {
+  uint64 ullCompetitionID = 1;
+}
+
+message CSPKG_CANCEL_ATTENTION_COMPETITION_REQ {
+  uint64 ullCompetitionID = 1;
+}
+
+message CSPKG_GET_CREATE_COMP_HISTORY_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_DEL_COMPETITION_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_TEAM_RECOMMEND_COMPETITION_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_RECOMMEND_COMPETITION_TO_TEAM_REQ {
+  uint64 ullCompetitionID = 1;
+  uint32 wSignUpID = 2;
+  uint32 dwExtConfID = 3;
+}
+
+message CSPKG_GET_COMPETITION_OB_INFO_REQ {
+  uint64 ullCompetitionID = 1;
+}
+
+message CSPKG_OB_COMPETITION_REQ {
+  uint64 ullCompetitionID = 1;
+  uint32 bGameNode1 = 2;
+  uint32 bGameNode2 = 3;
+}
+
+message CSPKG_GET_ACNT_COMPETITION_STATISTICS_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_ACNT_OFFICIAL_COMPETITION_STATISTICS_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_OFFICIAL_COMPETITION_READY_REMIND_REQ {
+  uint64 ullUid = 1;
+  int32 iLogicWorldID = 2;
+}
+
+message CSPKG_GET_PLAYER_JOIN_COMPETITION_HISTORY_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_PLAYER_COMPETITION_HONOR_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_PANDORA_COMPETITION_RECOMMEND_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_OBSERVE_PREMADE_REQ {
+  COMDT_OB_DESK stDeskInfo = 1;
+}
+
+message CSPKG_COMPETITION_RELATED_REPORT {
+  uint32 bType = 1;
+  uint64 ullParm1 = 2;
+  int32 iParm2 = 3;
+}
+
+message CSPKG_COMPETITION_RLEX_MODE_READY_REQ {
+  uint32 bReadyFlag = 1;
+}
+
+message CSPKG_COMPETITION_RLEX_MODE_SET_TEAM_OUT_REQ {
+  uint32 bTeamPos = 1;
+}
+
+message CSPKG_OFFICIAL_COMPETITION_SIGNUP_REQ {
+  uint32 dwRoomIndex = 1;
+}
+
+message CSPKG_CANCEL_OFFICIAL_COMPETITION_SIGNUP_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_OFFICIAL_COMPETITION_TEAM_GAME_RECORD_REQ {
+  uint32 dwRoomIndex = 1;
+}
+
+message CSPKG_GET_OFFICIAL_COMPETITION_GAME_RECORD_DETAIL_REQ {
+  uint32 dwRoomIndex = 1;
+  uint32 bGameStep = 2;
+  uint64 ullTeamUid = 3;
+  int32 iTeamLogicWorldID = 4;
+}
+
+message CSPKG_GET_OFFICIAL_COMPETITION_OPPO_HERO_REQ {
+  uint64 ullOppoTeamUid = 1;
+  int32 iOppoTeamLogicWorldID = 2;
+}
+
+message CSPKG_OFFICIAL_COMPETITION_READY_REQ {
+  uint32 bReadyFlag = 1;
+}
+
+message CSPKG_OFFICIAL_COMPETITION_MATCH_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_OFFICIAL_COMPETITION_ROOM_SIGNUP_CNT_REQ {
+  uint32 bRoomCnt = 1;
+  repeated uint32 RoomIndex = 2;
+}
+
+message CSPKG_OBPOSINFO_NTF {
+  uint32 bCamp = 1;
+  uint32 bCount = 2;
+  repeated CSDT_UGC_PLAYER_LIST astPlayerList = 3; // TDR_ARRAY
+}
+
+message CSPKG_SELECT_HERO_POSITION {
+  uint32 bHeroPosition = 1;
+  uint32 bIsActiveChg = 2;
+  int32 iSrcType = 3;
+}
+
+message CSPKG_QUERY_RECONNGAME_REQ {
+  uint32 bSrcType = 1;
+}
+
+message CSPKG_SELECT_HERO_10V10_POSITION_REQ {
+  uint32 bHero10V10Position = 1;
+  int32 iSrcType = 2;
+}
+
+message CSPKG_SWAP_HERO_10V10_POSITION_REQ {
+  uint32 dwDstObjID = 1;
+  int32 iSrcType = 2;
+}
+
+message CSPKG_SWAP_HERO_10V10_POSITION_CANCEL_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SWAP_HERO_10V10_POSITION_CHOICE_REQ {
+  uint32 bAccept = 1;
+}
+
+message CSPKG_GET_CUSTOMTEAM_MEMBER_STATE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_QUESTION_START_REQ {
+  uint32 bQuestionType = 1;
+}
+
+message CSPKG_QUESTION_CONTINUE_RSP {
+  uint32 bIsContinueAnswerQuestion = 1;
+}
+
+message CSPKG_QUESTION_ANSWER_REQ {
+  uint32 bQuestionType = 1;
+  uint32 bNum = 2;
+  repeated SCDT_QUESTIONNAIRE_FEEDBACK_OPTIONS astQuestion = 3; // TDR_ARRAY
+}
+
+message CSPKG_QUESTION_CLIENT_REPORT_REQ {
+  uint32 bQuestionType = 1;
+  uint32 bRightNum = 2;
+  uint32 bSeekHelpNum = 3;
+}
+
+message CSPKG_ADVANCED_QUESTION_SET_LIKE_HATE_REQ {
+  uint32 dwQuestionID = 1;
+  int32 chMaskBit = 2;
+}
+
+message CSPKG_ADVANCED_QUESTION_REQ {
+  uint32 dwQuestionID = 1;
+  uint32 bAnswerBits = 2;
+  uint32 bIsSeekMasterHelp = 3;
+}
+
+message CSPKG_FACE2FACE_REQ {
+  uint32 bFace2FaceType = 1;
+  uint32 dwFace2FaceCode = 2;
+  int32 iLongitude = 3;
+  int32 iLatitude = 4;
+}
+
+message CSPKG_FACE2FACE_SELECT_MAP_REQ {
+  uint32 bMapType = 1;
+  uint32 dwMapID = 2;
+  uint32 bPkAI = 3;
+  uint32 bAILevel = 4;
+  bytes szPositionInfo = 5; // fixed-length byte array
+  COMDT_UGC_UNIQ_INFO stUGCUniqInfo = 6;
+}
+
+message CSPKG_FACE2FACE_CANCEL_WAIT_ROOM_REQ {
+  uint32 bFace2FaceType = 1;
+  uint32 dwFace2FaceCode = 2;
+  uint64 ullRoomMasterUid = 3;
+  int32 iRoomMasterGameEntity = 4;
+}
+
+message CSPKG_CHANGE_ROOM_MEMBER_POS_REQ {
+  uint32 bChgType = 1;
+}
+
+message CSPKG_REPORT_ASMIAD_INFO {
+  int32 iAttribution = 1;
+  bytes szIOS_CAID = 2; // fixed-length byte array
+  int32 iCampaignId = 3;
+  bytes szCampaignName = 4; // fixed-length byte array
+  bytes szDeviceId = 5; // fixed-length byte array
+  bytes szConversionDate = 6; // fixed-length byte array
+  bytes szClickDate = 7; // fixed-length byte array
+  int32 iAdgroupId = 8;
+  bytes szOrgName = 9; // fixed-length byte array
+  bytes szCreativesetName = 10; // fixed-length byte array
+  bytes szAdgroupName = 11; // fixed-length byte array
+  bytes szKeyWord = 12; // fixed-length byte array
+  int32 iCreativesetID = 13;
+  int32 iOrgID = 14;
+  bytes szPurchaseDate = 15; // fixed-length byte array
+  bytes szKeywordMatchtype = 16; // fixed-length byte array
+  bytes szKeywordID = 17; // fixed-length byte array
+  bytes szConversionType = 18; // fixed-length byte array
+  bytes szCountryOrRegion = 19; // fixed-length byte array
+  bytes szIOSUA = 20; // fixed-length byte array
+  bytes szADID = 21; // fixed-length byte array
+  bytes szClaimType = 22; // fixed-length byte array
+  bytes szImpressionDate = 23; // fixed-length byte array
+}
+
+message CSPKG_WISE_VOICE_ASSISTANT_REQ {
+  COMDT_VOICE_MSG stVoiceMsg = 1;
+}
+
+message CSPKG_WISE_VOICE_TEXT_CHECK_REQ {
+  uint32 bClientSeq = 1;
+  uint32 bLength = 2;
+  repeated int32 szText = 3;
+}
+
+message CSPKG_BACKFLOW_GET_MEETING_GIFT_REQ {
+  uint32 bData = 1;
+}
+
+message CSPKG_BACKFLOW_GET_MEETING_GIFT_RSP {
+  COMDT_REWARD_DETAIL stReward = 1;
+}
+
+message CSPKG_BACKFLOW_CONTENT_RECOMMEND_POPUP_REQ {
+  uint32 dwDazeTime = 1;
+  uint32 dwPopScene = 2;
+  uint64 ullMaskBit = 3;
+}
+
+message CSPKG_BACKFLOW_CONTENT_RECOMMEND_SET_POPUP_MASK_REQ {
+  uint32 dwMaskBit = 1;
+  uint32 dwEndTime = 2;
+}
+
+message CSPKG_BACKFLOW_SERVICE_ACCOUNTS_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_BACKFLOW_MEETING_CLICK_OPEN_NEW_STORY_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_UPDATE_AUTOCHESS_BACKFLOW {
+  uint32 bFinishGuide = 1;
+}
+
+message CSPKG_CMD_EXPCARD_EXCHANGE {
+  uint32 dwExchangeID = 1;
+  uint32 bExchangeIdx = 2;
+  CSDT_EXPCARD_EXCHANGE_LIST stExchangeInfo = 3;
+}
+
+message CSPKG_TPNS_REQ {
+  uint32 dwScene = 1;
+  bytes szTargetOpenID = 2; // fixed-length byte array
+  uint64 ullTargetUid = 3;
+  bytes szJumpUrl = 4; // fixed-length byte array
+  bytes szRawData = 5; // fixed-length byte array
+}
+
+message CSPKG_CONFIRMBORNPOINT_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_OFFLINE_AI_REPORT_REQ {
+  uint32 dwGameNum = 1;
+  repeated COMDT_GAME_INFO astGameInfo = 2; // TDR_ARRAY
+}
+
+message CSPKG_SERVERAI_TAKECARE_RSP {
+  int32 iErrCode = 1;
+  uint32 dwObjID = 2;
+  uint32 dwOPType = 3;
+}
+
+message CSPKG_SERVERAI_TAKECARE_READY_NTF {
+  uint32 dwDeskID = 1;
+  uint32 dwDeskSeq = 2;
+  int32 iRelayEntity = 3;
+}
+
+message CSPKG_CMD_GET_PROPUSELIMIT_REQ {
+  COMDT_ACNT_UNIQ stToUniq = 1;
+  uint32 dwPropID = 2;
+}
+
+message CSPKG_UPDATE_CLIENT_SETTING_REQ {
+  COMDT_CLIENT_SETTING_INFO stClientSettingInfo = 1;
+}
+
+message CSPKG_INBATTLE_SWITCH_SET_REQ {
+  uint32 dwSwitchType = 1;
+  int32 iValue = 2;
+}
+
+message CSPKG_SET_PERSONAL_HERO_REQ {
+  uint32 dwHeroId = 1;
+  uint32 dwSkinId = 2;
+  repeated uint32 SkinPartID = 3;
+  uint32 dwAvatarGroupId = 4;
+  CSDT_PERSONAL_DIMENSION_HERO stDimensionHero = 5;
+}
+
+message CSPKG_SET_PERSONAL_ACHIEVEMENT_REQ {
+  COMDT_ACHIEVEMENT_SHOW stAchievement = 1;
+}
+
+message CSPKG_GET_ESPORTS_FIGHTHISTORYLIST_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+}
+
+message CSPKG_GET_ESPORTS_HONORHISTORYLIST_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+}
+
+message CSPKG_SET_HONORSHOWINFO_REQ {
+  uint32 dwHonorUnShowBits = 1;
+}
+
+message CSPKG_ESPORTS_PLAYER_CERTI_REQ {
+  uint32 bCertiType = 1;
+}
+
+message CSPKG_ESPORTS_CERTI_SHOWINFO_REQ {
+  uint32 bCertiType = 1;
+}
+
+message CSPKG_GET_GROUPESPORTSHISTORY_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_PERSONALESPORTSHISTORY_REQ {
+  uint64 ullTarUid = 1;
+  uint32 dwTarLogicWorldID = 2;
+}
+
+message CSPKG_GET_ACNT_ESPORTSSEASONSHOWINFO_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_ESPORTSCOREREWARD_REQ {
+  CSDT_GET_ESPORTSCOREREWARD_INFO stRewardLvlInfo = 1;
+}
+
+message CSPKG_GET_FAKEAI_INFO_REQ {
+  uint32 dwNum = 1;
+  repeated uint32 IDList = 2;
+  uint32 dwFrom = 3;
+}
+
+message CSPKG_GET_ESPORTSBEANS_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_SET_MASTERMATCH_CHALLBRANCH_REQ {
+  uint32 dwBranch = 1;
+}
+
+message CSPKG_MASTERMATCH_SCORE_INHERIT_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_MASTERMATCH_TOPWANGZHE_STATECHG_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_CLEAR_START_MASTERMATCH_TOP_TIPS_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_CLEAR_START_MASTERMATCH_PLACEMENT_TIPS_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_GET_MASTERMATCH_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_MASTERREWARD_STATE_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_MASTERREWARD_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_MASTERWANGZHE_STATE_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_MASTERWANGZHE_ACTIVATION_REQ {
+  bytes szActivationCode = 1; // fixed-length byte array
+}
+
+message CSPKG_SETTLE_BACKTO_TEAM_REQ {
+  uint32 bIsAIChallenge = 1;
+  uint32 bIsAITraining = 2;
+}
+
+message CSPKG_CLIENT_SETTING_SWITCH_LAYOUT_UPDATE_REQ {
+  COMDT_CLIENT_SETTING_SWITCH_LAYOUT_LIST stSwitchLayoutList = 1;
+}
+
+message CSPKG_CLIENT_SETTING_CUSTOMUILAYOUT_RECOMMEND_REQ {
+  bytes szDeviceModel = 1; // fixed-length byte array
+  int32 iScreenResolutionWidth = 2;
+  int32 iScreenResolutionHeight = 3;
+  uint32 bIsFourSkill = 4;
+  int32 iLayoutIndex = 5;
+}
+
+message CSPKG_CLIENT_SETTING_ADAPTIVE_HEROOPERATE_RECOMMEND_REQ {
+  uint32 dwHeroId = 1;
+}
+
+message CSPKG_CLIENT_SETTING_TOPPLAYER_HEROOPERATE_RECOMMEND_REQ {
+  uint32 dwHeroId = 1;
+}
+
+message CSPKG_CLIENT_SETTING_ADAPTIVE_HEROOPERATE_UPDATE_REQ {
+  COMDT_ADAPTIVE_HEROOPERATE_INFO stHeroSettingInfo = 1;
+}
+
+message CSPKG_CLIENT_SETTING_TOPPLAYER_HEROOPERATE_UPDATE_REQ {
+  COMDT_TOPPLAYER_HEROOPERATE_INFO stHeroSettingInfo = 1;
+}
+
+message CSPKG_ROLLBACK_REQ {
+  uint32 dwTimeStamp = 1;
+}
+
+message CSPKG_GETCAREEREXPLOREREWARD_REQ {
+  uint32 dwPlayType = 1;
+  uint32 bRewardLvl = 2;
+}
+
+message CSPKG_SET_CAREERTITILE_SHOWLIST_REQ {
+  COMDT_CAREERTITILE_SHOWLIST_INFO stCareerTitleShowInfo = 1;
+}
+
+message CSPKG_SET_CAREERTITILE_MASK_REQ {
+  uint32 dwCareerTitleSetMask = 1;
+}
+
+message CSPKG_CAREER_HOMEPAGE_SHOW_TYPE_SET_REQ {
+  uint32 dwHomePageShowType = 1;
+}
+
+message CSPKG_GET_ACNT_CAREER_INFO_REQ {
+  uint64 ullUid = 1;
+  int32 iLogicWorldId = 2;
+  uint32 dwFakeDescID = 3;
+}
+
+message CSPKG_CAREER_TARGETMODULESHOWSET_REQ {
+  uint32 dwShowPlayType = 1;
+  uint32 dwShowSubType = 2;
+}
+
+message CSPKG_CAREER_TITLE_SET_REQ {
+  uint32 dwTitleShowID = 1;
+  uint64 ullTitleShowSceneMask = 2;
+}
+
+message CSPKG_GET_CAREERREWARD_REQ {
+  uint32 dwID = 1;
+  uint32 bPos = 2;
+}
+
+message CSPKG_GET_BRANCH_MASTER_HISTORY_RANKING_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_MASTER_HISTORY_RANKING_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_BORNFOLLOW_REQ {
+  uint32 dwObjectID = 1;
+}
+
+message CSPKG_INVITE_BORNFOLLOW_REQ {
+  uint32 dwInviteObjectID = 1;
+  uint32 dwBeInviteObjID = 2;
+}
+
+message CSPKG_ACCEPT_BORNFOLLOW_REQ {
+  uint32 dwInviteObjectID = 1;
+  uint32 dwBeInviteObjID = 2;
+  uint32 bResult = 3;
+}
+
+message CSPKG_CANCEL_BORNFOLLOW_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_WIFI_TOKEN_VERIFY_REQ {
+  bytes szToken = 1; // fixed-length byte array
+  bytes szDeviceID = 2; // fixed-length byte array
+  bytes szSKey = 3; // fixed-length byte array
+}
+
+message CSPKG_WIFIPRIVILEGEINFO_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_CMD_ACTION_BUY_REQ {
+  uint32 dwBillNo = 1;
+  uint32 bBuyType = 2;
+  uint32 dwActionID = 3;
+  uint32 bIsPromotion = 4;
+  uint32 bBuyChannel = 5;
+}
+
+message CSPKG_CMD_ACTION_WEARON_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bSkinID = 2;
+  uint32 dwActionID = 3;
+  uint32 bWearPos = 4;
+}
+
+message CSPKG_CMD_ACTION_WEARCHG_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bSkinID = 2;
+  uint32 bWearChgPosA = 3;
+  uint32 bWearChgPosB = 4;
+}
+
+message CSPKG_PERSONALITY_BUY_REQ {
+  uint32 bBuyType = 1;
+  uint32 wObjID = 2;
+  uint32 bIsPromotion = 3;
+  uint32 bObjType = 4;
+}
+
+message CSPKG_SWITCH_PERSONALITY_USE_REQ {
+  uint32 bObjType = 1;
+  uint32 wObjID = 2;
+}
+
+message CSPKG_GET_AUTOCHESS_SCORE_AWARD_REQ {
+  uint32 bAwardIndex = 1;
+}
+
+message CSPKG_SET_AUTOCHESS_HALL_DEFAULTMODE_REQ {
+  uint32 bModeType = 1;
+}
+
+message CSPKG_SET_CURRENT_AUTOCHESS_FORMATION_REQ {
+  uint32 dwFormationID = 1;
+}
+
+message CSPKG_SET_AUTOCHESS_FORMATION_NAME_REQ {
+  uint32 dwFormationID = 1;
+  bytes szFormationName = 2; // fixed-length byte array
+}
+
+message CSPKG_CMD_REWARDSHARE_REQ {
+  uint32 wShareType = 1;
+}
+
+message CSPKG_CMD_WEAL_OPTREWARD {
+  uint32 dwOptType = 1;
+  uint32 dwOptID = 2;
+}
+
+message CSPKG_CMD_REALTIMECOMPLAINTREPORT_REQ {
+  uint32 dwFrapNo = 1;
+  uint32 bAcntNum = 2;
+  repeated bytes astChkInfo = 3; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_UPDGENERALBITS_NTF {
+  COMDT_GENERAL_BITS stGeneralBits = 1;
+}
+
+message CSPKG_VIDEOINFO_REPORT_REQ {
+  uint32 dwHeroId = 1;
+  uint32 bIsSkip = 2;
+  uint32 dwCastTime = 3;
+  bytes szNetwork = 4; // fixed-length byte array
+  uint32 dwVideoFlag = 5;
+  bytes szVideoPath = 6; // fixed-length byte array
+}
+
+message CSPKG_GETEVENTSCOREREWARD_REQ {
+  uint32 bRewardLvl = 1;
+}
+
+message CSPKG_GETGLOBALEVENTREWARD_REQ {
+  uint32 dwEventID = 1;
+  uint32 dwPeroidID = 2;
+}
+
+message CSPKG_GETGLOBALEVENT_SHAREREWARD_REQ {
+  uint32 dwEventID = 1;
+  uint32 dwPeroidID = 2;
+}
+
+message CSPKG_USER_AQREPORT_REQ {
+  int32 iTarLogicWorldID = 1;
+  uint64 ullTarUid = 2;
+  uint32 dwTarHeroId = 3;
+  uint32 bIsTarTopN = 4;
+  uint32 dwAqReportClassType = 5;
+  uint32 dwAqReportEventType = 6;
+  bytes szAqReportContent = 7; // fixed-length byte array
+}
+
+message CSPKG_REPORT_TERMINAL_TYPE_REQ {
+  uint32 dwTerminalType = 1;
+}
+
+message CSPKG_SELECT_PVETALENT_REQ {
+  uint32 dwHeroId = 1;
+  COMDT_WEAR_TALENTGENRE stTalentGenre = 2;
+}
+
+message CSPKG_SELECT_PVEWEAREQUIP_REQ {
+  uint32 dwHeroId = 1;
+  uint32 dwEquipTabOrSuitID = 2;
+}
+
+message CSPKG_PVETALENT_UPGRADE_REQ {
+  uint32 bTalentGenre = 1;
+  uint32 dwTalentRace = 2;
+}
+
+message CSPKG_CLIENT_REPORT_TLOG_REQ {
+  uint32 bTlogType = 1;
+  CSDT_TLOG_INFO stTlogInfo = 2;
+}
+
+message CSPKG_GET_COUNTERPART_AFFIX_REQ {
+  uint32 dwMapID = 1;
+  uint32 bAILevel = 2;
+}
+
+message CSPKG_SET_AUTOAI_REQ {
+  uint32 bType = 1;
+}
+
+message CSPKG_INIT_TALENTGENRE_REQ {
+  uint32 bTalentGenre = 1;
+}
+
+message CSPKG_GET_BATTLEPASS_LEVEL_AWARD_REQ {
+  uint32 wMinLevel = 1;
+  uint32 wMaxLevel = 2;
+  uint32 bAwardType = 3;
+  uint32 dwSeasonID = 4;
+}
+
+message CSPKG_GET_BATTLEPASS_WEEK_AWARD_REQ {
+  uint32 dwSeasonID = 1;
+}
+
+message CSPKG_EXCHANGE_BATTLEPASS_AWARD_REQ {
+  uint32 wExchangeID = 1;
+  uint32 wNum = 2;
+}
+
+message CSPKG_BUY_BATTLEPASS_LEVEL_REQ {
+  uint32 wCostType = 1;
+  uint32 wLevel = 2;
+  uint32 dwSeasonID = 3;
+  uint32 dwBillNo = 4;
+}
+
+message CSPKG_RANDOM_BATTLEPASS_TASK_REQ {
+  uint32 dwTaskID = 1;
+  uint32 dwSeasonID = 2;
+  uint32 bSubTaskType = 3;
+}
+
+message CSPKG_BATTLEPASS_TREASURE_DRAW_REQ {
+  uint32 dwSeasonID = 1;
+}
+
+message CSPKG_BATTLEPASS_GET_TREASURE_REWARD_REQ {
+  uint32 dwSeasonID = 1;
+  uint32 dwRewardID = 2;
+}
+
+message CSPKG_BATTLEPASS_REFRESH_SEASON_REQ {
+  uint32 dwCurSeasonID = 1;
+}
+
+message CSPKG_BATTLEPASS_GET_WARMUPREWARD_REQ {
+  uint32 dwSeasonID = 1;
+}
+
+message CSPKG_BATTLEPASS_CONTINUOUS_SUBSCRIBE_ACTIVE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_TRIAL_START_REQ {
+  uint32 wID = 1;
+}
+
+message CSPKG_TRIAL_CANCEL_REQ {
+  uint32 wID = 1;
+}
+
+message CSPKG_TRIAL_GET_STAGE_REWARD_REQ {
+  uint32 wID = 1;
+  uint32 bStage = 2;
+}
+
+message CSPKG_TRIAL_EXCHANGE_ENERGY_REQ {
+  uint32 wID = 1;
+}
+
+message CSPKG_TRIAL_BUY_SCORE_REQ {
+  uint32 wID = 1;
+  uint32 wNum = 2;
+}
+
+message CSPKG_EVENT_NOTIFY {
+  uint32 wType = 1;
+}
+
+message CSPKG_GET_TRAINHEROINFO_REQ {
+  uint32 bType = 1;
+}
+
+message CSPKG_OPEN_ACTIVITY_PANEL_NOTIFY {
+  int32 chData = 1;
+}
+
+message CSPKG_RECOMMEND_LOST_FRIEND_REQ {
+  int32 chData = 1;
+}
+
+message CSPKG_RECALL_LOST_FRIEND_REQ {
+  COMDT_ACNT_OPENID stUniq = 1;
+  uint32 bLength = 2;
+  repeated int32 szText = 3;
+}
+
+message CSPKG_VOTE_PICK_ABORT_REQ {
+  uint32 bAbort = 1;
+}
+
+message CSPKG_GAMECORE_CLT_INPUTMSG {
+  COMDT_GAMECORE_INPUTMSG stInputMsg = 1;
+}
+
+message CSPKG_CSMODE_INBATTLE_EVENT_REPORT_REQ {
+  uint32 bEventType = 1;
+  CSDT_GAMECORE_EVENT stEventData = 2;
+}
+
+message CSPKG_GAMECORE_EVENT {
+  uint32 dwEventType = 1;
+  CSDT_GAMECORE_EVENT stEventData = 2;
+}
+
+message CSPKG_NEED_RECOVERPVP {
+  int32 iNeed = 1;
+}
+
+message CSPKG_GETHISTORYTITLE_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+  uint32 dwFakeDescID = 3;
+}
+
+message CSPKG_SET_PREFERHERO_REQ {
+  uint32 dwOnlyShowAlmightyTitleOper = 1;
+  COMDT_PREFER_HERO stPreferHero = 2;
+}
+
+message CSPKG_RESET_UNUSEPREFERHERO_GAMECNT_NTF {
+  int32 chReserve = 1;
+}
+
+message CSPKG_GAMECOREMSG_ACK {
+  uint32 dwHeadSeq = 1;
+  uint32 dwSvrPkgSeqEnd = 2;
+}
+
+message CSPKG_GAMECOREMSG_RETRANS_REQ {
+  uint32 bNum = 1;
+  repeated uint32 SeqNo = 2;
+}
+
+message CSPKG_REPORT_MACHINESCORE {
+  uint32 dwMachineScore = 1;
+}
+
+message CSPKG_APP_STORE_REQ {
+  COMDT_APP_STORE_REQ stReqData = 1;
+}
+
+message CSPKG_PULL_BLACK_MATCH_REQ {
+  COMDT_ACNT_UNIQ stPulledBlackMatchUin = 1;
+}
+
+message CSPKG_SHOW_WANGZHEMARK_REQ {
+  COMDT_RANK_THEME_WANGZHEMARK stThemeWangZheMark = 1;
+}
+
+message CSPKG_GET_HONORCHALLENGE_REWARD_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_AUTOCHESS_SKINWEAR_REQ {
+  uint32 bIsSingleSet = 1;
+  COMDT_AUTOCHESS_SKINWEAR_LIST stWearInfo = 2;
+}
+
+message CSPKG_GET_AUTOCHESSINFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_AUTOCHESS_RANKREWARD_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_SAVE_CUSTOMUI_INFO_REQ {
+  COMDT_CUSTOMUI_INFO stUIInfo = 1;
+}
+
+message CSPKG_GET_SHARE_CUSTOMUI_INFO_REQ {
+  COMDT_ACNT_UNIQ stSrcAcntUniq = 1;
+  uint32 dwUIDataIndex = 2;
+}
+
+message CSPKG_SAVE_INBATTLE_SETTING_REQ {
+  uint32 bSettingType = 1;
+  CSDT_INBATTLE_SETTING_INFO stInBattleSettingInfo = 2;
+}
+
+message CSPKG_TOKEN_TRANSCRYSTAL_REQ {
+  uint32 bCrystalCnt = 1;
+}
+
+message CSPKG_AUTOCHESS_FREEBOUNTYMATCHCNT_BUY_REQ {
+  uint32 bBountyMatchType = 1;
+}
+
+message CSPKG_AUTOCHESS_BOUNTY_BUY_COIN_REQ {
+  uint32 bCoinType = 1;
+  uint32 bBountyMatchType = 2;
+}
+
+message CSPKG_PET_ACTIVE_REQ {
+  uint32 dwPetID = 1;
+  uint32 bIsPromotion = 2;
+}
+
+message CSPKG_AUTOCHESS_CLIENT_CFG_REQ {
+  COMDT_AUTOCHESS_CLIENT_CFG stAutoChessClientCfg = 1;
+}
+
+message CSPKG_GENERAL_SHOP_BUY_REQ {
+  uint32 bShopType = 1;
+  uint32 wShopID = 2;
+  uint32 dwBuyNum = 3;
+}
+
+message CSPKG_MODIFY_SHOWDATA_REQ {
+  uint32 bShowDataType = 1;
+}
+
+message CSPKG_SET_KOL_SKIN_MSG_SWITCH_REQ {
+  uint32 dwSkinID = 1;
+  uint32 bMsgSwitch = 2;
+}
+
+message CSPKG_SET_HOMEPAGE_SHOW_FLAG_REQ {
+  uint32 dwShowMask = 1;
+}
+
+message CSPKG_THREEKINGDOMS_SET_SKILL_REQ {
+  uint32 dwSkillID = 1;
+}
+
+message CSPKG_SET_NATIONAL_MATCH_LEVEL_REQ {
+  uint32 bMatchLevelId = 1;
+}
+
+message CSPKG_GET_TRIPARTITE_REWARD_REQ {
+  uint32 dwTripartiteId = 1;
+  uint32 dwRewardPeriod = 2;
+}
+
+message CSPKG_ESPORTS_SUBSCRIBE_REQ {
+  uint32 bESportsType = 1;
+  uint32 dwESportsID = 2;
+  uint32 dwDeadLineTime = 3;
+}
+
+message CSPKG_GET_ESPORTS_NATIONLAINFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_ESPORTS_PRINCIPAL_SHOW_SUBTITLE_REQ {
+  uint32 dwRealTimeAdCode = 1;
+}
+
+message CSPKG_SET_NATIONAL_COMMUNITYID_REQ {
+  uint32 dwCommunityId = 1;
+}
+
+message CSPKG_SAVE_HEROOPSETTING_INFO_REQ {
+  COMDT_HEROOPSETTING_INFO stSettingInfo = 1;
+}
+
+message CSPKG_FRIENDCARD_ACTIVE_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_PREBP_HERO_MODIFY_REQ {
+  uint32 bMapType = 1;
+  uint32 dwMapID = 2;
+  COMDT_PREBP_HERO stPreBPHero = 3;
+}
+
+message CSPKG_USE_SKIN_VOICE_REQ {
+  uint32 dwSkinID = 1;
+  uint32 dwSkinVoiceID = 2;
+}
+
+message CSPKG_H5REDLIST_QUERY_REQ {
+  COMDT_H5REDLIST_QUERYLIST stQueryList = 1;
+}
+
+message CSPKG_HEROSKIN_SHOP_RECOMMEND_REQ {
+  int32 chData = 1;
+}
+
+message CSPKG_COMMON_GM_PRESSURE_REQ {
+  int32 iPingDataLen = 1;
+  bytes szPingData = 2; // fixed-length byte array
+  uint32 bCopyPingData = 3;
+  int32 iPongDataLen = 4;
+}
+
+message CSPKG_COMMON_GM_REQ {
+  repeated int32 szCmdStr = 1;
+  repeated int32 szSubStr = 2;
+  CSDT_COMMON_GM_PARAM stReqParam = 3;
+}
+
+message CSPKG_QUESTIONNAIRE_REPORT_REQ {
+  uint32 dwQuestionnaireID = 1;
+  bytes szAnswerStr = 2; // fixed-length byte array
+  uint32 dwGameSvrEntity = 3;
+  int32 iRelaySvrEntity = 4;
+  int32 iGameSeq = 5;
+  uint32 bIsWin = 6;
+}
+
+message CSPKG_SET_DISPLAY_BRANCH_AND_HERO_REQ {
+  uint32 bSetBranch = 1;
+  uint32 bHeroNum = 2;
+  repeated uint32 HeroID = 3;
+  uint32 bSetAlmightyTitle = 4;
+  uint32 dwHeroPageBranchIndex = 5;
+}
+
+message CSPKG_QUIT_FRAME_EXTEND_STATE_REQ {
+  int32 iNotUsed = 1;
+}
+
+message CSPKG_GENERAL_TRIGGER_REPORT_REQ {
+  COMDT_GENERAL_TRIGGER_INFO stTriggerInfo = 1;
+}
+
+message CSPKG_BREAKING_NEWS_EVENT_REPORT_REQ {
+  COMDT_BREAKING_NEWS_EVENT_INFO stEventInfo = 1;
+}
+
+message CSPKG_BREAKING_NEWS_EVENT_QUERY_REQ {
+  int32 iNotUsed = 1;
+}
+
+message CSPKG_MANUALLY_ACCEPTTASK_REQ {
+  uint32 dwTaskID = 1;
+}
+
+message CSPKG_QUERY_CANACCEPTTASKLIST_REQ {
+  uint32 dwTaskType = 1;
+  uint32 dwTaskSubType = 2;
+}
+
+message CSPKG_UPGRADE_PVE_ATTR_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GUARD_PVE_INFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_PICKUP_BATTLE_DROPITEM_REQ {
+  uint32 dwItemID = 1;
+  uint32 bItemCnt = 2;
+}
+
+message CSPKG_WISHING_TREE_INFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_MASTER_BATTLE_REPLAYOP_REPORT {
+  uint32 bOpType = 1;
+  int32 iRelaySvrEntity = 2;
+  uint32 dwDeskId = 3;
+  uint32 dwDeskSeq = 4;
+  COMDT_ACNT_UNIQ stOpAcnt = 5;
+}
+
+message CSPKG_GET_RANKYEAR_REWARD_REQ {
+  uint32 dwThemeID = 1;
+}
+
+message CSPKG_RANKYEARSKIN_RECHARGE_REQ {
+  uint32 dwThemeID = 1;
+  uint32 dwRechargePoint = 2;
+}
+
+message CSPKG_RANKYEARSKIN_EXCHANGE_REQ {
+  uint32 dwThemeID = 1;
+}
+
+message CSPKG_PLAYINFO_SKIN_CHG_REQ {
+  uint32 dwPlayerInfoSkinID = 1;
+}
+
+message CSPKG_QUERY_TEAMINFO_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_PLAYERINFOSKIN_FLAGCLR_REQ {
+  uint32 dwPlayInfoSkinID = 1;
+}
+
+message CSPKG_SYNC_TEAMHALL_INFO_REQ {
+  uint32 bSyncType = 1;
+  int32 iTeamNum = 2;
+  repeated COMDT_REQUEST_CUSTOMTEAM_LIST astTeamList = 3; // TDR_ARRAY
+  COMDT_TEAMHALL_MAP_BRIEFINFO stMapBrief = 4;
+  int32 iSearchType = 5;
+  uint32 bRefresh = 6;
+  uint32 dwReqSourceType = 7;
+  uint32 bIsNotNeedRecSvrSort = 8;
+  COMDT_TEAM_HALL_FILTER stFilter = 9;
+}
+
+message CSPKG_QUICK_JOINTEAM_IN_HALL_REQ {
+  COMDT_TEAMHALL_MAP_BRIEFINFO stMapBrief = 1;
+  int32 iSearchType = 2;
+}
+
+message CSPKG_STOP_TEAMRECRUIT_REQ {
+  COMDT_TEAM_UNIQ stTeamUniq = 1;
+}
+
+message CSPKG_GETHISTORYRECORD_COMPLAINTINFO_REQ {
+  uint32 dwDeskID = 1;
+  uint32 dwDeskSeq = 2;
+  int32 iRelayEntity = 3;
+}
+
+message CSPKG_COMPLAINTGUARD_INFO_REQ {
+  uint32 bSource = 1;
+}
+
+message CSPKG_COMPLAINTGUARD_BLACK_TASKOPEN_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_OBSERVEFRIEND_REPLAY_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GET_MASTERREPLAY_HISTORY_REQ {
+  COMDT_OB_DESK stDeskInfo = 1;
+}
+
+message CSPKG_OBSERVE_OFFICIALMATCH_GET_INGMATCHLIST_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_OBSERVE_OFFICIALMATCH_GET_DONEMATCHLIST_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_OBSERVE_OFFICIALMATCH_REQ {
+  COMDT_OB_DESK stDesk = 1;
+}
+
+message CSPKG_GETSHOWSKININFO_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+  uint32 dwFakeDescID = 3;
+}
+
+message CSPKG_SETSHOWSKININFO_REQ {
+  COMDT_SHOW_HEROSKIN_INFO stShowSkinInfo = 1;
+}
+
+message CSPKG_SET_MOSTUSEDHEROSORTTYPE_REQ {
+  uint32 bSetType = 1;
+  uint32 bSortType = 2;
+}
+
+message CSPKG_RECHERO_STATINFO_REQ {
+  CSDT_RECHERO_STATINFO stRecHeroStatInfo = 1;
+  CSDT_RECHERO_SELFDEFINEINFO stSelfDefineHeroInfo = 2;
+}
+
+message CSPKG_CMD_EMOJI_BUY_REQ {
+  uint32 bBuyType = 1;
+  uint32 dwEmojiID = 2;
+  uint32 bIsPromotion = 3;
+}
+
+message CSPKG_CMD_EMOJI_PKG_BUY_REQ {
+  uint32 bBuyType = 1;
+  uint32 dwEmojiPkgID = 2;
+  uint32 bIsPromotion = 3;
+}
+
+message CSPKG_CMD_EMOJI_WEAR_REQ {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  COMDT_SKIN_EMOJI_WEARLIST stWearEmojiList = 2;
+  uint32 dwCurPageSkinID = 3;
+}
+
+message CSPKG_SINGLE_MANUAL_EMOJI_WEAR_REQ {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  uint32 dwWearEmojiID = 2;
+  uint32 dwWearIndex = 3;
+}
+
+message CSPKG_VOICE_WEAR_REQ {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  COMDT_SKIN_VOICE_WEARLIST stVoiceList = 2;
+  uint32 bHasUpdatedInBatMsg = 3;
+}
+
+message CSPKG_CMD_SHORTCUT_INTERACT_WEARCHG_REQ {
+  uint32 dwType = 1;
+  COMDT_SHORTCUT_INTERACT_WEARLIST stWearInfo = 2;
+}
+
+message CSPKG_RELAYAREA_PING_UPD {
+  uint32 dwAreaNum = 1;
+  repeated COMDT_RELAY_AREA_PING astAreaPing = 2; // TDR_ARRAY
+  uint32 dwNetworkType = 3;
+}
+
+message CSPKG_CMD_PANDORA_SMART_AD_REQ {
+  uint32 bSmartADReqType = 1;
+}
+
+message CSPKG_CMD_COMPETITION_YEAR_STAGEREWARD_REQ {
+  uint32 dwStageID = 1;
+}
+
+message CSPKG_CMD_FRIENDCARD_LIKE_REQ {
+  COMDT_ACNT_UNIQ stLikeUin = 1;
+}
+
+message CSPKG_GET_FRIEND_OWN_RESOURCE_REQ {
+  COMDT_ACNT_UNIQ stFriendUniq = 1;
+}
+
+message CSPKG_NO_RECEIVE_FRIEND_ASKFOR_LIST_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_SET_NO_RECEIVE_FRIEND_ASKFOR_REQ {
+  uint32 bOpenOrClose = 1;
+  COMDT_ACNT_UNIQ stFriendUniq = 2;
+}
+
+message CSPKG_MULTGAME_INTERACTIVE_DIDI {
+  uint64 ullDstAcntUid = 1;
+  int32 iDistanceLevel = 2;
+}
+
+message CSPKG_MULTGAME_DOUBLE_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_INGAME_PRIVATEVOICE_REQ {
+  uint64 ullToUid = 1;
+  uint32 dwSrcType = 2;
+}
+
+message CSPKG_INGAME_PRIVATEVOICE_RSP {
+  COMDT_RESULT_INFO stResultInfo = 1;
+  uint64 ullFromUid = 2;
+}
+
+message CSPKG_INGAME_PRIVATEVOICE_CANCEL_NTF {
+  uint64 ullToUid = 1;
+}
+
+message CSPKG_WEAL_FUND_SET_LAST_OPENGUI_TIME_REQ {
+  uint32 dwWealID = 1;
+}
+
+message CSPKG_PRESENT_ITEM_RECOMMEND_REQ {
+  uint64 ullReceiverUid = 1;
+  bytes szReceiverOpenID = 2; // fixed-length byte array
+  uint32 dwReceiverZoneAreaID = 3;
+  uint32 bPresentItemType = 4;
+}
+
+message CSPKG_UPDATE_GAME_MUSIC_PLAYLIST_REQ {
+  COMDT_GAME_MUSIC_PLAYLIST stMusicPlayListInfo = 1;
+}
+
+message CSPKG_BATCH_WEAR_SKY_SCREEN_REQ {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  uint32 wSkyScreenID = 2;
+  int32 chWearPos = 3;
+}
+
+message CSPKG_WEAR_SOLDIER_SKIN_REQ {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  uint32 dwSoldierSkinID = 2;
+  int32 chWearPos = 3;
+}
+
+message CSPKG_WEAR_SHARE_SOLDIER_SKIN_REQ {
+  COMDT_ACNT_UNIQ stFriend = 1;
+  uint32 dwShareType = 2;
+  uint32 dwHeroID = 3;
+  uint32 bSkinID = 4;
+  int32 chWearPos = 5;
+  uint32 dwSoldierSkinID = 6;
+}
+
+message CSPKG_OPEN_SHARE_SOLDIER_SKIN_REQ {
+  uint32 bShareType = 1;
+}
+
+message CSPKG_COMM_DARECOMMEND_REQ {
+  uint32 dwReqType = 1;
+  CSDT_DARECOMMEND_PARAM_INFO stParamInfo = 2;
+}
+
+message CSPKG_CLIENTDIRECTACCESS_REQ {
+  uint32 wMsgID = 1;
+  bytes szType = 2; // fixed-length byte array
+  uint32 wLen = 3;
+}
+
+message CSPKG_GET_PRE_DOWNLOAD_REWARD_REQ {
+  uint32 bReq = 1;
+}
+
+message CSPKG_SHOP_DISCOUNT_PACKBUY_REQ {
+  uint32 dwBillNo = 1;
+  uint32 bBuyType = 2;
+  COMDT_SHOP_DISCOUNT_PACKBUY_ITEM stItemInfo = 3;
+  uint32 dwActivityID = 4;
+  uint32 dwRebateID = 5;
+  uint32 dwRebateCnt = 6;
+}
+
+message CSPKG_CHG_CHAT_SUBCHANNEL_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_WEAR_BATTLE_UISKIN_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bSkinID = 2;
+  int32 chPos = 3;
+  uint32 wBattleUISkinID = 4;
+  uint32 bIsWearing = 5;
+}
+
+message CSPKG_GLOBAL_EXCHANGESHOP_SEARCH_REQ {
+  uint32 dwLogicType = 1;
+  uint32 dwPage = 2;
+  UN_GLOBAL_EXCHANGESHOP_SEARCH_PARAM stSearchParam = 3;
+}
+
+message CSPKG_GLOBAL_EXCHANGESHOP_OP_REQ {
+  uint32 dwLogicType = 1;
+  uint32 dwOpType = 2;
+  UNION_GLOBAL_EXCHANGESHOP_OP_PARAM stOpParam = 3;
+}
+
+message CSPKG_MAGIC_LOTTERY_REQ {
+  uint32 bDrawType = 1;
+  uint32 bDrawPoolID = 2;
+}
+
+message CSPKG_SET_ESPORTSSHOWBADGE_REQ {
+  uint32 bBadgeShowType = 1;
+  uint32 dwBadgeShowId = 2;
+}
+
+message CSPKG_GROUP_CREATE_REQ {
+  uint32 bType = 1;
+  uint32 dwHeadID = 2;
+  bytes szName = 3; // fixed-length byte array
+}
+
+message CSPKG_GROUP_PRIVATE_RECRUIT_REQ {
+  COMDT_ACNT_UNIQ stToAcnt = 1;
+  COMDT_COMMON_MSG_GROUP_RECRUIT stGroupRecruitMsg = 2;
+}
+
+message CSPKG_GROUP_JOIN_REQ {
+  uint64 ullID = 1;
+  uint32 bType = 2;
+  uint32 dwLogicWorldID = 3;
+}
+
+message CSPKG_GROUP_LEAVE_REQ {
+  uint32 bType = 1;
+}
+
+message CSPKG_GROUP_KICK_REQ {
+  uint32 bType = 1;
+  COMDT_ACNT_UNIQ stKickAcnt = 2;
+}
+
+message CSPKG_GROUP_CHG_LEADER_REQ {
+  uint32 bType = 1;
+  COMDT_ACNT_UNIQ stLeader = 2;
+}
+
+message CSPKG_GROUP_UPDATE_NOTICE_REQ {
+  uint32 bType = 1;
+  bytes szNotice = 2; // fixed-length byte array
+}
+
+message CSPKG_GROUP_UPDATE_NAME_REQ {
+  uint32 bType = 1;
+  bytes szName = 2; // fixed-length byte array
+}
+
+message CSPKG_GROUP_UPDATE_ICON_REQ {
+  uint32 bType = 1;
+  uint32 dwHeadID = 2;
+}
+
+message CSPKG_GROUP_PULL_GROUP_REQ {
+  uint64 ullID = 1;
+  uint32 bType = 2;
+  uint32 dwLogicWorldID = 3;
+}
+
+message CSPKG_GROUP_UPDATE_WECHATGROUP_REQ {
+  uint32 bType = 1;
+  uint64 ullWeChatGroupID = 2;
+  uint32 dwWeChatGroupLogicID = 3;
+}
+
+message CSPKG_GROUP_RIGHTS_REQ {
+  uint32 bType = 1;
+  uint32 dwMaskBits = 2;
+}
+
+message CSPKG_COMMON_MSG_DEL {
+  uint32 wNum = 1;
+  repeated int32 Index = 2;
+}
+
+message CSPKG_COMMON_MSG_UPD {
+  uint32 wNum = 1;
+  repeated int32 Index = 2;
+}
+
+message CSPKG_CMD_RECORD_LAST_CHOOSE_SUIT_HERO_REQ {
+  uint32 dwHeroID = 1;
+}
+
+message CSPKG_HERO_SUIT_MODIFY_SUIT_REQ {
+  uint32 dwHeroID = 1;
+  CSDT_MODIFY_HERO_SUIT_TYPE stModifyData = 2;
+  uint32 dwFlag = 3;
+  bytes szReportStr = 4; // fixed-length byte array
+}
+
+message CSPKG_HERO_SUIT_BATCHCHG_HERO_SKILL_REQ {
+  uint32 dwHeroNum = 1;
+  repeated uint32 HeroID = 2;
+  uint32 dwSkillID = 3;
+}
+
+message CSPKG_CMD_GET_HERO_SUIT_RECOMMEND_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bType = 2;
+}
+
+message CSPKG_GET_HEROGUIDE_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+  uint32 dwHeroId = 3;
+  uint32 bClientUseType = 4;
+}
+
+message CSPKG_GET_STRATEGY_REQ {
+  uint32 dwSelf_hero_id = 1;
+  uint32 bSelf_hero_num = 2;
+  repeated uint32 ally_hero_ids = 3;
+  uint32 bEnemy_hero_num = 4;
+  repeated uint32 enemy_hero_ids = 5;
+  uint32 dwMapID = 6;
+  uint32 bMapType = 7;
+}
+
+message CSPKG_GET_GAMINGEQUIPRECOMMEND_REQ {
+  uint32 dwSelfHeroId = 1;
+  uint32 wTime = 2;
+  uint32 bEnemyNum = 3;
+  repeated bytes astEnemyList = 4; // TDR_ARRAY, element type unknown
+  uint32 bCoopNum = 5;
+  repeated bytes astCoopList = 6; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_PULLDATA {
+  uint32 bReserved = 1;
+
+  oneof body_selector {
+    CSPKG_GET_STRATEGY_REQ stStrategyReq = 2;
+    CSPKG_GET_GAMINGEQUIPRECOMMEND_REQ stGameingEquipRecommendReq = 3;
+    CSDT_GET_PANDORAKEEPSAKETAG_REQ stPandoraKeepsakeTagReq = 4;
+    CSDT_GAMEZONE_SHAREARKREQ stGameZoneShareArkReq = 5;
+  }
+}
+
+message CSPKG_PULLDATA_REQ {
+  uint32 bType = 1;
+  CSPKG_PULLDATA stPullDataReq = 2;
+}
+
+message CSPKG_GET_GAMEDATALAUNCH_REQ {
+  bytes szLaunchStr = 1; // fixed-length byte array
+}
+
+message CSPKG_FIREFLY_ANCHORLIST_REQ {
+  uint32 dwPageNo = 1;
+}
+
+message CSPKG_CMD_SELFDEFINE_SYMBOL_PAGE_MODIFY_REQ {
+  uint32 bPageIndex = 1;
+  uint32 bModifyType = 2;
+  uint32 bPos = 3;
+  uint32 dwSymbolID = 4;
+  bytes szName = 5; // fixed-length byte array
+}
+
+message CSPKG_CMD_BATCH_MODIFY_HERO_SUIT_SYMBOL_REQ {
+  uint32 dwHeroNum = 1;
+  repeated uint32 HeroID = 2;
+  repeated uint32 InitSymbolID = 3;
+}
+
+message CSPKG_HERO_SUIT_RECOVER_REQ {
+  uint32 dwHeroID = 1;
+}
+
+message CSPKG_SET_ESPORTS_PLAYER_CARD_REQ {
+  COMDT_ESPORTS_PLAYER_CARD_SETTING stEsportsPlayerCard = 1;
+}
+
+message CSPKG_SET_HERO_LBAEL_REQ {
+  uint32 dwHeroID = 1;
+  uint32 bAutoUseFlag = 2;
+  uint32 bNum = 3;
+  bytes szHeroLabelList = 4; // fixed-length byte array
+}
+
+message CSPKG_SET_KING_TITLE_REQ {
+  uint32 dwKingTitleID = 1;
+  uint32 dwHeroID = 2;
+}
+
+message CSPKG_GET_ALL_KING_TITLE_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_SET_ESPORTS_SETTLE_TAGS_REQ {
+  uint32 dwSettleTagID = 1;
+}
+
+message CSPKG_GET_ESPORTS_HONORHISTORY_ITEM_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_ORDER_SKIN_REQ {
+  uint32 bIsOrder = 1;
+  uint32 dwSkinID = 2;
+}
+
+message CSPKG_BIRTHDAY_WEAL_START_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_BIRTHDAY_WEAL_CHOOSE_SHARE_SKIN_REQ {
+  COMDT_BIRTHDAY_CHOOSE_SHARE_SKININFO stChooseSkin = 1;
+}
+
+message CSPKG_BIRTHDAY_WEAL_INVITE_FRIEND_REQ {
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 1;
+  uint32 dwFriendCnt = 2;
+  repeated COMDT_SOULMATCH_FRIEND_LIST astFriendList = 3; // TDR_ARRAY
+}
+
+message CSPKG_BIRTHDAY_WEAL_SEND_THANKS_REQ {
+  COMDT_ACNT_UNIQ stFriendUniq = 1;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 2;
+}
+
+message CSPKG_BIRTHDAY_WEAL_DRAW_BIG_GIFT_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_BIRTHDAY_WEAL_BLOW_CANDLES_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_BIRTHDAY_WEAL_BLESS_REQ {
+  uint32 dwBlessID = 1;
+  COMDT_ACNT_UNIQ stToUniq = 2;
+}
+
+message CSPKG_WEAR_SKIN_RESOURCE_REQ {
+  uint32 dwSkinID = 1;
+  uint32 bResourceType = 2;
+  uint32 dwResourceID = 3;
+}
+
+message CSPKG_CHOOCE_HERO_RED_CREATE_REQ {
+  uint32 dwRedEnvelopeId = 1;
+}
+
+message CSPKG_CHOOCE_HERO_RED_CAPTURE_REQ {
+  uint64 ullRedCreateUid = 1;
+  uint32 dwRedEnvelopeId = 2;
+}
+
+message CSPKG_ORDER_PLAY_REQ {
+  uint32 dwID = 1;
+  uint32 bIsOrder = 2;
+}
+
+message CSPKG_GET_ORDER_PLAY_REWARD_REQ {
+  uint32 dwID = 1;
+}
+
+message CSPKG_BATTLE_NETWORKDETAILINFO_REQ {
+  COMDT_NETWORKDETAILINFO stNetworkDetail = 1;
+}
+
+message CSPKG_ESPORTS_NATIONAL_EVALUATE_REQ {
+  uint32 bEvaluateIndex = 1;
+  COMDT_ESPORTS_NATIONAL_EVALUATE_LIST stEvaluateGames = 2;
+}
+
+message CSPKG_UPDATA_COLLECTOR_INFO_REQ {
+  uint32 c = 1;
+}
+
+message CSPKG_COMMON_SET_REQ {
+  uint32 bSetType = 1;
+  CSDT_COMMON_SET_UNION stSetInfo = 2;
+}
+
+message CSPKG_CHECK_RANDOM_NAMES_REQ {
+  COMDT_CHECK_RANDOM_NAMES_LIST stReqRandomNamesList = 1;
+}
+
+message CSPKG_TEAM_INTERACT_REQ {
+  COMDT_TEAM_INTERACT stInteractInfo = 1;
+}
+
+message CSPKG_TEAM_INTERACT_RESPONSE_REQ {
+  COMDT_TEAM_INTERACT_RESPONSE stResponseInfo = 1;
+}
+
+message CSPKG_WEAR_RESOURCE_REQ {
+  uint32 bType = 1;
+  uint32 bWearIndex = 2;
+  uint32 dwID = 3;
+}
+
+message CSPKG_COMMERCERES_BUY_REQ {
+  uint32 dwBillNo = 1;
+  uint32 wItemType = 2;
+  COMDT_COMMERCERES_BUY_LIST stBuyList = 3;
+  uint32 bBuyChannel = 4;
+}
+
+message CSPKG_GET_HEROSKIN_COLLECT_REQ {
+  uint32 c = 1;
+}
+
+message CSPKG_USE_COLLECTOR_NAME_REQ {
+  uint32 dwCollectorNameID = 1;
+}
+
+message CSPKG_USE_PAT_REQ {
+  uint32 bWearIndex = 1;
+  COMDT_ACNT_UNIQ stToUniq = 2;
+  int32 iUseNum = 3;
+}
+
+message CSPKG_SPECSALE_SHOP_RECOMMEND_REQ {
+  int32 chData = 1;
+}
+
+message CSPKG_PULL_TGALIVEENTRYINFO_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_GET_HEROTRAINING_AWARD_REQ {
+  int32 iHeroTargetNum = 1;
+  repeated CSDT_ONE_HERO_TARGET_DETAIL astHeroTargetDetail = 2; // TDR_ARRAY
+}
+
+message CSPKG_HERO_TRAINING_PASS_LEVEL_AWARD_REQ {
+  uint32 dwHeroNum = 1;
+  repeated uint32 HeroID = 2;
+}
+
+message CSPKG_HERO_TRAINING_FRIENDRANK_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_GET_HEROTRIAL_AWARD_REQ {
+  uint32 dwHeroID = 1;
+  uint32 dwTaskID = 2;
+}
+
+message CSPKG_LOTTERY_PRICE_REQ {
+  uint32 dwLotteryID = 1;
+}
+
+message CSPKG_LOTTERY_REQ {
+  uint32 dwLotteryID = 1;
+  int32 iDrawCnt = 2;
+  COMDT_LOTTERY_PRICE_LIST stLotteryPrice = 3;
+}
+
+message CSPKG_LOTTERY_HISTORY_REQ {
+  uint32 dwLotteryID = 1;
+}
+
+message CSPKG_LOTTERY_GET_DRAW_COUNT_REWARD_REQ {
+  uint32 dwLotteryID = 1;
+  int32 iDrawCnt = 2;
+}
+
+message CSPKG_LOTTERY_GET_WELFARE_REQ {
+  uint32 dwLotteryID = 1;
+  uint32 dwWelfareType = 2;
+}
+
+message CSPKG_LOTTERY_GET_WELFARE_HISTORY_REQ {
+  uint32 dwLotteryID = 1;
+}
+
+message CSPKG_GET_SELF_TRANKVAL_REQ {
+  uint32 bRankType = 1;
+  uint32 bRankSubType = 2;
+}
+
+message CSPKG_SET_TRANKTITLE_FLAG_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_REC_CHAT_CONTENT_REQ {
+  uint32 bScene = 1;
+  COMDT_REC_CHAT_BRING_DATA_UNION stBringData = 2;
+  bytes szRecentClickData = 3; // fixed-length byte array
+  uint32 dwSceneSubType = 4;
+}
+
+message CSPKG_SET_LOADING_SHOW_CTL_REQ {
+  COMDT_LOADING_SHOW_CTL stShowCtl = 1;
+}
+
+message CSPKG_SET_HOMEPAGE_SHOW_TYPE_REQ {
+  uint32 bShowType = 1;
+}
+
+message CSPKG_VOICE_BROADCAST_EVENT_REPORT_REQ {
+  uint32 dwObjID = 1;
+  uint32 dwEventType = 2;
+  uint32 dwSeq = 3;
+}
+
+message CSPKG_GET_FRIEND_RECENTTHING_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_GET_FRIEND_THINGRECORD_REQ {
+  uint32 wNum = 1;
+  repeated COMDT_RECENTTHING_UNIQ_INFO astThingUniq = 2; // TDR_ARRAY
+}
+
+message CSPKG_LIKE_FRIEND_RECENTTHING_REQ {
+  COMDT_LIKE_RECENTTHING_REQ stReqCommInfo = 1;
+}
+
+message CSPKG_GET_FRIEND_RECENT_LIKED_RECORD_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_SET_FRIEND_RECENT_BRIEFINFO_REQ {
+  uint32 dwReadedThingMaxPostTime = 1;
+  uint32 dwReadedLikedRecordMaxPostTime = 2;
+}
+
+message CSPKG_FRIEND_LAST_LOGIN_REMIND_TS_SYNC {
+  COMDT_ACNT_UNIQ stFriendUniq = 1;
+  uint32 dwLastLoginRemindTS = 2;
+}
+
+message CSPKG_JUDGE_CLIENT_TEXT_REQ {
+  bytes szJudgeStr = 1; // fixed-length byte array
+}
+
+message CSPKG_SET_DEFAULT_TEAM_DISPLAY_MODEL_REQ {
+  uint32 bDisplayModel = 1;
+}
+
+message CSPKG_FRIEND_EXPERIENCE_REQ {
+  COMDT_ACNT_UNIQ stFriendUniq = 1;
+}
+
+message CSPKG_FRIEND_MILESTONE_SET_MASK_REQ {
+  COMDT_FRIEND_MILESTONE_MASK_SET_INFO stMilestoneMaskSetInfo = 1;
+}
+
+message CSPKG_PRESENT_TOKEN_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  bytes szFriendName = 2; // fixed-length byte array
+  uint32 dwTokenID = 3;
+  int32 iCount = 4;
+  repeated int32 szPswdInfo = 5;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 6;
+  COMDT_PRESENT_TOKEN_SRC stHistorySrc = 7;
+  uint32 bCheckHave = 8;
+}
+
+message CSPKG_PRESENT_TOKEN_SEND_HISTORY_REQ {
+  COMDT_PRESENT_TOKEN_SRC stHistorySrc = 1;
+}
+
+message CSPKG_PRESENT_TOKEN_GET_HISTORY_REQ {
+  COMDT_PRESENT_TOKEN_SRC stHistorySrc = 1;
+}
+
+message CSPKG_PRESENT_TOKEN_CHECK_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  bytes szFriendName = 2; // fixed-length byte array
+  uint32 dwTokenID = 3;
+  int32 iCount = 4;
+  repeated int32 szPswdInfo = 5;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 6;
+  COMDT_PRESENT_TOKEN_SRC stHistorySrc = 7;
+  uint32 bCheckHave = 8;
+}
+
+message CSPKG_CHANGE_NATALHERO_REQ {
+  uint32 dwHeroID = 1;
+}
+
+message CSPKG_GET_BONDTRIAL_REWARD_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_ACTIVATE_NATALHERO_NTF {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_PERFEFT_UPGRADE_REQ {
+  uint32 dwPerfEftID = 1;
+}
+
+message CSPKG_SKYSCREEN_UPGRADE_REQ {
+  uint32 dwSkyScreenID = 1;
+}
+
+message CSPKG_SET_SKYSCREEN_SHOW_INTIMACY_REQ {
+  uint32 bIntimacyType = 1;
+}
+
+message CSPKG_SKYSCREEN_INTERACT_REQ {
+  uint64 ullToAcntUid = 1;
+}
+
+message CSPKG_SET_KEEPSAKE_SHOW_LIST_REQ {
+  COMDT_ACNT_KEEPSAKE_SHOW_LIST stKeepsakeShowList = 1;
+}
+
+message CSPKG_DELETE_KEEPSAKE_REQ {
+  uint64 ullUniqID = 1;
+}
+
+message CSPKG_CHG_SHOW_HONOR_TYPE_REQ {
+  uint32 bShowType = 1;
+}
+
+message CSPKG_LBS_TEAM_RECOMMEND_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_GET_REAL_SVR_TIME_REQ {
+  uint32 dwReserved = 1;
+}
+
+message CSPKG_EXCHANGE_SHOP_REQ {
+  uint32 dwExchangeShopItemID = 1;
+  int32 iCount = 2;
+  int32 iCostIndex = 3;
+  uint32 dwBillNo = 4;
+  bytes szPswdInfo = 5; // fixed-length byte array
+  COMDT_EXCHANGESHOP_EXTRA_INFO stExtraInfo = 6;
+}
+
+message CSPKG_EXCHANGE_SHOP_HISTORY_REQ {
+  uint32 dwExchangeShopID = 1;
+}
+
+message CSPKG_EXCHANGE_SHOP_PRESENT_REQ {
+  uint32 dwExchangeShopItemID = 1;
+  int32 iCostIndex = 2;
+  COMDT_ACNT_UNIQ stFriendUin = 3;
+  bytes szFriendName = 4; // fixed-length byte array
+  repeated int32 szPswdInfo = 5;
+  COMDT_ACNT_PRESENTMSG_INFO stMsgInfo = 6;
+  uint32 bCheckHave = 7;
+}
+
+message CSPKG_EXCHANGE_SHOP_PRESENT_SEND_HISTORY_REQ {
+  uint32 dwExchangeShopID = 1;
+}
+
+message CSPKG_EXCHANGE_SHOP_PRESENT_TAKEN_HISTORY_REQ {
+  uint32 dwExchangeShopID = 1;
+}
+
+message CSPKG_QUESTIONNAIRE_FEEDBACK_REQ {
+  uint32 dwID = 1;
+  uint32 dwOperation = 2;
+  uint32 dwValue = 3;
+  bytes szText = 4; // fixed-length byte array
+  uint32 dwAnswerNum = 5;
+  repeated bytes astQuestions = 6; // TDR_ARRAY, element type unknown
+  uint32 dwType = 7;
+  uint32 dwScene = 8;
+}
+
+message CSPKG_QUESTIONNAIRE_TRIGGER_REQ {
+  int32 iTriggerID = 1;
+  CSDT_BATTLE_DETAIL_IN_GAMING stBattleDetail = 2;
+}
+
+message CSPKG_QUESTIONNAIRE_PANEL_FEEDBACK_REQ {
+  COMDT_INBATTLE_QUESTIONNAIRE_PANEL_RECORD stQuestionnairePanel = 1;
+}
+
+message CSPKG_WEAR_ALL_PERFEFT_MULTI_SKIN_REQ {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  CSDT_PERFEFT_ID_LIST stEftList = 2;
+  int32 chWearPos = 3;
+}
+
+message CSPKG_CUSTOMIZE_ITEM_FAVOURITE_ADD_REQ {
+  COMDT_CUSTOMIZE_ITEM_FAVOURITE_LIST stItemList = 1;
+}
+
+message CSPKG_CUSTOMIZE_ITEM_FAVOURITE_DEL_REQ {
+  COMDT_CUSTOMIZE_ITEM_FAVOURITE_LIST stItemList = 1;
+}
+
+message CSPKG_CUSTOMIZE_RECOMMEND_REQ {
+  uint32 dwSkinID = 1;
+}
+
+message CSPKG_CUSTOMIZE_BUY_FAIL_REPORT_REQ {
+  uint32 dwItemType = 1;
+  uint32 dwItemID = 2;
+}
+
+message CSPKG_CUSTOMIZE_ITEM_FAVOURITE_GUIDE_REWARD_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CUSTOMIZE_ITEM_FAVOURITE_CLEAR_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_CUSTOMIZE_ITEM_FAVOURITE_LIST_REQ {
+  COMDT_ACNT_UNIQ stAcntUin = 1;
+}
+
+message CSPKG_SACRED_ANIMAL_OPEN_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_SACRED_ANIMAL_TRIGGER_INTERACT_REQ {
+  uint32 dwBatchID = 1;
+  uint32 dwTriggerInteractID = 2;
+  COMDT_ACNT_UNIQ stAcntUin = 3;
+}
+
+message CSPKG_SACRED_ANIMAL_FEED_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_SACRED_ANIMAL_APPEARANCE_SAVEORCANCEL_REQ {
+  uint32 dwBatchID = 1;
+  uint32 dwSaveOrCancel = 2;
+}
+
+message CSPKG_SACRED_ANIMAL_APPEARANCE_LOCK_REQ {
+  uint32 dwBatchID = 1;
+  COMDT_SACRED_ANIMAL_APPEARANCE_LOCK_DETAIL stLockDetail = 2;
+}
+
+message CSPKG_SACRED_ANIMAL_APPEARANCE_USE_PROP_REQ {
+  uint32 dwBatchID = 1;
+  uint32 dwAttributeID = 2;
+}
+
+message CSPKG_SACRED_ANIMAL_SET_RANK_ADCODE_REQ {
+  uint32 dwAdCode = 1;
+}
+
+message CSPKG_SACRED_ANIMAL_GET_USER_INFO_REQ {
+  uint32 dwBatchID = 1;
+  COMDT_SACRED_ANIMAL_ACNT_UNIQ_LIST stAcntUniqList = 2;
+}
+
+message CSPKG_SACRED_FLOWER_NOURISH_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SACRED_ANIMAL_UPDATE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SACRED_ANIMAL_RANK_HIDE_NAME_REQ {
+  uint32 bIsHidden = 1;
+}
+
+message CSPKG_LINGBAO_SUIT_OP_REQ {
+  uint32 dwSuitID = 1;
+  uint32 bOpType = 2;
+}
+
+message CSPKG_LINGBAO_ACTION_OP_REQ {
+  uint32 bOpType = 1;
+  CSDT_LINGBAO_ACTION_OP_INFO stOpInfo = 2;
+}
+
+message CSPKG_LINGBAO_TRIGGER_INTERACT_REQ {
+  int32 iTriggerInteractID = 1;
+}
+
+message CSPKG_LINGBAO_CHG_SWITCH_REQ {
+  COMDT_LINGBAO_SHOW_SWITCH_INFO stChgSwitch = 1;
+}
+
+message CSPKG_ANNI101_REBATE_REWARD_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_ANNI101_EVE_REWARD_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_FUHE_CHAT_ROOM_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_COS_TOKEN_INFO_REQ {
+  COMDT_COS_TOKEN_INFO stTokenInfo = 1;
+}
+
+message CSPKG_DIMENSION_GENERAL_NEWBIE_GUIDE_SUB_REQ {
+  uint32 dwModuleID = 1;
+  uint32 dwStepID = 2;
+}
+
+message CSPKG_DIMENSION_LOTTERY_REFRESH_REQ {
+  uint32 dwBatchID = 1;
+  uint32 bGender = 2;
+  int32 iPlanIndex = 3;
+}
+
+message CSPKG_DIMENSION_LOTTERY_CONFIRM_REQ {
+  uint32 dwBatchID = 1;
+  uint32 bGender = 2;
+  int32 iPlanIndex = 3;
+  uint32 dwConfirmType = 4;
+}
+
+message CSPKG_DIMENSION_LOTTERY_LOCK_REQ {
+  uint32 dwBatchID = 1;
+  uint32 bGender = 2;
+  int32 iPlanIndex = 3;
+  COMDT_REFRESH_LOTTERY_LOCK_DETAIL stLockDetail = 4;
+}
+
+message CSPKG_DIMENSION_LOTTERY_CHG_PLAN_NAME_REQ {
+  uint32 dwBatchID = 1;
+  uint32 bGender = 2;
+  int32 iPlanIndex = 3;
+  bytes szNewName = 4; // fixed-length byte array
+}
+
+message CSPKG_DIMENSION_LOTTERY_USE_PROP_REQ {
+  uint32 dwBatchID = 1;
+  uint32 bGender = 2;
+  int32 iPlanIndex = 3;
+  uint32 dwAttributeID = 4;
+}
+
+message CSPKG_DIMENSION_LOTTERY_WEAR_PLAN_REQ {
+  uint32 dwBatchID = 1;
+  uint32 bGender = 2;
+  int32 iPlanIndex = 3;
+}
+
+message CSPKG_SET_PRE_SELECT_BRANCH_REQ {
+  COMDT_PRE_SELECT_BRANCH stPreSelectBranch = 1;
+  uint32 bMapType = 2;
+  uint32 dwMapID = 3;
+  uint32 dwDataFromType = 4;
+}
+
+message CSPKG_SWAP_BRANCH_REQ {
+  uint32 dwDstObjID = 1;
+}
+
+message CSPKG_CANCEL_SWAP_BRANCH_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SWAP_BRANCH_CHOICE_REQ {
+  uint32 bAccept = 1;
+}
+
+message CSPKG_SET_PRESELECT_BRANCH_GUIDE_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_RECOMMEND_HERO_EXPERIENCE_REQ {
+  uint32 bRecommendType = 1;
+  int32 iHeroID = 2;
+}
+
+message CSPKG_RECOMMEND_POPUP_HIDDEN_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_RECOMMEND_HERO_HIDDEN_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GANGUP_TEAM_TAB_REQ {
+  uint32 bReserved = 1;
+  uint32 dwClientSourceType = 2;
+}
+
+message CSPKG_GANGUP_EFFECT_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_GANGUP_CREATE_REQ {
+  bytes szName = 1; // fixed-length byte array
+  int32 iInviteNum = 2;
+  repeated bytes astInviteList = 3; // TDR_ARRAY, element type unknown
+  uint32 dwDirtyFlag = 4;
+  uint32 dwAdCode = 5;
+  bytes szGongGao = 6; // fixed-length byte array
+}
+
+message CSPKG_GANGUP_JOIN_REQ {
+  uint64 ullGangUpID = 1;
+  uint32 dwRecommendID = 2;
+  uint32 dwSourceType = 3;
+  COMDT_GANGUP_TAG_INFO stTagInfo = 4;
+}
+
+message CSPKG_GANGUP_LEAVE_REQ {
+  uint64 ullGangUpID = 1;
+}
+
+message CSPKG_GANGUP_KICK_REQ {
+  uint64 ullGangUpID = 1;
+  COMDT_ACNT_UNIQ stKickAcnt = 2;
+}
+
+message CSPKG_GANGUP_UPDATE_NAME_REQ {
+  uint64 ullGangUpID = 1;
+  bytes szName = 2; // fixed-length byte array
+}
+
+message CSPKG_GANGUP_UPDATE_LOCATION_REQ {
+  uint64 ullGangUpID = 1;
+  uint32 dwAdCode = 2;
+}
+
+message CSPKG_GANGUP_UPDATE_GONGGAO_REQ {
+  uint64 ullGangUpID = 1;
+  bytes szGongGao = 2; // fixed-length byte array
+}
+
+message CSPKG_GANGUP_UPDATE_BASICINFO_REQ {
+  uint64 ullGangUpID = 1;
+  COMDT_GANGUP_UPDATE_BASICINFO stBasicInfo = 2;
+}
+
+message CSPKG_GANGUP_FETCH_REQ {
+  COMDT_GANGUP_INFO stGangUpInfo = 1;
+  uint32 dwClientReqID = 2;
+}
+
+message CSPKG_GANGUP_FETCH_DETAIL_REQ {
+  uint64 ullGangUpID = 1;
+  uint32 dwClientReqID = 2;
+  uint32 dwReqSource = 3;
+  COMDT_ACNT_UNIQ stTargetUniq = 4;
+}
+
+message CSPKG_GANGUP_RIGHTS_REQ {
+  uint64 ullGangUpID = 1;
+  uint32 dwSwitchMaskBits = 2;
+}
+
+message CSPKG_GANGUP_INVITE_JOIN_REQ {
+  uint64 ullGangUpID = 1;
+  int32 iInviteNum = 2;
+  repeated bytes astInviteList = 3; // TDR_ARRAY, element type unknown
+  uint32 dwRecommendID = 4;
+}
+
+message CSPKG_GANGUP_APPROVE_REQ {
+  uint64 ullGangUpID = 1;
+  COMDT_ACNT_UNIQ stAcnt = 2;
+  int32 iApproveType = 3;
+}
+
+message CSPKG_SET_GANGUP_GROUP_OPENID_REQ {
+  uint64 ullGangUpID = 1;
+  bytes szGroupOpenID = 2; // fixed-length byte array
+}
+
+message CSPKG_GANGUP_RECOMMEND_JOIN_REQ {
+  uint32 dwClientReqID = 1;
+  uint32 dwCurShowIndex = 2;
+  uint32 dwGangUpRecClassTypeFilter = 3;
+  uint32 dwAdCode = 4;
+  uint32 bIsFromLocaldata = 5;
+}
+
+message CSPKG_GANGUP_RECOMMEND_CREATE_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_GANGUP_RECOMMEND_INVITE_REQ {
+  int32 iReverse = 1;
+}
+
+message CSPKG_GANGUP_SET_QQ_SYNC_SWITCH_REQ {
+  COMDT_GANGUP_QQ_SYNC_SWITCH_INFO stSyncSwitchInfo = 1;
+}
+
+message CSPKG_GANGUP_FETCH_APPLY_REQ {
+  uint64 ullGangUpID = 1;
+  int32 iPageID = 2;
+}
+
+message CSPKG_GANGUP_REMIND_GROUP_REQ {
+  uint64 ullGangUpID = 1;
+}
+
+message CSPKG_GANGUP_READ_REMIND_GROUP_REQ {
+  uint64 ullGangUpID = 1;
+}
+
+message CSPKG_GANGUP_REMIND_JOIN_GROUP_REQ {
+  uint64 ullGangUpID = 1;
+}
+
+message CSPKG_GANGUP_READ_REMIND_JOIN_GROUP_REQ {
+  uint64 ullGangUpID = 1;
+}
+
+message CSPKG_GANGUP_F2F_REQ {
+  uint32 dwPinCode = 1;
+  int32 iLongitude = 2;
+  int32 iLatitude = 3;
+}
+
+message CSPKG_GANGUP_F2F_JOIN_REQ {
+  bytes szGangUpName = 1; // fixed-length byte array
+}
+
+message CSPKG_GANGUP_F2F_LEAVE_REQ {
+  int32 iReverse = 1;
+}
+
+message CSPKG_AREA_NETWORK_REPORT_REQ {
+  COMDT_NETWORK_INFO stNetworkInfo = 1;
+}
+
+message CSPKG_AREA_NETWORK_PINGLIST_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SOULMATCH_ENTER_ROOM_REQ {
+  COMDT_ACNT_LOCATION stLbsInfo = 1;
+  uint32 dwEnterType = 2;
+}
+
+message CSPKG_SOULMATCH_QUIT_ROOM_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_SOULMATCH_PICK_ACNT_REQ {
+  COMDT_ACNT_UNIQ stBePickAcntUniq = 1;
+  uint32 dwComboCnt = 2;
+  uint32 dwBePickAcntZone = 3;
+  uint32 dwVoicePlaySeconds = 4;
+}
+
+message CSPKG_SOULMATCH_ROOM_FLAG_SET_REQ {
+  uint32 dwFlag = 1;
+  uint32 bOn = 2;
+  uint32 dwFriendTag = 3;
+  uint32 dwPos = 4;
+  bytes szSoulMatchFriendTagStr = 5; // fixed-length byte array
+  bytes szSoulMatchTitleStr = 6; // fixed-length byte array
+}
+
+message CSPKG_SOULMATCH_RECOMMEND_ROOM_REQ {
+  COMDT_ACNT_LOCATION stLbsInfo = 1;
+}
+
+message CSPKG_SOULMATCH_SEND_EMOJI_REQ {
+  int32 iEmojiID = 1;
+  uint32 wRemainSeconds = 2;
+}
+
+message CSPKG_SOULMATCH_SET_GENDER_REQ {
+  uint32 bGender = 1;
+}
+
+message CSPKG_SOULMATCH_SEND_GIFT_REQ {
+  COMDT_ACNT_UNIQ stDstUniq = 1;
+  COMDT_SOULMATCH_GIFT_ONETYPE_DETAIL stGift = 2;
+  uint32 dwFromType = 3;
+}
+
+message CSPKG_SET_NAMEPLATE_REQ {
+  COMDT_ACNT_UNIQ stTarUniq = 1;
+  bytes szNamePlateStr = 2; // fixed-length byte array
+  uint32 dwIsSelfDefine = 3;
+}
+
+message CSPKG_CLEAR_NAMEPLATE_REDTIP_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_QUERY_ACNTLIST_DETAILINFO_REQ {
+  int32 iQueryScene = 1;
+  CSDT_ACNT_UNIQ_LIST stAcntUniqList = 2;
+}
+
+message CSPKG_CLEAR_NAMEPLATE_SETTLE_REDTIP_REQ {
+  COMDT_ACNT_UNIQ stTarUniq = 1;
+}
+
+message CSPKG_VIDEO_LOGIN_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_VIDEO_REFRESH_TOKEN_REQ {
+  COMDT_VIDEO_TOKEN stVideoToken = 1;
+}
+
+message CSPKG_QUERY_FRIEND_MUTUAL_MARK_REQ {
+  uint64 ullFriendUid = 1;
+  uint32 dwFriendLogicWorldID = 2;
+  bytes szFriendOpenID = 3; // fixed-length byte array
+}
+
+message CSPKG_BIND_FRIEND_MUTUAL_MARK_REQ {
+  uint64 ullFriendUid = 1;
+  uint32 dwFriendLogicWorldID = 2;
+  bytes szFriendOpenID = 3; // fixed-length byte array
+}
+
+message CSPKG_REPORT_BATTLE_STAT_REQ {
+  uint32 dwFrameNo = 1;
+  uint32 bReportAcntNum = 2;
+  repeated bytes astReportAcntInfo = 3; // TDR_ARRAY, element type unknown
+  uint32 bIsGameOver = 4;
+}
+
+message CSPKG_CMD_SERVERAI_PLAYER_BEHAVIOR_REPORT_REQ {
+  COMDT_ACNT_UNIQ stTargetUniq = 1;
+  uint32 dwTargetFakeDescId = 2;
+  uint32 dwShowGradeOfRank = 3;
+  uint32 dwTriggerTs = 4;
+  uint32 dwGameType = 5;
+  uint32 dwTriggerType = 6;
+  uint32 dwHeroID = 7;
+  uint32 dwBranchType = 8;
+  bytes szAIParam = 9; // fixed-length byte array
+  uint32 bIsAISameCamp = 10;
+  uint32 bIsWin = 11;
+  bytes szTriggerUIInfo = 12; // fixed-length byte array
+  COMDT_DESK_KEY stBattleKey = 13;
+}
+
+message CSPKG_TOKENGAME_JOIN_AND_USEPROP_REQ {
+  COMDT_TOKEN_GAME_JOIN_INFO stJoinInfo = 1;
+}
+
+message CSPKG_DIMENSION_MAP_MOVE_REQ {
+  COMDT_DIMENSION_MAP_ACTOR_MOVE_INFO stMoveInfo = 1;
+}
+
+message CSPKG_SET_DIMENSION_MAP_VIEW_NUM_REQ {
+  uint32 dwViewNum = 1;
+}
+
+message CSPKG_DIMENSION_MAP_CAST_SPELL_REQ {
+  int32 iCastSpellCmd = 1;
+  CSDT_DIMENSION_MAP_CAST_SPELL_DATA_UNION stCastSpellData = 2;
+}
+
+message CSPKG_TRANSFER_TEAM_MASTER_DIMENSION_MAP_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_DIMENSION_MAP_TELEPORT_REQ {
+  COMDT_COORDINATE stTelePortPos = 1;
+  uint32 wRotation = 2;
+}
+
+message CSPKG_DIMENSION_MAP_TIME_SYNC_REQ {
+  uint64 ullClientReqTimeMs = 1;
+}
+
+message CSPKG_DIMENSION_MAP_SUBMIT_GUIDE_TASK_REQ {
+  uint32 dwTaskID = 1;
+}
+
+message CSPKG_INVITE_TO_DIMENSION_MAP_ROOM_REQ {
+  COMDT_ACNT_UNIQ stBeInvitedPlayerID = 1;
+}
+
+message CSPKG_ENTER_FRIEND_DIMENSION_MAP_ROOM_REQ {
+  COMDT_ACNT_UNIQ stFriendPlayerID = 1;
+  uint64 ullFriendRoomID = 2;
+}
+
+message CSPKG_DIMENSION_MAP_ROOM_PLAYER_LIST_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_GET_DIMENSION_MAP_PLAYER_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_DIMENSION_MAP_SPELL_DELAY_EFFECT_REQ {
+  int32 iCastSpellCmd = 1;
+  CSDT_DIMENSION_MAP_CAST_KEY stCastKey = 2;
+  uint64 ullTargetPlayerUid = 3;
+}
+
+message CSPKG_DIMENSION_MAP_SET_STATE_REQ {
+  uint32 dwPlayerState = 1;
+}
+
+message CSPKG_DIMENSION_MAP_SET_WEAK_MOVE_CHECK_REQ {
+  uint32 bBWeakCheckSwitch = 1;
+}
+
+message CSPKG_LEAVE_DIMENSION_FOR_BATTLE_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_DIMENSION_MAP_TELEPORT_FINISH_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_DIMENSION_MAP_RING_ENTER_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_DIMENSION_MAP_RING_LEAVE_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_DIMENSION_MAP_RING_GET_REWARD_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_DIMENSION_MAP_ANIMATION_SYNC_REQ {
+  CSDT_DIMENSION_MAP_ANIMATION_SYNC_INFO stSyncInfo = 1;
+}
+
+message CSPKG_DIMENSION_MAP_PROJECTILE_START_REQ {
+  CSDT_DIMENSION_MAP_CAST_INFO stProjectileInfo = 1;
+}
+
+message CSPKG_DIMENSION_MAP_PROJECTILE_HIT_REQ {
+  CSDT_DIMENSION_MAP_PROJECTILE_HIT_INFO stProjectileHitInfo = 1;
+}
+
+message CSPKG_DIMENSION_MAP_JOIN_MULTI_ACTION_REQ {
+  uint64 ullInviterID = 1;
+  uint32 dwActionID = 2;
+  int32 iJoinerFaceDirection = 3;
+  int32 iInviterFaceDirection = 4;
+}
+
+message CSPKG_DIMENSION_MAP_STOP_MULTI_ACTION_REQ {
+  int32 iStopReason = 1;
+}
+
+message CSPKG_DIMENSION_MAP_PARKOUR_REPORT_REQ {
+  uint32 dwVehicleID = 1;
+  uint32 dwCurveID = 2;
+  uint32 dwReportType = 3;
+  uint32 dwFinishTime = 4;
+}
+
+message CSPKG_DIMENSION_MAP_PHOTO_FRAME_REQ {
+  uint32 dwFrameTime = 1;
+  uint32 dwAnimationID = 2;
+}
+
+message CSPKG_DIMENSION_TABLE_GAME_START_REQ {
+  int32 iPlaceHolder = 1;
+}
+
+message CSPKG_DIMENSION_TABLE_GAME_CONFIRM_REQ {
+  int32 iPlaceHolder = 1;
+}
+
+message CSPKG_DIMENSION_TABLE_HALL_MATE_LIST_REQ {
+  uint32 bGameType = 1;
+}
+
+message CSPKG_DIMENSION_TABLE_GAME_CHG_GAME_TYPE_REQ {
+  uint32 bGameType = 1;
+}
+
+message CSPKG_DIMENSION_MAP_INVITE_CHAT_JOIN_REQ {
+  COMDT_CHAT_MSG_DIMENSION_INVITE stInviteInfo = 1;
+}
+
+message CSPKG_DIMENSION_HOUSE_MEMBER_LIST_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_DIMENSION_HOUSE_RECOMMEND_LIST_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_DIMENSION_HOUSE_VISITOR_LIST_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_DIMENSION_HOUSE_QUERY_REQ {
+  COMDT_ACNT_UNIQ stOwnerAcnt = 1;
+}
+
+message CSPKG_DIMENSION_HOUSE_SET_USE_SCENE_REQ {
+  uint32 bUseHouseScene = 1;
+}
+
+message CSPKG_REPORT_BATTLE_SPECIAL_EVENT_REQ {
+  CSDT_BATTLE_SPECIAL_EVENT stEvent = 1;
+}
+
+message CSPKG_INBATTLE_COMPLAINT_REQ {
+  uint32 dwFrapNo = 1;
+  uint32 dwBeComplaintObjId = 2;
+  uint32 dwComplaintTimeFromStart = 3;
+}
+
+message CSPKG_LOGIN_CLOUD_MATRIX_GIFT_REQ {
+  uint32 dwCurPlatForm = 1;
+}
+
+message CSPKG_CLOUD_MATRIX_RECEIVE_GIFT_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_RANK_SMART_GUIDE_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_HERO_FIGHTVALUE_TARGET_REQ {
+  uint32 dwHeroID = 1;
+}
+
+message CSPKG_BRANCH_FIGHTVALUE_TARGET_REQ {
+  uint32 bBranchType = 1;
+}
+
+message CSPKG_HONOR_BATTLE_ZONE_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_WECHAT_CHANNELS_INFO_SET_REQ {
+  uint32 dwInfoSetType = 1;
+  CSDT_WECHAT_CHANNELS_INFO_SET_UNION stInfoSetData = 2;
+  uint32 dwIsResetData = 3;
+  uint32 dwIsPostRecentThing = 4;
+  uint32 bIsChangePlatform = 5;
+}
+
+message CSPKG_WECHAT_CHANNELS_GET_ILINK_AUTHCODE_REQ {
+  uint32 dwReserve = 1;
+}
+
+message CSPKG_WECHAT_CHANNELS_HOMEPAGE_COMPLAINT_REQ {
+  uint64 ullUid = 1;
+  uint64 ullBeComplaintUid = 2;
+  bytes szBeComplaintUserOpenID = 3; // fixed-length byte array
+  uint32 dwBeComplaintLogicWorldID = 4;
+  int32 iBeComplaintPlatID = 5;
+  int32 iBeComplaintiZoneAreaID = 6;
+  bytes szWechatChannelsName = 7; // fixed-length byte array
+  bytes szWechatChannelsHeadUrl = 8; // fixed-length byte array
+  bytes szWechatChannelsSign = 9; // fixed-length byte array
+  bytes szWechatChannelsHomepageVideoUrl = 10; // fixed-length byte array
+  uint32 dwComplaintReason = 11;
+  uint32 bIsComplaintPlatform = 12;
+  uint32 dwComplaintReasonForPlatform = 13;
+  bytes szComplaintContents = 14; // fixed-length byte array
+  COMDT_WECHAT_CHANNELS_VIDEO_LIST stVideoList = 15;
+}
+
+message CSPKG_WECHAT_CHANNELS_HOMEPAGE_INFO_REPORT {
+  uint64 ullUid = 1;
+  bytes szUserOpenID = 2; // fixed-length byte array
+  uint32 dwLogicWorldID = 3;
+  int32 iPlatID = 4;
+  int32 iIZoneAreaID = 5;
+  bytes szName = 6; // fixed-length byte array
+  bytes szHeadUrl = 7; // fixed-length byte array
+  bytes szSign = 8; // fixed-length byte array
+  bytes szHomepageVideoUrl = 9; // fixed-length byte array
+  COMDT_WECHAT_CHANNELS_VIDEO_LIST stVideoList = 10;
+}
+
+message CSPKG_TIKTOK_VIDEO_SET_REQ {
+  COMDT_TIKTOK_HOMEPAGE_INFO stTiktokHomePageVideoInfo = 1;
+  uint32 dwIsTiktokPostRecentThing = 2;
+}
+
+message CSPKG_TIKTOK_BIND_SET_REQ {
+  uint32 dwTiktokBindState = 1;
+  bytes szTiktokAccountID = 2; // fixed-length byte array
+}
+
+message CSPKG_TIKTOK_QUERY_HOMEPAGE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_TIKTOK_HOMEPAGE_SHOWTYPE_SET_REQ {
+  COMDT_TIKTOK_HOMEPAGE_INFO stTiktokHomePageVideoInfo = 1;
+  uint32 bIsChangePlatform = 2;
+}
+
+message CSPKG_TIKTOK_PRIVATE_SET_REQ {
+  uint32 dwTiktokPrivateSetType = 1;
+}
+
+message CSPKG_TIKTOK_HOMEPAGE_COMPLAINT_REQ {
+  uint64 ullUid = 1;
+  uint64 ullBeComplaintUid = 2;
+  bytes szBeComplaintUserOpenID = 3; // fixed-length byte array
+  uint32 dwBeComplaintLogicWorldID = 4;
+  int32 iBeComplaintPlatID = 5;
+  int32 iBeComplaintiZoneAreaID = 6;
+  bytes szTiktokName = 7; // fixed-length byte array
+  bytes szTiktokHeadUrl = 8; // fixed-length byte array
+  bytes szTiktokHomepageVideoUrl = 9; // fixed-length byte array
+  bytes szTiktokAccountID = 10; // fixed-length byte array
+  uint32 dwComplaintReason = 11;
+  uint32 bIsComplaintPlatform = 12;
+  uint32 dwComplaintReasonForPlatform = 13;
+  bytes szComplaintContents = 14; // fixed-length byte array
+  COMDT_TIKTOK_VIDEO_LIST stVideoList = 15;
+  bytes szSign = 16; // fixed-length byte array
+}
+
+message CSPKG_TIKTOK_HOMEPAGE_INFO_REPORT {
+  uint64 ullUid = 1;
+  bytes szUserOpenID = 2; // fixed-length byte array
+  uint32 dwLogicWorldID = 3;
+  int32 iPlatID = 4;
+  int32 iIZoneAreaID = 5;
+  bytes szTiktokAccountID = 6; // fixed-length byte array
+  bytes szName = 7; // fixed-length byte array
+  bytes szHeadUrl = 8; // fixed-length byte array
+  bytes szHomepageVideoUrl = 9; // fixed-length byte array
+  COMDT_TIKTOK_VIDEO_LIST stVideoList = 10;
+  bytes szSign = 11; // fixed-length byte array
+}
+
+message CSPKG_KUAISHOU_VIDEO_SET_REQ {
+  COMDT_KUAISHOU_HOMEPAGE_INFO stKuaiShouHomePageVideoInfo = 1;
+  uint32 dwIsKuaiShouPostRecentThing = 2;
+}
+
+message CSPKG_KUAISHOU_BIND_SET_REQ {
+  uint32 dwKuaiShouBindState = 1;
+  bytes szKuaiShouAccountID = 2; // fixed-length byte array
+}
+
+message CSPKG_KUAISHOU_QUERY_HOMEPAGE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_KUAISHOU_HOMEPAGE_SHOWTYPE_SET_REQ {
+  COMDT_KUAISHOU_HOMEPAGE_INFO stKuaiShouHomePageVideoInfo = 1;
+  uint32 bIsChangePlatform = 2;
+}
+
+message CSPKG_KUAISHOU_PRIVATE_SET_REQ {
+  uint32 dwKuaiShouPrivateSetType = 1;
+}
+
+message CSPKG_KUAISHOU_HOMEPAGE_COMPLAINT_REQ {
+  uint64 ullUid = 1;
+  uint64 ullBeComplaintUid = 2;
+  bytes szBeComplaintUserOpenID = 3; // fixed-length byte array
+  uint32 dwBeComplaintLogicWorldID = 4;
+  int32 iBeComplaintPlatID = 5;
+  int32 iBeComplaintiZoneAreaID = 6;
+  bytes szKuaiShouName = 7; // fixed-length byte array
+  bytes szKuaiShouHeadUrl = 8; // fixed-length byte array
+  bytes szKuaiShouHomepageVideoUrl = 9; // fixed-length byte array
+  bytes szKuaiShouAccountID = 10; // fixed-length byte array
+  uint32 dwComplaintReason = 11;
+  uint32 bIsComplaintPlatform = 12;
+  uint32 dwComplaintReasonForPlatform = 13;
+  bytes szComplaintContents = 14; // fixed-length byte array
+  COMDT_KUAISHOU_VIDEO_LIST stVideoList = 15;
+}
+
+message CSPKG_KUAISHOU_HOMEPAGE_INFO_REPORT {
+  uint64 ullUid = 1;
+  bytes szUserOpenID = 2; // fixed-length byte array
+  uint32 dwLogicWorldID = 3;
+  int32 iPlatID = 4;
+  int32 iIZoneAreaID = 5;
+  bytes szKuaiShouAccountID = 6; // fixed-length byte array
+  bytes szName = 7; // fixed-length byte array
+  bytes szHeadUrl = 8; // fixed-length byte array
+  bytes szHomepageVideoUrl = 9; // fixed-length byte array
+  COMDT_KUAISHOU_VIDEO_LIST stVideoList = 10;
+}
+
+message CSPKG_QUERY_FREE_PICK_HERO_INFO_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_USE_FREE_PICK_HERO_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_APPLY_LOVERPLAY_RELATION_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_AGREE_LOVERPLAY_RELATION_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_REFUSE_LOVERPLAY_RELATION_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_DISSOLVE_LOVERPLAY_RELATION_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_REPORT_SHOW_LOVERPLAY_RELATION_REQ {
+  COMDT_ACNT_UNIQ stUin = 1;
+}
+
+message CSPKG_CHOOSE_LOVERPLAY_RELATION_RANK_TITLE_REQ {
+  uint32 dwTitleID = 1;
+  uint32 bRankType = 2;
+  uint32 dwRankNo = 3;
+}
+
+message CSPKG_TIMELIMIT_EVENT_ACNTINFO_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_TIMELIMIT_EVENT_GETREWARD_REQ {
+  uint32 dwEventID = 1;
+  uint32 dwProgressLevel = 2;
+}
+
+message CSPKG_DEATH_WATCH_REQ {
+  uint32 dwObjId = 1;
+  uint32 bType = 2;
+}
+
+message CSPKG_COUPONS_PAY_NEWBIE_GET_REWARD_REQ {
+  uint32 dwGetRewardType = 1;
+  uint32 dwRewardLevelIndex = 2;
+}
+
+message CSPKG_COUPONS_PAY_NEWBIE_SET_CHOOSEREWARD_REQ {
+  uint32 dwSetType = 1;
+  uint32 dwSetRewardLevelIndex = 2;
+  uint32 dwChooseRewardIndex = 3;
+  COMDT_COUPONS_PAY_NEWBIE_REWARDLEVEL_CHOOSEREWARD_INFO stChooseRewardInfo = 4;
+}
+
+message CSPKG_PRAYER_CHECKIN_BORN_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_PRAYER_CHECKIN_SELECT_REQ {
+  uint32 dwBatchID = 1;
+  int32 iPrayerCheckInID = 2;
+}
+
+message CSPKG_PRAYER_CHECKIN_REFRESH_REQ {
+  uint32 dwBatchID = 1;
+  uint32 bIndex = 2;
+}
+
+message CSPKG_PRAYER_CHECKIN_LIST_DEL_ONE_REQ {
+  uint32 dwBatchID = 1;
+  int32 iPrayerCheckInID = 2;
+}
+
+message CSPKG_WEATHER_REQ {
+  uint32 dwAdCode = 1;
+}
+
+message CSPKG_DIMENSION_SET_CUSTOMOUTFIT_REQ {
+  uint32 dwCustomOutfitIdx = 1;
+  COMDT_DIMENSION_CUSTOMOUTFIT_DETAIL stCustomOutfit = 2;
+}
+
+message CSPKG_DIMENSION_SET_CUSTOMOUTFIT_IDX_REQ {
+  uint32 dwCustomOutfitIdx = 1;
+}
+
+message CSPKG_DIMENSION_SET_CUSTOMOUTFIT_NAME_REQ {
+  uint32 dwCustomOutfitIdx = 1;
+  bytes szName = 2; // fixed-length byte array
+  uint32 dwPortraitTemplateId = 3;
+}
+
+message CSPKG_DIMENSION_SET_PORTRAIT_REQ {
+  uint32 bIsManual = 1;
+  uint32 dwCustomOutfitIdx = 2;
+  COMDT_DIMENSION_CUSTOMOUTFIT_PORTRAIT stPortrait = 3;
+  uint32 dwPortraitTemplateId = 4;
+}
+
+message CSPKG_DIMENSION_SET_USE_ORIGINAL_PORTRAIT_REQ {
+  uint32 bIsUseOriginal = 1;
+}
+
+message CSPKG_DIMENSION_WEAR_WEAPON_REQ {
+  uint32 dwHeroID = 1;
+  COMDT_DIMENSION_HERO_WEAPON_WEARLIST stWeaponList = 2;
+  uint32 dwDataType = 3;
+}
+
+message CSPKG_DIMENSION_WEAR_INTERACTION_REQ {
+  COMDT_DIMENSION_INTERACTION stInteraction = 1;
+  uint32 dwIdx = 2;
+}
+
+message CSPKG_DIMENSION_WEAR_MULTI_TAG_INTERACTION_REQ {
+  uint32 dwTag = 1;
+  CSDT_DIMENSION_MULTI_INTERACTION_DETAIL stInteraction = 2;
+}
+
+message CSPKG_DIMENSION_BUY_REQ {
+  uint32 dwBillNo = 1;
+  COMDT_DIMENSION_BUY_LIST stBuyList = 2;
+}
+
+message CSPKG_DIMENSION_REPORT_PIC_UPLOAD {
+  bytes szOutfitID = 1; // fixed-length byte array
+}
+
+message CSPKG_DIMENSION_HERO_CHG_JOB_REQ {
+  uint32 dwHeroID = 1;
+  uint32 dwHeroJobType = 2;
+  uint32 dwDataType = 3;
+}
+
+message CSPKG_DIMENSION_HERO_CHG_INBATTLE_ATTR_REQ {
+  uint32 dwHeroID = 1;
+  COMDT_HERO_DIMENSION_INBATTLE_ATTR stInBattleAttr = 2;
+  uint32 dwDataType = 3;
+}
+
+message CSPKG_CLAN_ACTIVITY_SET_CLAN_REQ {
+  int32 iBatchID = 1;
+  int32 iClanID = 2;
+}
+
+message CSPKG_UPDATE_GVOICE_ID_INFO_REQ {
+  uint32 dwCount = 1;
+  repeated bytes astGVoiceIDInfo = 2; // TDR_ARRAY, element type unknown
+}
+
+message CSPKG_HERO_INSCRIBE_OP_REQ {
+  uint32 dwInscribeId = 1;
+  uint32 dwSkinId = 2;
+  uint32 dwOpType = 3;
+}
+
+message CSPKG_RECOMMEND_NEWBIEGROWTHGIFT_POPUPWND_REQ {
+  uint32 dwSpecSaleID = 1;
+}
+
+message CSPKG_RECOMMEND_HIGHLIGHTSKIN_POPUPWND_REQ {
+  uint32 dwRecommendSkinID = 1;
+  uint32 dwPopWndType = 2;
+}
+
+message CSPKG_CREDIT_LEVEL_WEEKLY_SUMMARY_REQ {
+  int32 chReserve = 1;
+}
+
+message CSPKG_CREDIT_LEVEL_WEEKLY_REWARD_REQ {
+  int32 chReserve = 1;
+}
+
+message CSPKG_SEASONALBUM_REWARDPOOL_GET_REWARD_REQ {
+  uint32 dwRewardPoolType = 1;
+  uint32 dwGetStage = 2;
+  uint32 dwBillNo = 3;
+  uint32 dwCoinType = 4;
+}
+
+message CSPKG_UPGRADEGIFT_UPGRADE_REQ {
+  uint64 ullUniqueID = 1;
+}
+
+message CSPKG_UPGRADEGIFT_BATCHUPGRADE_REQ {
+  CSDT_UPGRADEGIFT_BATCHUPGRADE_LIST stBatchUpgradeList = 1;
+  uint32 bAutoUse = 2;
+}
+
+message CSPKG_USE_EASY_CARD_REQ {
+  uint32 bWealType = 1;
+  uint32 dwWealID = 2;
+  uint32 dwPeriodID = 3;
+  uint32 dwEasyCardID = 4;
+}
+
+message CSPKG_WEAL_EASYCARD_HOTSPOT_SET_REQ {
+  uint32 bWealType = 1;
+  uint32 dwWealID = 2;
+  uint32 bHotSpotSet = 3;
+}
+
+message CSPKG_QQARK_TEAM_SHARE_AUTH_REQ {
+  bytes szGameData = 1; // fixed-length byte array
+  bytes szSceneToken = 2; // fixed-length byte array
+  COMDT_QQARK_DYNAMIC_PARAMS stDynamicParams = 3;
+  uint32 dwInterfaceType = 4;
+  bytes szUid = 5; // fixed-length byte array
+}
+
+message CSPKG_UPDATE_EXTERN_ROOM_DLCDOWNLOADINFO_REQ {
+  uint32 bIsDLCDownloadCompleted = 1;
+}
+
+message CSPKG_ANCHOR_LIVE_MODEL_REPORT_REQ {
+  COMDT_ANCHOR_LIVE_MODEL stLiveModelInfo = 1;
+}
+
+message CSPKG_SKIN_GOLDCARD_SCRATCH_REQ {
+  uint32 dwSkinID = 1;
+}
+
+message CSPKG_SKIN_GOLDCARD_INSCRIBE_REQ {
+  uint32 dwSkinID = 1;
+}
+
+message CSPKG_WEAR_SKYSCREEN_REQ {
+  COMDT_SKY_SCREEN_WEAR_INFO stWearInfo = 1;
+  int32 chWearPos = 2;
+}
+
+message CSPKG_WEAR_SKIN_COMMERCERES_REQ {
+  COMDT_SIMPLE_HEROSKIN_LIST stSkinList = 1;
+  uint32 wItemType = 2;
+  uint32 dwItemID = 3;
+  int32 chWearPos = 4;
+}
+
+message CSPKG_GAMEHUB_DATA_REQ {
+}
+
+message CSPKG_GAMEHUB_REPORT_REQ {
+  uint64 ullAppkey = 1;
+  uint32 bType = 2;
+  uint32 bNetType = 3;
+  bytes szUri = 4; // fixed-length byte array
+  bytes szMethod = 5; // fixed-length byte array
+  int32 iInstid = 6;
+  int32 iCode = 7;
+  int32 iParam1 = 8;
+  int32 iParam2 = 9;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_CREATE_VOICE_STAT {
+  COMDT_GVOICE_ROOM_KEY_INFO stGVoiceRoomKey = 1;
+  COMDT_RESULT_INFO stResultInfo = 2;
+  bytes szAppID = 3; // fixed-length byte array
+  bytes szAppKey = 4; // fixed-length byte array
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_OUTSIDER_REPORT {
+  uint32 wStayScenes = 1;
+  uint32 wTeamState = 2;
+  uint32 dwScenesReportTime = 3;
+  uint32 wIsReceiveXiaodajiGift = 4;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_HERO_PROFILE_REQ {
+  uint32 dwHeroId = 1;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_ABTEST_INFO_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_SINGLE_OUTSIDER_REQ {
+  uint32 wStayScenes = 1;
+  uint32 dwScenesReportTime = 2;
+  int64 llScenesEntryTimestamp = 3;
+  int64 llLastReportTimestamp = 4;
+  uint32 bIsActivityRedPoint = 5;
+  uint32 bIsSeasonMallRedPoint = 6;
+  int32 iSeasonMallExp = 7;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_SINGLE_BP_REQ {
+  int32 iQuestionNum = 1;
+  repeated int32 QuestionList = 2;
+  uint32 dwHeroId = 3;
+  uint32 dwStage = 4;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_CHAT_CREATE_ROOM_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_CHAT_REWARD_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_STATUS_REPORT {
+  int32 iInteractiveMode = 1;
+  uint32 bIsSupportLocalWakeUp = 2;
+  uint32 bIsMicrophoneWork = 3;
+  int32 iUserSetting = 4;
+  uint32 bIsSupportTwoway = 5;
+  int32 iCharacter = 6;
+  uint32 bIsInterject = 7;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_TWOWAY_NEWBIE_CREATE_ROOM_REQ {
+  int32 chReserve = 1;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_ONEWAY_FREQUENCY_CONTROL_REQ {
+  uint64 ullLastTimeStamp = 1;
+  int32 iEventResultCnt = 2;
+  repeated bytes astEventResultList = 3; // TDR_ARRAY, element type unknown
+  int32 iFrameNo = 4;
+  int32 iFrameDelta = 5;
+  int32 iIsDetailedOrSimple = 6;
+}
+
+message CSPKG_LINGBAO_ACCOMPANY_ONLINE_OVERALL_REQ {
+  uint32 dwDataLen = 1;
+}
+
+message CSPKG_COMMON_SUBSCRIBE_REQ {
+  COMDT_COMMON_SUBSCRIBE_ACTION stSubscribeAction = 1;
+}
+
+message CSPKG_CLI_PAY_REPORT_REQ {
+}
+
+message CSPKG_TAP_SCREEN_REPORT {
+  uint32 dwFlag = 1;
+}
+
+message CSPKG_LINGBAO_LOTTERY_REFRESH_REQ {
+  uint32 dwBatchID = 1;
+  int32 iPlanIndex = 2;
+  repeated int32 szPswdInfo = 3;
+}
+
+message CSPKG_LINGBAO_LOTTERY_CONFIRM_REQ {
+  uint32 dwBatchID = 1;
+  int32 iPlanIndex = 2;
+  uint32 dwConfirmType = 3;
+}
+
+message CSPKG_LINGBAO_LOTTERY_LOCK_REQ {
+  uint32 dwBatchID = 1;
+  int32 iPlanIndex = 2;
+  COMDT_REFRESH_LOTTERY_LOCK_DETAIL stLockDetail = 3;
+}
+
+message CSPKG_LINGBAO_LOTTERY_USE_PROP_REQ {
+  uint32 dwBatchID = 1;
+  int32 iPlanIndex = 2;
+  uint32 dwAttributeID = 3;
+  repeated int32 szPswdInfo = 4;
+}
+
+message CSPKG_LINGBAO_LOTTERY_WEAR_PLAN_REQ {
+  uint32 dwBatchID = 1;
+  int32 iPlanIndex = 2;
+}
+
+message CSPKG_SETTLE_RESPECT_REQ {
+  COMDT_ACNT_UNIQ stTargetAcntUin = 1;
+  uint32 dwTargetHeroID = 2;
+}
+
+message CSPKG_CLEAR_SETTLE_FLASH_HINT_REQ {
+  uint32 wFlashHintType = 1;
+}
+
+message CSPKG_BACKFLOW_RANKING_PRIVILEGES_INFO_NTF {
+  COMDT_BACKFLOW_RANKING_PRIVILEGES_INFO stPrivilegesInfo = 1;
+}
+
+message CSPKG_BACKFLOW_PRIVILEGE_NEW_SKIN_REPLACE_REQ {
+  uint32 dwReplaceIndex = 1;
+  uint32 dwSkinID = 2;
+}
+
+message CSPKG_JINLI_DOUBLETOKEN_JOIN_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_JINLI_BOUNTY_JOIN_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_JINLI_SCORE_SET_RANK_ADCODE_REQ {
+  uint32 dwAdCode = 1;
+  uint32 dwActivityRankType = 2;
+}
+
+message CSPKG_JINLI_SCORE_RANK_HIDE_NAME_REQ {
+  uint32 bIsHidden = 1;
+  uint32 dwActivityRankType = 2;
+}
+
+message CSPKG_JINLI_SCORE_RANK_FINAL_REWARD_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_ACTIVITY_RANK_SET_ADCODE_REQ {
+  uint32 dwAdCode = 1;
+  uint32 dwActivityRankType = 2;
+}
+
+message CSPKG_ACTIVITY_RANK_HIDE_NAME_REQ {
+  uint32 bIsHidden = 1;
+  uint32 dwActivityRankType = 2;
+}
+
+message CSPKG_JINLI_SHOWCONTENT_SETTING_REQ {
+  CSDT_JINLI_SHOWCONTENT_SETTING stSettingInfo = 1;
+}
+
+message CSPKG_JINLI_TICKET_LOTTERY_CHOOSE_NUMBER_REQ {
+  int32 iBatchID = 1;
+  int32 iTicketID = 2;
+  int32 iChooseNumberCnt = 3;
+  repeated int32 ChooseNumberID = 4;
+}
+
+message CSPKG_JINLI_TICKET_LOTTERY_RANDOM_NUMBER_REQ {
+  int32 iBatchID = 1;
+  int32 iTicketID = 2;
+  uint32 bIsOverwriteChoosenNumber = 3;
+}
+
+message CSPKG_JINLI_TICKET_LOTTERY_CONFIRM_NUMBER_REQ {
+  int32 iBatchID = 1;
+  int32 iTicketID = 2;
+}
+
+message CSPKG_JINLI_TICKET_LOTTERY_GLOBAL_HIT_RECORD_REQ {
+  int32 iBatchID = 1;
+  uint32 dwDate = 2;
+}
+
+message CSPKG_JINLI_TICKET_LOTTERY_DRAW_NUM_REQ {
+  int32 iBatchID = 1;
+  uint32 dwDate = 2;
+}
+
+message CSPKG_JINLI_TICKET_LOTTERY_GET_REWARD_REQ {
+  int32 iBatchID = 1;
+  uint32 dwDate = 2;
+}
+
+message CSPKG_JINLI_TICKET_LOTTERY_DIMENSION_MAP_DRAW_INFO_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_OFFLINE_SUBSCRIBE_QUERY_REQ {
+  int32 iNum = 1;
+  repeated uint32 SubscribeIDList = 2;
+  uint32 bNeedOpenLink = 3;
+}
+
+message CSPKG_RECOMMENDTAB_QUERY_REQ {
+  COMDT_TEAMHALL_MAP_BRIEFINFO stMapBrief = 1;
+  COMDT_BRANCH_INFO stBranchInfo = 2;
+}
+
+message CSPKG_RECOMMENDTAB_UPDATE_GAME_STATE_REQ {
+  uint32 bRecommendTabType = 1;
+}
+
+message CSPKG_RECOMMENDTAB_TYPE_REQ {
+  uint32 bRecommendTabType = 1;
+}
+
+message CSPKG_REPORT_ACTIVITY_INFO_REQ {
+  bytes szCategory = 1; // fixed-length byte array
+  bytes szSubCategory = 2; // fixed-length byte array
+  bytes szDetail = 3; // fixed-length byte array
+}
+
+message CSPKG_DIMENSION_CHANNEL_RANDOM_EMOTE_CHAT_REQ {
+  uint32 dwEmoteID = 1;
+}
+
+message CSPKG_CREDIT_CHG_FLOW_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_COMPLAINT_SECOND_REQ {
+  COMDT_SECOND_COMPLAINT_INFO stSecondComplaintInfo = 1;
+}
+
+message CSPKG_ASK_HAWK_EYE_FOR_HELP_REQ {
+  COMDT_ACNT_UNIQ stBeComplaintAcntUniq = 1;
+}
+
+message CSPKG_COMPLAINT_VOTE_REQ {
+  COMDT_ACNT_UNIQ stBeVoteAcntUniq = 1;
+  int32 iVoteType = 2;
+}
+
+message CSPKG_SUPERSATURDAY_HIT_INFO_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_ONEKEY_GET_PLAYONEGAME_REQ {
+  COMDT_ONEKEY_SUBMIT_TASK_INFO stTaskInfo = 1;
+  CSDT_ONEKEY_SUBMIT_WEAL_INFO stWealInfo = 2;
+}
+
+message CSPKG_DYNAMIC_ISLAND_REC_REQ {
+  uint32 dwTrigerScene = 1;
+}
+
+message CSPKG_ADJUST_AILEVEL_REQ {
+  uint32 dwAILevel = 1;
+}
+
+message CSPKG_AWAKEN_SUB_SETTLE_REQ {
+  uint32 dwLevelID = 1;
+  uint32 bStage = 2;
+  uint32 dwTalentCnt = 3;
+  repeated uint32 TalentInfos = 4;
+  uint32 bInGameReward = 5;
+}
+
+message CSPKG_AWAKEN_HIGH_LIGHT_REPORT_REQ {
+  uint32 bFlag = 1;
+}
+
+message CSPKG_AWAKEN_SUIT_EDIT_REQ {
+  uint32 dwHeroID = 1;
+  int32 iEditMask = 2;
+  int32 iEditType = 3;
+  COMDT_AWAKEN_SUIT_INFO stSuitInfo = 4;
+  int32 iEditSlot = 5;
+  CSDT_AWAKEN_HEROSUIT_EDIT_ONE_SYMBOL stOneSymbol = 6;
+}
+
+message CSPKG_BATTLE_SPECIAL_COMMAND_TO_SERVERAI_REQ {
+  COMDT_BATTLE_SPECIAL_INSTRUCTS stCommand = 1;
+}
+
+message CSPKG_COMMANDER_COMMAND_REQ {
+  COMDT_COMMANDER_INSTRUCTS stCommand = 1;
+}
+
+message CSPKG_SWITCH_CONTROL_OBJ_REQ {
+  uint32 dwCurrControlObjID = 1;
+  uint32 dwToControlObjID = 2;
+}
+
+message CSPKG_GET_AI_LOAD_INFO_REQ {
+  uint32 bAIScene = 1;
+}
+
+message CSPKG_COMMANDER_SET_AI_COMMUNICATION_LEVEL_REQ {
+  uint32 dwLevel = 1;
+}
+
+message CSPKG_COMMANDER_SET_AI_ACT_LEVEL_REQ {
+  uint32 dwLevel = 1;
+}
+
+message CSPKG_COMMANDER_PLAYER_RESPONSE_AI_ACTION_REQ {
+  COMDT_COMMANDER_PLAYER_RESPONSE_AI_ACTION_INFO stPlayerResponseAIActionInfo = 1;
+}
+
+message CSPKG_COMMANDER_INIT_AI_HERO_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_DIMENSION_MAP_STAR_INFO_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_DESK_SETTLE_REVIEW_REQ {
+  uint64 ullUid = 1;
+  uint32 dwLogicWorldID = 2;
+  uint32 dwDeskID = 3;
+  uint32 dwDeskSeq = 4;
+  int32 iRelayEntity = 5;
+}
+
+message CSPKG_DEEPSEEK_REVIEW_GENERATE_REQ {
+  uint32 bMapType = 1;
+  uint32 dwMapId = 2;
+  uint32 dwDeskID = 3;
+  uint32 dwDeskSeq = 4;
+  int32 iDeskEntity = 5;
+  uint32 bIsRegenerate = 6;
+}
+
+message CSPKG_DEEPSEEK_REVIEW_BUY_REQ {
+  uint32 dwBillNo = 1;
+  uint32 dwCoinType = 2;
+  uint32 dwCoinCost = 3;
+}
+
+message CSPKG_DEEPSEEK_REVIEW_STOP_REQ {
+  uint32 dwDeskID = 1;
+  uint32 dwDeskSeq = 2;
+  int32 iDeskEntity = 3;
+}
+
+message CSPKG_BACKFLOW_CUSTOM_SHOW_FRIEND_RECENT_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_INSTALLMENT_BUY_SKIN_REQ {
+  uint32 dwBillNo = 1;
+  uint32 bBuyType = 2;
+  uint32 dwSkinResID = 3;
+  uint32 dwRebateID = 4;
+  uint32 dwRebateCnt = 5;
+  COMDT_HEROSKIN_BUY_SRCINFO stSrcInfo = 6;
+  uint32 bInstallmentType = 7;
+}
+
+message CSPKG_INSTALLMENT_SUBSCRIBE_REQ {
+  uint32 dwSkinResID = 1;
+  uint32 bIsSubscribe = 2;
+}
+
+message CSPKG_LUCKY_CARD_INFO_REQ {
+  int32 iReverse = 1;
+}
+
+message CSPKG_LUCKY_CARD_BUY_REQ {
+  int32 iBatchID = 1;
+  uint32 dwBillNo = 2;
+  int32 iPayType = 3;
+  int32 iBuyChannel = 4;
+  COMDT_PACK_BUY_ITEM_INFO stPackBuyItemInfo = 5;
+}
+
+message CSPKG_LUCKY_CARD_GET_REFUND_REQ {
+  int32 iBatchID = 1;
+}
+
+message CSPKG_LUCKY_CARD_GET_REBATE_REQ {
+  int32 iBatchID = 1;
+  int32 iRebateID = 2;
+  int32 iRebateCnt = 3;
+  int32 iGetChannel = 4;
+}
+
+message CSPKG_LUCKY_CARD_GET_SKIN_BUY_HISTORY_REQ {
+  int32 iBatchID = 1;
+}
+
+message CSPKG_GAMEPLAY_GOAL_SYSTEM_EXCHANGE_GEM_REQ {
+  uint32 dwBillNo = 1;
+  int32 iID = 2;
+  uint32 dwCnt = 3;
+}
+
+message CSPKG_UNIFYBUY_BUY_REQ {
+  uint32 dwBillNo = 1;
+  int32 iNum = 2;
+  repeated COMDT_DIMENSION_BUY_LIST astBuyList = 3; // TDR_ARRAY
+}
+
+message CSPKG_PRESENT_SPECITEM_PRE_CHECK_REQ {
+  COMDT_ACNT_UNIQ stFriendUin = 1;
+  bytes szFriendName = 2; // fixed-length byte array
+  uint32 dwSpecID = 3;
+  uint32 dwPresentCnt = 4;
+}
+
+message CSPKG_MASTER2V2_SET_HOMEPAGE_REQ {
+  COMDT_MASTER2V2_HOMEPAGE_INFO stHomePageInfo = 1;
+}
+
+message CSPKG_MASTER2V2_SET_SHOWTYPE_REQ {
+  uint32 dwRelationShowType = 1;
+}
+
+message CSPKG_MASTER2V2_EXTEND_RELATION_REQ {
+  uint32 bReverse = 1;
+}
+
+message CSPKG_COMMON_BATCHGET_BRIEF_ACNTINFO_REQ {
+  int32 iAcntNum = 1;
+  repeated COMDT_ACNT_UNIQ astAcntUniq = 2; // TDR_ARRAY
+}
+
+message CSPKG_COMMON_ACNT_BRIEF_INFO_REQ {
+  uint32 dwInfoType = 1;
+  int32 iNum = 2;
+  repeated COMDT_ACNT_UNIQ astAcntUniq = 3; // TDR_ARRAY
+}
+
+message CSPKG_COLLECT_VALUE_GET_OWN_ASSET_REQ {
+  COMDT_ACNT_UNIQ stAcntUniq = 1;
+}
+
+message CSPKG_COLLECT_VALUE_GET_OWN_HERO_ASSET_REQ {
+  COMDT_ACNT_UNIQ stAcntUniq = 1;
+  uint32 dwFakeDescID = 2;
+}
+
+message CSPKG_STRANGER_RECOMMEND_REQ {
+  COMDT_TEAMHALL_MAP_BRIEFINFO stMapBrief = 1;
+  uint32 bIsActiveReq = 2;
+  COMDT_TEAM_UNIQ stBlackTeamUniq = 3;
+}
+
+message CSPKG_STRANGER_TEAM_SYNC_REQ {
+  COMDT_TEAM_UNIQ stTeamUniq = 1;
+}
+
+message CSPKG_STRANGER_RECOMMEND_ACTIVE_REQ {
+  COMDT_TEAMHALL_MAP_BRIEFINFO stMapBrief = 1;
+  COMDT_TEAM_UNIQ stBlackTeamUniq = 2;
+}
+
+message CSPKG_FIGHT_UNIT_SET_ROLE_REQ {
+  uint32 dwFightUnitRole = 1;
+}
+
+message CSPKG_FIGHT_UNIT_APPLY_SWAP_ROLE_REQ {
+  uint64 ullTargetUid = 1;
+}
+
+message CSPKG_FIGHT_UNIT_HANDLE_SWAP_ROLE_REQ {
+  uint64 ullApplyUid = 1;
+  uint32 bIsAgreeSwap = 2;
+}
+
+message CSPKG_ESPORTS_CUP_SHOW_SET_REQ {
+  COMDT_ESPORTS_CUP_SHOW_LIST stCupShowList = 1;
+}
+
+message CSPKG_ESPORTS_CAREER_SHOW_SET_REQ {
+  COMDT_ESPORTS_CAREER_SHOW_LIST stCareerShowList = 1;
+}
+
+message CSPKG_MAGICVOICE_CHOOSE_VOICE_REQ {
+  uint32 dwChoseVoice = 1;
+}
+
+message CSPKG_WORKSHOP_SVR_CFG_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_WORKSHOP_RECOMMEND_LIST_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_WORKSHOP_SET_MAP_DOWNLOAD_INFO_REQ {
+  COMDT_MAP_DOWNLOAD_INFO stMapDownInfo = 1;
+}
+
+message CSPKG_BUY_REGRET_GET_RECENT_BUY_ITEMS_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_BUY_REGRET_GET_ITEM_EXCHANGE_INFO_REQ {
+  int32 iItemType = 1;
+  int32 iRecentBuyItemIndex = 2;
+}
+
+message CSPKG_BUY_REGRET_CHOOSE_ONE_ITEM_REQ {
+  int32 iExchangeItemIndex = 1;
+  COMDT_BUY_REGRET_EXCHANGE_ITEM_DETAIL stExchangeItem = 2;
+}
+
+message CSPKG_MOMENTS_FEED_REQ {
+  COMDT_MOMENTS_FEED_REQDATA stFeedData = 1;
+}
+
+message CSPKG_MOMENTS_LIKE_REQ {
+  COMDT_MOMENTS_LIKE_DETAIL stLikeDetail = 1;
+}
+
+message CSPKG_MOMENTS_COMMENT_REQ {
+  COMDT_MOMENTS_ITEM stMomentsItem = 1;
+  COMDT_MOMENTS_COMMENT_CONTENT stContent = 2;
+}
+
+message CSPKG_MOMENTS_COMMENT_DETAIL_REQ {
+  COMDT_MOMENTS_ITEM stMomentsItem = 1;
+  int32 iPageNo = 2;
+}
+
+message CSPKG_FREE_HERO_SKIN_GROUP_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_KOH_PLUGIN_TICKET_GET_REQ {
+  COMDT_KOH_PLUGIN_TICKET_GET_PARAM stReqParam = 1;
+}
+
+message CSPKG_ACTIVITY_PLAY_HALL_RECOMMEND_REQ {
+  int32 iReserve = 1;
+}
+
+message CSPKG_FARM_FERTILIZE_LEVELUP_REQ {
+  uint32 dwFertilizerID = 1;
+  uint32 dwReserve = 2;
+}
+
+message CSPKG_FARM_RECOMMEND_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_HOUSE_STATE_UPDATE_REQ {
+  uint32 dwReverse = 1;
+}
+
+message CSPKG_SEND_COIN_CONVERT_MAIL_REQ {
+  uint32 dwReqTime = 1;
+  int32 iConvertMask = 2;
+}
+
+message CSPKG_LINGBAO_DIG_TREASURE_TOTAL_INFO_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_LINGBAO_DIG_TREASURE_HISTORY_REQ {
+  uint32 dwBatchID = 1;
+}
+
+message CSPKG_ACTIVITY_CLIENT_REPORT_GRAY_DATA_REQ {
+  COMDT_ACTIVITY_CLIENT_REPORT_GRAY_DATA stActivityClientReportGrayData = 1;
+}
+
+message CSPKG_LITE_JOIN_TEAM_REQ {
+  COMDT_TEAM_UNIQ stTeamUniq = 1;
+  COMDT_ACNT_UNIQ stInviter = 2;
+}
+
+message CSPKG_LITE_SHARE_ADD_FRIEND_REQ {
+  uint32 bReserved = 1;
+}
+
+message CSPKG_LITE_SHARE_ADD_FRIEND_CONFIRM_REQ {
+  COMDT_ACNT_UNIQ stAcntUniq = 1;
+  bytes szReqCode = 2; // fixed-length byte array
+}
+
+message CSPKG_INBATTLE_CUSTOMDATA_SET_REQ {
+  COMDT_INBATTLE_CUSTOMDATA stCustomData = 1;
+}
+
+message CSPKG_CAMPUS_IDENTITY_QUERY_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CAMPUS_IDENTITY_DELETE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CAMPUS_CHAT_BUBBLE_SHOW_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_CAMPUS_TITLE_SET_READ_REQ {
+  uint32 dwReadMask = 1;
+}
+
+message CSPKG_SAVE_HISTORY_SKIN_WEARING_SUIT_REQ {
+  uint32 dwSkinUniqueID = 1;
+  COMDT_SKINPART_WEARING stSkinPartInfo = 2;
+  COMDT_SKIN_VOICE_WEARLIST stVoiceInfo = 3;
+  COMDT_SKIN_WEARING_SUIT stSkinSuitInfo = 4;
+}
+
+message CSPKG_USE_HISTORY_SKIN_WEARING_SUIT_REQ {
+  int32 iSuitID = 1;
+}
+
+message CSPKG_GET_HERO_TUTOR_GUIDE_REQ {
+  uint32 dwHeroID = 1;
+}
+
+message CSPKG_LITE_QUERY_SNS_PROFILE_REQ {
+  uint32 bReserve = 1;
+}
+
+message CSPKG_LITE_LOGIN_REPORT_REQ {
+  bytes szUnionID = 1; // fixed-length byte array
+  bytes szMiniGameChannel = 2; // fixed-length byte array
+  bytes szClueToken = 3; // fixed-length byte array
+  bytes szReqID = 4; // fixed-length byte array
+  bytes szClickID = 5; // fixed-length byte array
+  bytes szCallBack = 6; // fixed-length byte array
+  bytes szTrackID = 7; // fixed-length byte array
+  int32 iMiniGamePlatID = 8;
+}
+
+message CSPKG_INBATTLE_EFFECT_BUY_REQ {
+  COMDT_INBATTLE_EFFECT_BUY_INFO stInBattleEffectBuyInfo = 1;
+  uint32 dwBuffTagFilt = 2;
+}
+
+message CSPKG_UGC_LOADFIN {
+  int32 chReserve = 1;
+}
+
+message CSPKG_UGC_GAME_OVER_REQ_UGC {
+  uint32 bObjData = 1;
+}
+
+message CSPKG_UGC_OPERATE_COMMAND_REQ_UGC {
+  uint32 dwRoomID = 1;
+  uint64 ullProjectID = 2;
+  uint32 dwPlayerID = 3;
+  COMDT_UGC_OPER_COMMAND_BUFFER stCommand = 4;
+}

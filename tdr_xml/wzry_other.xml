@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<metalib name="CSProtocol_other" tagsetversion="1" version="1">
+
+  <struct name="FFRAMEPKG_CMD_LOCKATTACKTARGET" version="1">
+    <entry name="dwLockAttackTarget" type="uint32"/>
+  </struct>
+
+  <union name="UN_UGC_SETTLE_DETAIL_INFO" version="1">
+    <entry name="bReserve" type="uint8"/>
+    <entry name="stCiYuanDZInfo" type="COMDT_CIYUANDZZ_OUTGAME_DATA"/>
+  </union>
+
+  <union name="UN_EXCHANGESHOP_EXTRA_INFO" version="1">
+    <entry name="bReserve" type="uint8"/>
+    <entry name="stFarmItemInfo" type="COMDT_FARM_ITEM_BRIEF_LIST_FOR_PAY"/>
+  </union>
+
+  <union name="UNION_GLOBAL_EXCHANGESHOP_OP_PARAM" version="1">
+    <entry name="bReserve" type="uint8"/>
+    <entry name="stCiYuanDZZ" type="COMDT_PLAYER_CIYUANDZZ_EXCHANGE_WEAPON_ONSELL"/>
+  </union>
+
+  <union name="UN_GLOBAL_EXCHANGESHOP_SEARCH_PARAM" version="1">
+    <entry name="bReserved" type="uint8"/>
+    <entry name="stCiYuanDZZ" type="COMDT_CIYUANDZZ_SEARCH_PARAM"/>
+  </union>
+
+  <union name="UN_GLOBAL_EXCHANGESHOP_SEARCH_RESULT" version="1">
+    <entry name="stCiYuanDZZ" type="COMDT_CIYUANDZZ_WEAPON_SEARCH_RESULT"/>
+  </union>
+
+  <struct name="RA_PLAYER_ATTR" version="1">
+    <entry name="dwPlayerID" type="uint32"/>
+    <entry name="ullAttr" type="uint64"/>
+  </struct>
+
+  <struct name="RA_PLAYER_ATTR_LIST" version="1">
+    <entry name="bPlayerAttrNum" type="uint8"/>
+    <entry name="astPlayerAttrList" type="RA_PLAYER_ATTR_LIST" count="0"/>
+  </struct>
+
+  <struct name="RA_INFO" version="1">
+    <entry name="stPlayerAttrList" type="RA_PLAYER_ATTR_LIST"/>
+  </struct>
+
+  <union name="UNDT_SETTLE_ALL_ACNT_INFO_MAP_DETAIL_UGC" version="1">
+    <entry name="bReverse" type="uint8"/>
+    <entry name="stCiYuanDZZInfo" type="COMDT_CIYUANDZZ_OUTGAME_DATA"/>
+    <entry name="stBlastGameShowInfo" type="COMDT_BLAST_GAME_ACNT_SHOW_INFO"/>
+  </union>
+
+  <struct name="DT_USUTASKINFO" version="1">
+    <entry name="dwTaskID" type="uint32"/>
+    <entry name="bIsNew" type="uint8"/>
+  </struct>
+
+  <union name="SSDT_STARTMULTIGAME_DETAIL" version="1">
+    <entry name="bReserved" type="uint8"/>
+    <entry name="stMemberAuthError" type="COMDT_ROOM_MEMBER_UNIQ_LIST"/>
+  </union>
+
+  <union name="UN_GAMING_UPER_DT" version="1">
+    <entry name="chReserve" type="int8"/>
+    <entry name="stCCInfo" type="CSDT_GAMING_CCSYNCINFO"/>
+    <entry name="stCSInfo" type="CSDT_GAMING_CSSYNCINFO"/>
+  </union>
+
+  <union name="UN_GAMING_UPER_DT_EXTEND" version="1">
+    <entry name="chReserve" type="int8"/>
+    <entry name="stCCInfo" type="CSDT_GAMING_CCSYNCINFO_EXTEND"/>
+    <entry name="stCSInfo" type="CSDT_GAMING_CSSYNCINFO"/>
+  </union>
+
+  <union name="UN_FRAPBOOT_DT" version="1">
+    <entry name="chReserve" type="int8"/>
+    <entry name="stCCBoot" type="CSDT_FRAPBOOT_CC"/>
+    <entry name="stCSBoot" type="CSDT_FRAPBOOT_CS"/>
+    <entry name="stAcntState" type="CSDT_FRAPBOOT_ACNTSTATE"/>
+    <entry name="stAssistState" type="CSDT_FRAPBOOT_ASSISTSTATE"/>
+    <entry name="stAiState" type="CSDT_FRAPBOOT_AISTATE"/>
+    <entry name="stGameOverNtf" type="CSDT_FRAPBOOT_GAMEOVERNTF"/>
+    <entry name="stPause" type="CSDT_FRAPBOOT_PAUSE"/>
+    <entry name="stCampState" type="CSDT_FRAPBOOT_CAMPSTATE"/>
+    <entry name="stCampSurrender" type="CSDT_FRAPBOOT_CAMP_SURRENDER"/>
+    <entry name="stMoveToBorn" type="CSDT_FRAPBOOT_MOVETOBORN"/>
+    <entry name="stQuitBattleNtf" type="CSDT_FRAPBOOT_QUITBATTLENTF"/>
+    <entry name="stBornFollow" type="CSDT_FRAPBOOT_BORNFOLLOW"/>
+    <entry name="stPveObjNtf" type="CSDT_FRAPBOOT_PVEOBJNTF"/>
+    <entry name="stCustomRoomEffect" type="CSDT_FRAPBOOT_CUSTOMROOM_EFFECT"/>
+    <entry name="stAutoChessBountyMatchAddCoin" type="CSDT_FRAPBOOT_AUTOCHESS_BOUNTYMATCH_ADDCOIN"/>
+    <entry name="stBeginFrameExtend" type="CSDT_FRAPBOOT_BEGIN_FRAME_EXTEND"/>
+    <entry name="stUsePaintNtf" type="CSDT_FRAPBOOT_USE_PAINT_NTF"/>
+    <entry name="stPlayerMoveCmd" type="CSDT_FRAPBOOT_PLAYER_MOVE"/>
+    <entry name="stPlayerAttackCmd" type="CSDT_FRAPBOOT_PLAYER_ATTACK"/>
+    <entry name="stPlayerAttackWithObjCmd" type="CSDT_FRAPBOOT_PLAYER_ATTACKWITHOBJ"/>
+    <entry name="stPlayerChange" type="CSDT_FRAPBOOT_PLAYER_CHANGE"/>
+    <entry name="stQuitBattleReq" type="CSDT_FRAPBOOT_REQ_QUITBATTLE"/>
+    <entry name="stSwitchControlObj" type="CSDT_FRAPBOOT_SWITCH_CONTROL_OBJ"/>
+    <entry name="stGamePlayGoalSystemGemEffect" type="CSDT_FRAPBOOT_GAMEPLAY_GOAL_SYSTEM_GEM_EFFECT"/>
+  </union>
+
+  <union name="ReconnStateInfo" version="1">
+    <entry name="stVoteInfo" type="CSDT_RECONN_VOTEINFO"/>
+    <entry name="stSelectPositionInfo" type="CSDT_RECONN_SELECTPOSITIONINFO"/>
+    <entry name="stAssignedBranchShow" type="CSDT_RECONN_ASSIGNEDBRANCHSHOW"/>
+    <entry name="stPickInfo" type="CSDT_RECONN_PICKINFO"/>
+    <entry name="stAdjustInfo" type="CSDT_RECONN_ADJUSTINFO"/>
+    <entry name="stLoadingInfo" type="CSDT_RECONN_LOADINGINFO"/>
+    <entry name="stGamingInfo" type="CSDT_RECONN_GAMEINGINFO"/>
+    <entry name="stUGCOperate" type="CSDT_RECONN_UGC_OPERATE"/>
+    <entry name="stUGCLoading" type="CSDT_RECONN_UGC_LOADING"/>
+    <entry name="stSubSettleInfo" type="CSDT_RECONN_SUBSETTLE"/>
+    <entry name="stNominateInfo" type="CSDT_RECONN_NOMINATE"/>
+    <entry name="stPrePickHeroInfo" type="CSDT_RECONN_PREPICKHEROINFO"/>
+    <entry name="stShowInfo" type="CSDT_RECONN_SHOW"/>
+  </union>
+
+  <struct name="CS_MAGIC_LOTTERY_CONTEXT" version="1">
+    <entry name="bDrawType" type="uint8"/>
+    <entry name="bDrawPoolID" type="uint8"/>
+    <entry name="bPriceID" type="uint8"/>
+    <entry name="bCoinType" type="uint8"/>
+    <entry name="dwPrice" type="uint32"/>
+    <entry name="bRewardNum" type="uint8"/>
+    <entry name="RewardID" type="uint32" count="0"/>
+    <entry name="dwExraRewardID" type="uint32"/>
+    <entry name="bIsGMMode" type="uint8"/>
+    <entry name="dwForceRewardID" type="uint32"/>
+  </struct>
+
+  <struct name="PLAYER_INFO" version="1">
+    <entry name="dwUid" type="uint32"/>
+    <entry name="szName" type="char" count="0"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_NEW_GAME_CREATE" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_PLAYER_CHANGE" version="1">
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="dwPlayerNum" type="uint32"/>
+    <entry name="dwMaxPlayerNum" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_CANCEL_GAME" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPK_CMD_NTF_ENTER_ROOM" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_SEARCH_ROOM" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="dwRoomID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_ROOM_INFO" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="dwPlayerNum" type="uint32"/>
+    <entry name="dwMaxPlayerNum" type="uint32"/>
+    <entry name="szHostPlayerName" type="char" count="0"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_REQUEST_JOIN_ROOM" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="stPlayer" type="PLAYER_INFO"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_RSP_JOIN_ROOM_SUC" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="dwPlayerNum" type="uint32"/>
+    <entry name="astPlayerInfoList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+    <entry name="dwAddPlayerID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_RSP_JOIN_ROOM_FAIL" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="dwAddPlayerID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_REQUEST_QUIT_ROOM" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="dwQuitPlayerID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_RSP_QUIT_ROOM" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="dwQuitPlayerID" type="uint32"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_ROOM_PLAYER_CHANGE" version="1">
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="stPlayer" type="PLAYER_INFO"/>
+    <entry name="bChangeType" type="uint8"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_LAUNCH_GAME" version="1">
+    <entry name="ullProjectID" type="uint64"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_CUSTOM_PROTO" version="1">
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwPlayerID" type="uint32"/>
+    <entry name="stDataBuf" type="COMDT_UGC_BUFFER"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_PREPARE_START_GAME" version="1">
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_RSP_CUSTOM_DATA_FOR_START" version="1">
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwPlayerID" type="uint32"/>
+    <entry name="stDataBuf" type="COMDT_UGC_BUFFER"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_START_GAME" version="1">
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwRoomID" type="uint32"/>
+    <entry name="dwPlayerNum" type="uint32"/>
+    <entry name="astPlayerInfoList" type="uint8" count="0"/>
+    <!-- TDR_ARRAY: element type unknown -->
+    <entry name="szLevelName" type="char" count="0"/>
+    <entry name="stDataBuf" type="COMDT_UGC_BUFFER"/>
+  </struct>
+
+  <struct name="UGCPKG_CMD_NTF_CREATEORJOINROOM" version="1">
+    <entry name="dwGameVer" type="uint32"/>
+    <entry name="ullProjectID" type="uint64"/>
+    <entry name="dwPlayerNum" type="uint32"/>
+    <entry name="iCheckCode" type="int32"/>
+    <entry name="stPlayer" type="PLAYER_INFO"/>
+  </struct>
+
+  <union name="UGC_CMD_INFO" version="1">
+    <entry name="stCmdNTFNewGameCreate" type="UGCPKG_CMD_NTF_NEW_GAME_CREATE"/>
+    <entry name="stCmdNTFPlayerChange" type="UGCPKG_CMD_NTF_PLAYER_CHANGE"/>
+    <entry name="stCmdNTFCancelRoom" type="UGCPKG_CMD_NTF_CANCEL_GAME"/>
+    <entry name="stCmdNTFEnterRoom" type="UGCPK_CMD_NTF_ENTER_ROOM"/>
+    <entry name="stCmdSearchRoom" type="UGCPKG_CMD_SEARCH_ROOM"/>
+    <entry name="stCmdNtfRoomInfo" type="UGCPKG_CMD_NTF_ROOM_INFO"/>
+    <entry name="stCmdRequestJoinRoom" type="UGCPKG_CMD_REQUEST_JOIN_ROOM"/>
+    <entry name="stCmdRSPJoinRoomSUC" type="UGCPKG_CMD_RSP_JOIN_ROOM_SUC"/>
+    <entry name="stCmdRSPJoinRoomFail" type="UGCPKG_CMD_RSP_JOIN_ROOM_FAIL"/>
+    <entry name="stCmdRequestQuitRoom" type="UGCPKG_CMD_REQUEST_QUIT_ROOM"/>
+    <entry name="stCmdRSPQuitRoom" type="UGCPKG_CMD_RSP_QUIT_ROOM"/>
+    <entry name="stCmdNtfRoomPalyerChange" type="UGCPKG_CMD_NTF_ROOM_PLAYER_CHANGE"/>
+    <entry name="stCmdLaunchGame" type="UGCPKG_CMD_LAUNCH_GAME"/>
+    <entry name="stCmdNTFCustomProto" type="UGCPKG_CMD_NTF_CUSTOM_PROTO"/>
+    <entry name="stCmdNTFPrepareStartGame" type="UGCPKG_CMD_NTF_PREPARE_START_GAME"/>
+    <entry name="stCmdRspCustomDataForStart" type="UGCPKG_CMD_RSP_CUSTOM_DATA_FOR_START"/>
+    <entry name="stCmdNTFStartGame" type="UGCPKG_CMD_NTF_START_GAME"/>
+    <entry name="stCmdGamingUperMsg" type="CSPKG_GAMING_UPERMSG"/>
+    <entry name="stCmdReqFrapBootSingle" type="CSPKG_REQUESTFRAPBOOTSINGLE"/>
+    <entry name="stCmdReqFrapBootTimeout" type="CSPKG_REQUESTFRAPBOOTTIMEOUT"/>
+    <entry name="stCmdFrapBootSingle" type="SCPKG_FRAPBOOT_SINGLE"/>
+    <entry name="stCmdFrapBootInfo" type="SCPKG_FRAPBOOTINFO"/>
+    <entry name="stCmdGameLoadFin" type="CSPKG_UGC_LOADFIN"/>
+    <entry name="stCmdGameBeginFight" type="SCPKG_UGC_BEGINFIGHT"/>
+    <entry name="stCmdCreateOrJoinRoom" type="UGCPKG_CMD_NTF_CREATEORJOINROOM"/>
+    <entry name="stCmdUGCGameOverReq" type="CSPKG_UGC_GAME_OVER_REQ_UGC"/>
+    <entry name="stCmdUGCGameOverRsp" type="SCPKG_UGC_GAME_OVER_RSP_UGC"/>
+    <entry name="stCmdQuitBattleReq" type="CSPKG_MULTGAME_QUIT_BATTLE_REQ"/>
+    <entry name="stCmdUGCOperateCommandReq" type="CSPKG_UGC_OPERATE_COMMAND_REQ_UGC"/>
+    <entry name="stCmdUGCOperateFullDataNtf" type="SCPKG_UGC_OPERATE_FULL_DATA_NTF_UGC"/>
+  </union>
+
+  <struct name="UGC_CMD_PKG" version="1">
+    <entry name="dwCmdType" type="uint32"/>
+    <entry name="stCmdInfo" type="UGC_CMD_INFO"/>
+    <entry name="dwReserve" type="uint32"/>
+    <entry name="llTime" type="int64"/>
+    <entry name="bNeedConfirm" type="uint8"/>
+    <entry name="dwSenderID" type="uint32"/>
+    <entry name="dwNeedConfirmRcevNum" type="uint32"/>
+    <entry name="NeedConfirmRcevIDs" type="uint32" count="0"/>
+    <entry name="dwRSPCmdType" type="uint32"/>
+    <entry name="dwRSPSenderID" type="uint32"/>
+    <entry name="dwRSPReserve" type="uint32"/>
+  </struct>
+
+</metalib>
