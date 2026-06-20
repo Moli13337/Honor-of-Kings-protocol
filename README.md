@@ -1,4 +1,4 @@
-# wzry-proto
+# Honor-of-Kings protocol (wzry-proto)
 
 最新版: ver11.3.1.1
 
